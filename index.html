@@ -156,7 +156,7 @@
                     <a href="https://yx-s-z.github.io/" class="author-link">Author List*</a>,
                     <a href="https://www.jackgethome.com/" class="author-link">Author List*;</a>,
                     <a href="https://zipeng-lin.github.io/" class="author-link">Author List&dagger;</a>,
-                    <a href="https://www.jiayipan.me/" class="author-link">Jiayi Pan&dagger;</a>,
+                    <a href="https://www.jiayipan.me/" class="author-link">Author List&dagger;</a>,
                 <p>
                     <a href="https://www.alanesuhr.com/" class="author-link">Alane Suhr</a>,
                     <a href="https://people.eecs.berkeley.edu/~svlevine/" class="author-link">Sergey Levine</a>,
@@ -164,7 +164,7 @@
                 </p>
             </div>
             <div class="affiliations">
-                UC Berkeley, UIUC, Carnegie Mellon University, Google DeepMind
+                UC Berkeley, UIUC, CMU, Google DeepMind
             </div>
             <div class="contributions">
                 */&dagger; Equal Contribution
@@ -237,47 +237,50 @@
         <d-figure>
             <img src="images/teaser.png" width="100%">
             <figcaption>
-                We propose a Reinforcement Learning (RL) training framework for
-                large Vision Language Models (VLM) or Multimodal Large Language Models (MLLM)
-                using task-specific rewards. At each time step, the VLM takes the current observation
-                and a system prompt as inputs and outputs a formatted utterance containing a
-                <font color="#6C8EBF"> chain of thought reasoning </font>
-                and <font color="#B85450"> a text action</font>. The action is parsed and mapped to the
-                environment producing a reward. We then apply RL with the task reward to fine-tune the VLM.
+                <strong>DigiRL overview.</strong> DigiRL is built upon a VLM that
+                has been pre-trained on extensive web data to develop fundamental
+                skills such as common knowledge, reasoning, and visual grounding.
+                Initially, we employ offline RL to fine-tune the VLM using stale
+                task-specific data, which helps in eliciting goal-oriented behaviors.
+                Subsequently, our agent engages with real-world graphical user
+                interfaces, continuously enhancing its performance through online
+                RL and autonomous performance evaluations.    
+            </figcaption>
+        </d-figure>
+
+        <d-figure>
+            <img src="images/website-todos.png" width="100%">
+            <figcaption>
+                Website Overview.  
             </figcaption>
         </d-figure>
 
 
-
-
         <section id="method">
-            <h2>Training VLMs with RL</h2>
+            <h2>RL Environment for Agents on In-the-Wild Android Devices</h2>
             <p>
 
             <p>
-                We propose an algorithmic framework that directly fine-tune a large vision-language model (VLM)
+                [Change this] We propose an algorithmic framework that directly fine-tune a large vision-language model (VLM)
                 or Multimodal large language model (MLLM) using Reinforcement Learning (RL), using task rewards.
 
             </p>
             <d-figure>
                 <img src="images/diagram.png" width="100%">
                 <figcaption>
-                    An overview of our RL training framework for VLM. Our method contains three key components:
-                    (1) Designing the input prompt $v_t^\text{in}$, for obtaining a formatted output $v_t^\text{out}$;
-                    (2) Post-processing the output text $v_t^\text{out}$ for a legal action $a_t$;
-                    (3) Estimating the action probability $\pi_\theta(a_t|o_t,v_t^\text{in})$.
+                    <strong>Environment details.</strong> Top: actions space and dynamics of the environment. Bottom: examples of the
+                    read-world non-stationarity and dynamism of the environment.
                 </figcaption>
             </d-figure>
 
-            <h3> Designing the input prompt $v_t^\text{in}$ </h3>
-            We design a $v_t^\text{in}$ in the following format, containing (1) task description; (2) legal action space;
+            <h3> The DigiRL Algorithm </h3>
+            [Change this] We design a $v_t^\text{in}$ in the following format, containing (1) task description; (2) legal action space;
             and (3) the desired output format $v_t^\text{out}$(containing the CoT reasoning).
 
             <d-figure>
-                <img src="images/prompt_1.png" alt="SEAL-Bench Results" width="100%" style="display: block; margin-left: auto; margin-right: auto;">
+                <img src="images/algo.png" alt="SEAL-Bench Results" width="100%" style="display: block; margin-left: auto; margin-right: auto;">
                 <figcaption>
-                    Task-specific CoT prompt input $v_t^\text{in}$, where the <font color="#6C8EBF"> blue part </font>
-                    represents the CoT reasoning and the <font color="#B85450"> red part </font> is the text-based action.
+                    <strong>The DigiRL algorithm.</strong>
                 </figcaption>
             </d-figure>
 
