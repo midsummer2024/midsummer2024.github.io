@@ -220,9 +220,30 @@
     function initializeCarousel(carousel) {
         const imagePath = carousel.getAttribute('data-image-path');
         const slidesContainer = carousel.querySelector('.carousel-slides');
-        const totalImages = 4; // Adjust based on your needs or fetch dynamically
+        let totalImages = 0;
     
-        for (let i = 1; i <= totalImages; i++) {
+        // Dynamically determine the number of images
+        const img = new Image();
+        img.onload = function() {
+            totalImages++;
+            loadNextImage(totalImages);
+        };
+        img.onerror = function() {
+            // All images are loaded
+            generateSlides(carousel, totalImages, imagePath, slidesContainer);
+            showSlides(carousel, 0); // Initialize slides
+        };
+    
+        function loadNextImage(index) {
+            img.src = `${imagePath}${index}.png`;
+        }
+    
+        // Start loading the first image
+        loadNextImage(totalImages);
+    }
+    
+    function generateSlides(carousel, totalImages, imagePath, slidesContainer) {
+        for (let i = 0; i < totalImages; i++) {
             const slideDiv = document.createElement('div');
             slideDiv.className = 'carousel-slide';
             const img = document.createElement('img');
@@ -230,8 +251,6 @@
             slideDiv.appendChild(img);
             slidesContainer.appendChild(slideDiv);
         }
-    
-        showSlides(carousel, 0); // Initialize slides
     }
     
     function moveSlide(button, n) {
@@ -253,7 +272,6 @@
         slides[n].style.display = "block"; // Display only the active slide
         carousel.setAttribute('data-slide-index', n);
     }
-    
     
 
 </script>
@@ -307,10 +325,10 @@
             </figcaption>
         </d-figure>
 
-        <h3> Example: check news in Italy </h3>
+        <h3> Example: Search for flights from Helsinki to Seoul </h3>
 
         <h4> DigiRL </h4>
-        <div class="carousel-container" data-image-path="images/-50/" data-slide-index="0">
+        <div class="carousel-container" data-image-path="images/digirl/" data-slide-index="0">
             <div class="carousel-slides">
                 <!-- Slides will be dynamically generated here -->
             </div>
@@ -320,11 +338,24 @@
                 <button class="carousel-button" onclick="moveSlide(this, 1)">&#10095;</button>
             </div>
             <figcaption>
-                Run1, General, -50
+                Run1, General, 2048
             </figcaption>
         </div>
         
         <h4> Online (Filtered) Behavior Cloning </h4>
+        <div class="carousel-container" data-image-path="images/filteredbc/" data-slide-index="0">
+            <div class="carousel-slides">
+                <!-- Slides will be dynamically generated here -->
+            </div>
+        
+            <div class="carousel-controls">
+                <button class="carousel-button" onclick="moveSlide(this, -1)">&#10094;</button>
+                <button class="carousel-button" onclick="moveSlide(this, 1)">&#10095;</button>
+            </div>
+            <figcaption>
+                Run1, General, 1474
+            </figcaption>
+        </div>
         
         <h4> CogAgent </h4>
         <div class="carousel-container" data-image-path="images/cogagent/" data-slide-index="0">
