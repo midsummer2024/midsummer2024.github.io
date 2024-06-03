@@ -27,7 +27,7 @@
           </script>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>RL4VLM</title>
+            <title>DigiRL</title>
 
 
             <style>
@@ -261,8 +261,10 @@
             </d-figure>
         </section>
 
-        <section id="result">
-        <h2> Main Results </h2>
+        <section id="Results">
+        <h2> Results </h2>
+
+        <h3> Main Results </h3>
 
         We achieve 280% improvement over GPT-4V, and outperforms filtered behavior cloning on both AitW General and AitW Web Shopping subsets.
         <d-figure>
@@ -302,26 +304,24 @@
         <h4> CogAgent </h4>
         <h4> Set-of-Marks based on GPT-4V </h4>
 
-        </section>
-
-        <section id="rl-bc">
-            <h2> Why RL over Behavior Cloning? </h2>
-            The online learning curve is shown below.
+        
+        <h3> Why RL over Behavior Cloning? </h3>
+        The online learning curve is shown below.
         <d-figure>
             <img src="images/curves-imp.png" width="100%">
             <figcaption>
-            Offline-to-online training curves for Filtered BC and DigiRL.
-            Curves are smoothed with exponential weighted averaging to start from
-            the performance of supervised trained policy. Two runs for each model are
-            started on two different dates with at least two days apart. Observe that
-            DigiRL is able to improve faster with a fewer number of samples. Since
-            the data collection frequency is the bottleneck, these performance trends
-            directly reflect performance trends against wall-clock time as well.
+                Offline-to-online training curves for Filtered BC and DigiRL.
+                Curves are smoothed with exponential weighted averaging to start from
+                the performance of supervised trained policy. Two runs for each model are
+                started on two different dates with at least two days apart. Observe that
+                DigiRL is able to improve faster with a fewer number of samples. Since
+                the data collection frequency is the bottleneck, these performance trends
+                directly reflect performance trends against wall-clock time as well.
             </figcaption>
         </d-figure>
-        </section>
+    </section>
 
-        </d-article>
+    </d-article>
         <d-appendix>
             <h3>BibTeX</h3>
             <p class="bibtex">
