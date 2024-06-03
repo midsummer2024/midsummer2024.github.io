@@ -134,7 +134,7 @@
             </style>
 
     </head>
-    <body>
+    <sec>
         <div class="header-container">
             <div class="header-content">
               <h1>DigiRL</h1>
@@ -225,7 +225,6 @@
 
 </script>
 
-
         <d-contents>
             <nav>
                 <h4>Contents</h4>
@@ -235,23 +234,41 @@
             </nav>
         </d-contents>
 
-        <d-figure>
-            <img src="images/website-todos.png" width="100%">
-            <figcaption>
-                Website Overview.  
-            </figcaption>
-        </d-figure>
+        <!-- insert a video at ./images/main.mp4 here -->
+        <video width="100%" controls>
+            <source src="images/main.mp4" type="video/mp4">
+        </video>
+
+        <section id="Motivation">
+            <h2> Motivation </h2>
+            <p>
+                Put text here.
+            </p>
+        </section>
+
+        <section id="Method">
+            <h2> Method </h2>
+            <p>
+                We propose a new method to train large vision-language models (VLMs) as decision-making agents via reinforcement learning (RL).
+                Our method, DigiRL, is designed to train agents that can interact with real-world graphical user interfaces (GUIs) and perform tasks
+                that require reasoning and decision-making.
+            </p>
+            <d-figure>
+                <img src="images/teaser.png" width="100%">
+                <figcaption>
+                    Our method is designed to train agents that can interact with real-world graphical user interfaces (GUIs) and perform tasks that require reasoning and decision-making.
+                </figcaption>
+            </d-figure>
+        </section>
 
         <section id="result">
-        <h2> 280% Performance Improvement over GPT-4V </h2>
+        <h2> Main Results </h2>
 
-        We show that our method can enable a backbone <a href="https://github.com/haotian-liu/LLaVA" class="code-link">LLaVA-1.6-7b</a>
-        model to outperform commercial models (<a href="https://openai.com/index/gpt-4v-system-card" class="code-link">GPT4-V</a>
-        and <a href="https://gemini.google.com/" class="code-link">Gemini</a>), and supervised fine-tuned LLaVA-7b.
+        We achieve 280% improvement over GPT-4V, and outperforms filtered behavior cloning on both AitW General and AitW Web Shopping subsets.
         <d-figure>
             <img src="images/tab-imp.png" width="100%">
             <figcaption>
-            Main comparisons of different agents across various settings. Each offline experiment is repeated three times and the mean and standard deviation are reported. Each online experiment is repeated two times. Results are evaluated with our autonomous evaluator with the first 96 instructions in the train and test set.
+            Main comparisons of different agents across various settings.
             </figcaption>
         </d-figure>
 
@@ -277,7 +294,7 @@
                 <button class="carousel-button" onclick="moveSlide(1)">&#10095;</button>
             </div>
             <figcaption>
-                Check news in Italy
+                Run1, General, -50
             </figcaption>
         </div>
 
@@ -288,8 +305,7 @@
         </section>
 
         <section id="rl-bc">
-            <h2> Why RL? </h2>
-            <h3> Why RL instead of filtered BC? </h3>
+            <h2> Why RL over Behavior Cloning? </h2>
             The online learning curve is shown below.
         <d-figure>
             <img src="images/curves-imp.png" width="100%">
@@ -303,141 +319,7 @@
             directly reflect performance trends against wall-clock time as well.
             </figcaption>
         </d-figure>
-
-        <h3> Explore Trajectories </h3>
-            <div class="carousel-container">
-                <div class="carousel-slide active">
-                    <img src="images/nl.png" alt="Teaser Image 1">
-                </div>
-                <div class="carousel-slide active">
-                    <img src="images/ezp.png" alt="Teaser Image 2">
-                </div>
-
-                <div class="carousel-controls">
-                    <button class="carousel-button" onclick="moveSlide(-1)">&#10094;</button>
-                    <button class="carousel-button" onclick="moveSlide(1)">&#10095;</button>
-                </div>
-                <figcaption>
-                    Trajectories in different training phase of RL and filtered BC.
-                </figcaption>
-            </div>
         </section>
-
-        <section id="non-stationarity">
-            <h2> Non-Stationarity </h2>
-            <p>
-                We show that the environment is non-stationary and dynamic, which motivates the use of RL.
-            </p>
-            <d-figure>
-                <img src="images/non-stationarity.png" width="100%">
-                <figcaption>
-                    Non-stationarity and dynamism of the environment.
-                </figcaption>
-            </d-figure>
-
-            <h3> Explore Trajectories </h3>
-            <div class="carousel-container">
-                <div class="carousel-slide active">
-                    <img src="images/nl.png" alt="Teaser Image 1">
-                </div>
-                <div class="carousel-slide active">
-                    <img src="images/ezp.png" alt="Teaser Image 2">
-                </div>
-
-                <div class="carousel-controls">
-                    <button class="carousel-button" onclick="moveSlide(-1)">&#10094;</button>
-                    <button class="carousel-button" onclick="moveSlide(1)">&#10095;</button>
-                </div>
-                <figcaption>
-                    Trajectories in different training phase of RL and filtered BC.
-                </figcaption>
-            </div>
-
-        </section>
-
-        <section id="env-pressure-test">
-            <h2> Scalable Emulator Parallel </h2>
-            <p>
-                We show that our method is scalable to a large number of machines.
-            </p>
-
-            <d-figure>
-                <img src="images/env-distr.png" width="100%">
-                <figcaption>
-                Multi-machine parallel emulator execution. The host machine is equipped with GPU
-                accelerators and the worker machines are equipped only with CPUs. The policy update is executed on
-                the worker machine and the trajectory collections are executed distributedly on the worker machines
-                and aggregated by the host machine.
-                </figcaption>
-            </d-figure>
-
-            <d-figure>
-                <img src="images/scalability.png" width="100%">
-                <figcaption>
-                Emulation speed w.r.t number of
-                CPUs used. The upper bound can only achieved
-                when there is no communication and error handling
-                cost. Our design of distributed emulator can sig-
-                nificantly improve the efficiency of emulation com-
-                paared to the vanilla method of running all emula-
-                tions over the same instance.
-                </figcaption>
-            </d-figure>
-        </section>
-
-
-        <section id="method">
-            <h2>Details</h2>
-            <p>
-
-            <h3> Algorithm Framework </h3>
-            
-            <p>
-                [Change this] We propose an algorithmic framework that directly fine-tune a large vision-language model (VLM)
-                or Multimodal large language model (MLLM) using Reinforcement Learning (RL), using task rewards.
-
-            </p>
-            <d-figure>
-            <img src="images/teaser.png" width="100%">
-            <figcaption>
-                <strong>DigiRL overview.</strong> DigiRL is built upon a VLM that
-                has been pre-trained on extensive web data to develop fundamental
-                skills such as common knowledge, reasoning, and visual grounding.
-                Initially, we employ offline RL to fine-tune the VLM using stale
-                task-specific data, which helps in eliciting goal-oriented behaviors.
-                Subsequently, our agent engages with real-world graphical user
-                interfaces, continuously enhancing its performance through online
-                RL and autonomous performance evaluations.    
-            </figcaption>
-            </d-figure>
-
-            <h3> Environment Details </h3>
-
-            <d-figure>
-                <img src="images/diagram.png" width="100%">
-                <figcaption>
-                    <strong>Environment details.</strong> Top: actions space and dynamics of the environment. Bottom: examples of the
-                    read-world non-stationarity and dynamism of the environment.
-                </figcaption>
-            </d-figure>
-
-
-
-            <h3> The DigiRL Algorithm </h3>
-
-            [Change this] We design a $v_t^\text{in}$ in the following format, containing (1) task description; (2) legal action space;
-            and (3) the desired output format $v_t^\text{out}$(containing the CoT reasoning).
-
-            <d-figure>
-                <img src="images/algo.png" alt="SEAL-Bench Results" width="100%" style="display: block; margin-left: auto; margin-right: auto;">
-                <figcaption>
-                    <strong>The DigiRL algorithm.</strong>
-                </figcaption>
-            </d-figure>
-
-            </section>
-
-    </section>
 
         </d-article>
         <d-appendix>
