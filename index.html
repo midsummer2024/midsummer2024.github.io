@@ -202,31 +202,59 @@
         }
     }
 
-    let slideIndex = 0; // Global slide index
-
     document.addEventListener('DOMContentLoaded', (event) => {
-        showSlides(slideIndex); // Initialize slides
+        initializeCarousels();
         for (var i = 1; i <= 12; i++) {
-            insertCitation(i.toString()); // Insert citations
+            insertCitation(i.toString());
         }
-        updateBibliography(); // Update bibliography
+        updateBibliography();
     });
-
-    function moveSlide(n) {
-        showSlides(slideIndex += n);
+    
+    function initializeCarousels() {
+        const carousels = document.querySelectorAll('.carousel-container');
+        carousels.forEach(carousel => {
+            initializeCarousel(carousel);
+        });
     }
-
-    function showSlides(n) {
-        let i;
-        let slides = document.getElementsByClassName("carousel-slide");
-        if (n >= slides.length) { slideIndex = 0; }
-        if (n < 0) { slideIndex = slides.length - 1; }
-
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
+    
+    function initializeCarousel(carousel) {
+        const imagePath = carousel.getAttribute('data-image-path');
+        const slidesContainer = carousel.querySelector('.carousel-slides');
+        const totalImages = 4; // Adjust based on your needs or fetch dynamically
+    
+        for (let i = 1; i <= totalImages; i++) {
+            const slideDiv = document.createElement('div');
+            slideDiv.className = 'carousel-slide';
+            const img = document.createElement('img');
+            img.src = `${imagePath}${i}.png`;
+            slideDiv.appendChild(img);
+            slidesContainer.appendChild(slideDiv);
         }
-        slides[slideIndex].style.display = "block"; // Display only the active slide
+    
+        showSlides(carousel, 0); // Initialize slides
     }
+    
+    function moveSlide(button, n) {
+        const carousel = button.closest('.carousel-container');
+        let slideIndex = parseInt(carousel.getAttribute('data-slide-index'));
+        slideIndex += n;
+        showSlides(carousel, slideIndex);
+    }
+    
+    function showSlides(carousel, n) {
+        const slides = carousel.querySelectorAll('.carousel-slide');
+        if (n >= slides.length) { n = 0; }
+        if (n < 0) { n = slides.length - 1; }
+    
+        slides.forEach(slide => {
+            slide.style.display = "none";
+        });
+    
+        slides[n].style.display = "block"; // Display only the active slide
+        carousel.setAttribute('data-slide-index', n);
+    }
+    
+    
 
 </script>
 
@@ -282,31 +310,37 @@
         <h3> Example: check news in Italy </h3>
 
         <h4> DigiRL </h4>
-        <div class="carousel-container">
-            <div class="carousel-slide active">
-                <img src="images/-50/1.png">
+        <div class="carousel-container" data-image-path="images/-50/" data-slide-index="0">
+            <div class="carousel-slides">
+                <!-- Slides will be dynamically generated here -->
             </div>
-            <div class="carousel-slide active">
-                <img src="images/-50/2.png">
-            </div>
-            <div class="carousel-slide active">
-                <img src="images/-50/3.png">
-            </div>
-            <div class="carousel-slide active">
-                <img src="images/-50/4.png">
-            </div>
-
+        
             <div class="carousel-controls">
-                <button class="carousel-button" onclick="moveSlide(-1)">&#10094;</button>
-                <button class="carousel-button" onclick="moveSlide(1)">&#10095;</button>
+                <button class="carousel-button" onclick="moveSlide(this, -1)">&#10094;</button>
+                <button class="carousel-button" onclick="moveSlide(this, 1)">&#10095;</button>
             </div>
             <figcaption>
                 Run1, General, -50
             </figcaption>
         </div>
-
+        
         <h4> Online (Filtered) Behavior Cloning </h4>
+        
         <h4> CogAgent </h4>
+        <div class="carousel-container" data-image-path="images/cogagent/" data-slide-index="0">
+            <div class="carousel-slides">
+                <!-- Slides will be dynamically generated here -->
+            </div>
+        
+            <div class="carousel-controls">
+                <button class="carousel-button" onclick="moveSlide(this, -1)">&#10094;</button>
+                <button class="carousel-button" onclick="moveSlide(this, 1)">&#10095;</button>
+            </div>
+            <figcaption>
+                General, 81
+            </figcaption>
+        </div>
+        
         <h4> Set-of-Marks based on GPT-4V </h4>
 
         
