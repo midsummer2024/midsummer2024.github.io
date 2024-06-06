@@ -326,7 +326,7 @@
             </figcaption>
         </d-figure>
 
-        <h3> Example: Search for good Italian restaurants on map </h3>
+        <h3> Search for good Italian restaurants on map </h3>
 
         <h4> DigiRL </h4>
         <div class="carousel-container" data-image-path="images/general_digirl/" data-slide-index="0">
@@ -378,10 +378,11 @@
             </div>
         </div>
 
-        <h3> Example: Check news in Peru </h3>
+        <h3> Go to newegg.com, search for "asus zenbook" </h3>
 
         <h4> DigiRL </h4>
-        <div class="carousel-container" data-image-path="images/digirl-webshop/" data-slide-index="0">
+
+        <div class="carousel-container" data-image-path="images/webshop_digirl/" data-slide-index="0">
             <div class="carousel-slides">
                 <!-- Slides will be dynamically generated here -->
             </div>
@@ -390,13 +391,11 @@
                 <button class="carousel-button" onclick="moveSlide(this, -1)">&#10094;</button>
                 <button class="carousel-button" onclick="moveSlide(this, 1)">&#10095;</button>
             </div>
-            <figcaption>
-                Run1, Webshop, 2068
-            </figcaption>
         </div>
         
         <h4> Online (Filtered) Behavior Cloning </h4>
-        <div class="carousel-container" data-image-path="images/filteredbc-webshop/" data-slide-index="0">
+
+        <div class="carousel-container" data-image-path="images/webshop_bc/" data-slide-index="0">
             <div class="carousel-slides">
                 <!-- Slides will be dynamically generated here -->
             </div>
@@ -405,26 +404,39 @@
                 <button class="carousel-button" onclick="moveSlide(this, -1)">&#10094;</button>
                 <button class="carousel-button" onclick="moveSlide(this, 1)">&#10095;</button>
             </div>
-            <figcaption>
-                Run1, Webshop, 1896
-            </figcaption>
         </div>
         
         <h4> CogAgent </h4>
 
+        <div class="carousel-container" data-image-path="images/webshop_cogagent/" data-slide-index="0">
+            <div class="carousel-slides">
+                <!-- Slides will be dynamically generated here -->
+            </div>
         
+            <div class="carousel-controls">
+                <button class="carousel-button" onclick="moveSlide(this, -1)">&#10094;</button>
+                <button class="carousel-button" onclick="moveSlide(this, 1)">&#10095;</button>
+            </div>
+        </div>
+
         <h4> Set-of-Marks based on GPT-4V </h4>
 
+        <div class="carousel-container" data-image-path="images/webshop_gpt4v/" data-slide-index="0">
+            <div class="carousel-slides">
+                <!-- Slides will be dynamically generated here -->
+            </div>
         
+            <div class="carousel-controls">
+                <button class="carousel-button" onclick="moveSlide(this, -1)">&#10094;</button>
+                <button class="carousel-button" onclick="moveSlide(this, 1)">&#10095;</button>
+            </div>
+        </div>
+
         <h3> Why RL over Behavior Cloning? </h3>
         The online learning curve is shown below.
         <d-figure>
             <img src="images/curves-imp.png" width="100%">
             <figcaption>
-                Offline-to-online training curves for Filtered BC and DigiRL.
-                Curves are smoothed with exponential weighted averaging to start from
-                the performance of supervised trained policy. Two runs for each model are
-                started on two different dates with at least two days apart. Observe that
                 DigiRL is able to improve faster with a fewer number of samples. Since
                 the data collection frequency is the bottleneck, these performance trends
                 directly reflect performance trends against wall-clock time as well.
