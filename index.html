@@ -236,7 +236,7 @@
         };
     
         function loadNextImage(index) {
-            img.src = `${imagePath}${index}.png`;
+            img.src = `${imagePath}${index}.jpg`;
         }
     
         // Start loading the first image
@@ -248,7 +248,7 @@
             const slideDiv = document.createElement('div');
             slideDiv.className = 'carousel-slide';
             const img = document.createElement('img');
-            img.src = `${imagePath}${i}.png`;
+            img.src = `${imagePath}${i}.jpg`;
             slideDiv.appendChild(img);
             slidesContainer.appendChild(slideDiv);
         }
