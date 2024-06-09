@@ -280,7 +280,6 @@
         <d-contents>
             <nav>
                 <h4>Contents</h4>
-                <div><a href="#Motivation"> Motivation</a></div>
                 <div><a href="#Method"> Method</a></div>
                 <div><a href="#Results"> Results</a></div>
             </nav>
@@ -291,35 +290,41 @@
             <source src="images/main.mp4" type="video/mp4">
         </video>
 
-        <section id="Motivation">
-            <h2> Motivation </h2>
-            <p>
-                <b>Prompting alone is insufficient</b> because it only provides a 'stop-gap' solution. Without updating the model's weights, the performance of the resulting agents is inherently limited by the base model's capabilities. 
-            </p>
-            <p>
-                <b>SFT (Behavior Cloning) is also insufficient</b> because the dynamic nature of the web and devices means that models trained on outdated data can become sub-optimal as the environment changes.
-            </p>
-            <p>
-                <b>Online Filtered Behavior Cloning is not good enough</b> because it easily leads to sub-optimal behaviors due to its cloning nature, leading to challenge in generalizing to unseen tasks.
-            </p>
+        <section id="Abstract">
+            <h2>  </h2>
+
+        <d-figure>
+            <img src="images/abstract.png" width="100%">
+        </d-figure>
+
+        <d-figure>
+            <img src="images/teaser.png" width="100%">
+            <figcaption>
+                Our method is designed to train agents that can interact with real-world graphical user interfaces (GUIs) and perform tasks that require reasoning and decision-making.
+            </figcaption>
+        </d-figure>
+
         </section>
 
-        <section id="Method">
-            <h2> Method </h2>
-            <h3> Approach </h3>
-            <d-figure>
-                <img src="images/teaser.png" width="100%">
-                <figcaption>
-                    Our method is designed to train agents that can interact with real-world graphical user interfaces (GUIs) and perform tasks that require reasoning and decision-making.
-                </figcaption>
-            </d-figure>
-            <h3> Algorithm </h3>
+        <section id="RL-over-BC">
+
+            <h2> Why RL over Online Behavior Cloning? </h2>
             <d-figure>
                 <img src="images/algo.png" width="100%">
                 <figcaption>
                     We use doubly robust value function and trajectory-level value function to filter interaction data and train the actor policy.
                 </figcaption>
             </d-figure>
+
+            <d-figure>
+                <img src="images/curves-imp.png" width="100%">
+                <figcaption>
+                    DigiRL is able to improve faster with a fewer number of samples. Since
+                    the data collection frequency is the bottleneck, these performance trends
+                    directly reflect performance trends against wall-clock time as well.
+                </figcaption>
+            </d-figure>
+
         </section>
 
         <section id="Results">
@@ -441,16 +446,6 @@
             </div>
         </div>
 
-        <h3> Why RL over Behavior Cloning? </h3>
-        The online learning curve is shown below.
-        <d-figure>
-            <img src="images/curves-imp.png" width="100%">
-            <figcaption>
-                DigiRL is able to improve faster with a fewer number of samples. Since
-                the data collection frequency is the bottleneck, these performance trends
-                directly reflect performance trends against wall-clock time as well.
-            </figcaption>
-        </d-figure>
     </section>
 
     </d-article>
