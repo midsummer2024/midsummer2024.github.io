@@ -216,21 +216,21 @@
                 <!-- Visual Effects. -->
                 <div class="column">
                     <div class="content">
-                        <h2 class="title is-3">RL > SFT</h2>
+                        <h2 class="title is-3">DigiRL: New SoTA for Real-world Digital Agents</h2>
+
+                        <h3> Why Reinforcement Learning At All? </h3>
                         <p>
                             We find reinforcement learning significantly outperforms supervised fine-tuning due to the strong stochasticity
                             in real-world environments. To overcome this challenge, we introduce an interactive algorithmic framework with 
                             reinforcement learning.
-                        </p>
-                        <!-- <div style="text-align:center;">
-                            <img src="website/images/teaser.png" alt="illustrative-example"
-                                style="margin: 0 auto; display: block; max-width: 1000px; width: 100%; height: auto;" />
-                            <br>
-                        </div> -->
 
-                        Our algorithm (DigiRL) uses a doubly robust estimator to estimate the value of a state. We also use a instruction-level algorithm
-                        (automatic curriculum) to enhance the performance. 
-                        algorithm:
+                            <!-- %%Reserved by Yifei -->
+                        </p>
+
+                        <h3> Algorithmic Framework of DigiRL </h3>
+                        <p>
+                            <!-- %%Reserved by Yifei -->
+                        </p>
 
                         <div style="text-align:center;">
                             <img src="website/images/algo.png" alt="illustrative-example"
@@ -242,8 +242,10 @@
                             We clearly find DigiRL outperforms Filtered BC in the Offline-to-Online learning setting on both subsets of AitW.
                             <br>
                             <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button" disabled
+                                    id="visualize-sr-vs-k-scale-with-model-size-llama2-base">Subset:</button>
                                 <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button"
-                                    id="visualize-sr-vs-k-scale-with-model-size-llama2-base">Visualize: AitW General</button>
+                                    id="visualize-sr-vs-k-scale-with-model-size-llama2-base">AitW General</button>
                                 <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button"
                                     id="visualize-sr-vs-k-scale-with-model-size-llama2-rlhf">AitW Web Shopping</button>
                             </div>
@@ -266,53 +268,10 @@
                 <!-- Visual Effects. -->
                 <div class="column">
                     <div class="content">
-                        <h2 class="title is-3">Evaluation</h2>
+                        <h3 class="title is-3">Evaluation</h3>
                         <p>
-                            We evaluate with Gemini 1.5 Pro:
+                            We evaluate with Gemini 1.5 Pro. We also manually evaluate on some subsets and finds that the evaluation results highly align:
                         </p>
-                        <ul>
-                            <li>Base: Pre-trained model</li>
-                            <li>SIFT: Supervised Instruction-Finetuning</li>
-                            <li>RLHF: Reinforcement Learning from Human Feedback</li>
-                        </ul>
-
-                        <h3>LLMs' Ability to Leverage Natural Language Feedback</h3>
-                        <ul>
-                            <li>
-                                We find no significant difference between open- and closed-source models in terms of
-                                &Delta;feedback.
-                                <br>
-                                <button class="btn btn-outline-secondary btn-sm inline-vis-button"
-                                    id="visualize-feedback-sr-no-diff-open-close">Visualize
-                                    This</button>
-
-                            </li>
-
-                            <li>
-                                Similar to previous findings, we find that SIFT and RLHF hurt models' ability to
-                                leverage feedback on CodeLLama (except 7B) and LLaMA-2, as they all have lower
-                                &Delta;feedback and Success Rate (with feedback) compared to their base variants.
-                                Another two exceptions are Vicuna and Lemur-v1; We speculate using multi-turn
-                                conversations (ShareGPT) for SIFT contributes to these two exceptions.
-                                <br>
-                                <button class="btn btn-outline-secondary btn-sm inline-vis-button"
-                                    id="visualize-feedback-sr-sift-rlhf">Visualize
-                                    This</button>
-                            </li>
-
-                            <li>
-                                Models hardly benefit from self-feedback. We find GPT-4-0613 using self-generated
-                                feedback has
-                                limited benefit: only decision-making has improved slightly.
-                                <br>
-                                <button class="btn btn-outline-secondary btn-sm inline-vis-button"
-                                    id="visualize-feedback-sr-gpt-4-self">Visualize
-                                    This</button>
-                            </li>
-
-                        </ul>
-
-
 
                         <div class="text-center">
                             <div class="btn-group btn-group-toggle text-center task-selector" data-toggle="buttons">
@@ -350,34 +309,24 @@
                             <canvas id="chart-sr-w-feedback" style="max-height: 100%;"></canvas>
                         </div>
 
-                        <h3>LLMs' Ability to Provide Natural Language Feedback</h3>
+                        <h3>Failure Mode Analysis</h3>
 
                         <p>
-                            In this section, we fixed the evaluated LLM (gpt-3.5-turbo-0613) and use different
-                            LLMs to
-                            <b>provide</b> language feedback.
-                            This allows us to measure different LLMs' effectiveness in providing feedback.
-                            <br>
-                            We find that task-solving ability could be orthogonal to feedback-providing ability: LLM's
-                            higher task-solving performance does not necessarily translate to better feedback-providing
-                            capability and vice versa.
-                            For example, despite performing the worst in solving tasks, CodeLLaMA (34B, SIFT) can
-                            provide feedback that improves the stronger GPT-3.5.
+                            We analyze the failure modes of all models:
                         </p>
 
                         <div class="text-center">
                             <div class="btn-group btn-group-toggle text-center feedback-provider-sort-by-selector"
                                 data-toggle="buttons">
-                                <button type="button" class="btn btn-outline-secondary btn-sm" disabled>Sort
-                                    by:</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm" disabled>Subset:</button>
                                 <button type="button" class="btn btn-outline-secondary btn-sm active"
                                     id="sort-by-feedback-gain">
-                                    Success Rate with Feedback
+                                    AitW General
                                 </button>
 
                                 <button type="button" class="btn btn-outline-secondary btn-sm"
                                     id="sort-by-feedback-provider-perf">
-                                    Feedback Provider's Performance
+                                    AitW Web Shopping
                                 </button>
                             </div>
                         </div>

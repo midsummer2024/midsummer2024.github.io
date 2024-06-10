@@ -2,7 +2,7 @@
 let sr_feedback_provider_raw;
 let chart = null;
 
-const gpt_3_5_perf = 36.18;
+const gpt_3_5_perf = 0;
 
 const sortby_options = {
   GAIN_FROM_FEEDBACK: "sort-by-feedback-gain",
@@ -49,7 +49,7 @@ function createFeedbackProviderChart() {
   const sr_feedback_gain = sr_with_feedback.map(item => item[1]);
   const sr_feedback_provider_perf = sr_with_feedback.map(item => item[2]);
 
-  const title_text = 'Different Feedback Providers\' Ability to Improve GPT-3.5\'s Performance';
+  const title_text = 'Correlation between autonomous evaluator and human judgements';
 
   if (chart) {
     chart.destroy();
@@ -118,19 +118,19 @@ function createFeedbackProviderChart() {
             };
           }
         },
-        subtitle: {
-          display: true,
-          text: 'GPT-3.5\'s No Feedback Performance (Vertical Line): ' + gpt_3_5_perf.toFixed(2) + '%',
-          font: function (context) {
-            var width = context.chart.width;
-            var size = Math.round(width / 40);
-            size = Math.min(size, 14);
+        // subtitle: {
+        //   display: true,
+        //   text: 'GPT-3.5\'s No Feedback Performance (Vertical Line): ' + gpt_3_5_perf.toFixed(2) + '%',
+        //   font: function (context) {
+        //     var width = context.chart.width;
+        //     var size = Math.round(width / 40);
+        //     size = Math.min(size, 14);
 
-            return {
-              size: size
-            };
-          }
-        },
+        //     return {
+        //       size: size
+        //     };
+        //   }
+        // },
         legend: {
           display: true,
           labels: {
