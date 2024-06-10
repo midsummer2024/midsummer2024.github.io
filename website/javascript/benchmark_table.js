@@ -130,8 +130,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     tooltip: true,
                 },
                 columns: [
-                    { title: "Type", field: "type", widthGrow: 0.9, minWidth: 60},
-                    { title: "Arch", field: "model-arch", widthGrow: 1.5, minWidth: 180},
+                    // { title: "Type", field: "type", widthGrow: 0.9, minWidth: 60},
+                    // { title: "Arch", field: "model-arch", widthGrow: 1.5, minWidth: 180},
                     { title: "Model", field: "model-name", widthGrow: 1.5, minWidth: 180},
                     { title: "Size", field: "size", widthGrow: 0.9, minWidth: 60},
                     { title: "Prompt", field: "prompt", widthGrow: 0.9, minWidth: 60},
