@@ -136,18 +136,19 @@ document.addEventListener('DOMContentLoaded', function () {
                     { title: "Size", field: "size", widthGrow: 0.9, minWidth: 60},
                     { title: "Prompt", field: "prompt", widthGrow: 0.9, minWidth: 60},
                     { title: "Algorithm", field: "algo", widthGrow: 0.9, minWidth: 60},
+                    { title: "Method", field: "method", widthGrow: 0.9, minWidth: 60},
                     {//create column group
                         title: "AitW General Subset Success Rate",
                         columns: [
-                            { title: "General Train", field: "general-train", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
-                            { title: "General Test", field: "general-test", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
+                            { title: "Train", field: "general-train", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
+                            { title: "Test", field: "general-test", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
                         ],
                     },
                     {//create column group
                         title: "AitW Webshop Subset Success Rate",
                         columns: [
-                            { title: "Webshop Train", field: "webshop-train", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
-                            { title: "Webshop Test", field: "webshop-test", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
+                            { title: "Train", field: "webshop-train", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
+                            { title: "Test", field: "webshop-test", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
                         ],
                     }
                 ],
