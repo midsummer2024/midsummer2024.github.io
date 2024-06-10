@@ -98,18 +98,18 @@ function createChart(subsetNames, annotate_model_name = true) {
 
             occupiedPositions.push(yValue + yAdjust);  // Add the new position to the list
 
-            annotations_for_data[label] = {
-                type: 'label',
-                // color: series.borderColor,
-                padding: 0,
-                xValue: 3 + 0.2,
-                yValue: yValue + yAdjust,
-                backgroundColor: hexToRGBA(series.backgroundColor, 0.8),
-                content: [label],
-                font: {
-                    size: 10
-                }
-            }
+            // annotations_for_data[label] = {
+            //     type: 'label',
+            //     // color: series.borderColor,
+            //     padding: 0,
+            //     xValue: 3 + 0.2,
+            //     yValue: yValue + yAdjust,
+            //     backgroundColor: hexToRGBA(series.backgroundColor, 0.8),
+            //     content: [label],
+            //     font: {
+            //         size: 10
+            //     }
+            // }
         });
     } else {
         extra_plugin_args = {
@@ -128,7 +128,7 @@ function createChart(subsetNames, annotate_model_name = true) {
     chart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [1, 2, 3, 4, 5], // Assuming k values range from 1 to 5
+            labels: [0, 12*16, 24*16, 36*16, 48*16, 60*16], // Assuming k values range from 1 to 5
             datasets: sr_vs_k_series_subset  // Assuming sr_vs_k_series is already formatted for Chart.js
         },
         options: {
@@ -138,7 +138,7 @@ function createChart(subsetNames, annotate_model_name = true) {
                 x: {
                     title: {
                         display: true,
-                        text: 'Max number of interaction turns allowed (k)',
+                        text: 'Number of Trajectories Trained',
                         font: {
                             size: 14,
                         }
@@ -147,7 +147,7 @@ function createChart(subsetNames, annotate_model_name = true) {
                 y: {
                     title: {
                         display: true,
-                        text: 'Success Rate with k-turn of Interaction (%)',
+                        text: 'Success Rate every 16 trajectories',
                         font: {
                             size: 14,
                         }
@@ -155,11 +155,11 @@ function createChart(subsetNames, annotate_model_name = true) {
                 }
             },
             plugins: {
-                annotation: {
-                    annotations: {
-                        ...annotations_for_data,
-                    }
-                },
+                // annotation: {
+                //     annotations: {
+                //         ...annotations_for_data,
+                //     }
+                // },
                 colors: {
                     enabled: false,
                 },
@@ -198,7 +198,7 @@ function createChart(subsetNames, annotate_model_name = true) {
                 },
                 title: {
                     display: true,
-                    text: "LLM's task success rate with different interaction budget k",
+                    text: "Offline-to-online training curves for Filtered BC and DigiRL",
                     font: function (context) {
                         var width = context.chart.width;
                         var size = Math.round(width / 32);
@@ -216,36 +216,17 @@ function createChart(subsetNames, annotate_model_name = true) {
 }
 
 const default_order = [
-    'gpt-3.5-turbo-0613 (closed-source)',
-    'claude-2 (closed-source)',
-    'claude-instant-1 (closed-source)',
-    'Llama-2-70b (70B, Base)',
-    'Llama-2-70b-chat (70B, RLHF)',
-    'CodeLlama-34b (34B, Base)',
-    'CodeLlama-34b-Instruct (34B, SIFT)',
+    'Filtered BC, Run 1',
+    'Filtered BC, Run 2',
+    'DigiRL, Run 1',
+    'DigiRL, Run 2',
 ]
 
 const all_models = [
-    'CodeLlama-13b (13B, Base)',
-    'CodeLlama-13b-Instruct (13B, SIFT)',
-    'CodeLlama-34b (34B, Base)',
-    'CodeLlama-34b-Instruct (34B, SIFT)',
-    'CodeLlama-7b (7B, Base)',
-    'CodeLlama-7b-Instruct (7B, SIFT)',
-    'Lemur-70b-chat-v1 (70B, SIFT)',
-    'Lemur-70b-v1 (70B, Base)',
-    'Llama-2-13b (13B, Base)',
-    'Llama-2-13b-chat (13B, RLHF)',
-    'Llama-2-70b (70B, Base)',
-    'Llama-2-70b-chat (70B, RLHF)',
-    'Llama-2-7b (7B, Base)',
-    'Llama-2-7b-chat (7B, RLHF)',
-    'chat-bison-001 (closed-source)',
-    'claude-2 (closed-source)',
-    'claude-instant-1 (closed-source)',
-    'gpt-3.5-turbo-0613 (closed-source)',
-    'vicuna-13b-v1.5 (13B, SIFT)',
-    'vicuna-7b-v1.5 (13B, SIFT)'
+    'Filtered BC, Run 1',
+    'Filtered BC, Run 2',
+    'DigiRL, Run 1',
+    'DigiRL, Run 2',
 ]
 
 
@@ -259,9 +240,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             createChart(default_order);
 
-            document.getElementById("visualize-sr-vs-k-open-behind-close").addEventListener("click", function () {
-                createChart(default_order);
-            });
+            // document.getElementById("visualize-sr-vs-k-open-behind-close").addEventListener("click", function () {
+            //     createChart(default_order);
+            // });
 
 
             document.getElementById("visualize-sr-vs-k-scale-with-model-size-llama2-base").addEventListener("click", function () {
@@ -272,29 +253,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 ]);
             });
 
-            document.getElementById("visualize-sr-vs-k-scale-with-model-size-llama2-rlhf").addEventListener("click", function () {
-                createChart([
-                    'Llama-2-7b-chat (7B, RLHF)',
-                    'Llama-2-13b-chat (13B, RLHF)',
-                    'Llama-2-70b-chat (70B, RLHF)',
-                ]);
-            });
+            // document.getElementById("visualize-sr-vs-k-scale-with-model-size-llama2-rlhf").addEventListener("click", function () {
+            //     createChart([
+            //         'Llama-2-7b-chat (7B, RLHF)',
+            //         'Llama-2-13b-chat (13B, RLHF)',
+            //         'Llama-2-70b-chat (70B, RLHF)',
+            //     ]);
+            // });
 
-            document.getElementById("visualize-sr-vs-k-scale-with-model-size-codellama-base").addEventListener("click", function () {
-                createChart([
-                    'CodeLlama-7b (7B, Base)',
-                    'CodeLlama-13b (13B, Base)',
-                    'CodeLlama-34b (34B, Base)',
-                ]);
-            });
+            // document.getElementById("visualize-sr-vs-k-scale-with-model-size-codellama-base").addEventListener("click", function () {
+            //     createChart([
+            //         'CodeLlama-7b (7B, Base)',
+            //         'CodeLlama-13b (13B, Base)',
+            //         'CodeLlama-34b (34B, Base)',
+            //     ]);
+            // });
 
-            document.getElementById("visualize-sr-vs-k-scale-with-model-size-codellama-sift").addEventListener("click", function () {
-                createChart([
-                    'CodeLlama-7b-Instruct (7B, SIFT)',
-                    'CodeLlama-13b-Instruct (13B, SIFT)',
-                    'CodeLlama-34b-Instruct (34B, SIFT)',
-                ]);
-            });
+            // document.getElementById("visualize-sr-vs-k-scale-with-model-size-codellama-sift").addEventListener("click", function () {
+            //     createChart([
+            //         'CodeLlama-7b-Instruct (7B, SIFT)',
+            //         'CodeLlama-13b-Instruct (13B, SIFT)',
+            //         'CodeLlama-34b-Instruct (34B, SIFT)',
+            //     ]);
+            // });
 
             document.getElementById("visualize-sr-vs-k-vicuna-better-than-llama").addEventListener("click", function () {
                 createChart([

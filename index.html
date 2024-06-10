@@ -182,9 +182,6 @@
                         </p>
                     </div>
                 </div>
-                <div class="chart-container" id="chart-k" style="display:block;margin:0 auto;">
-                    <canvas id="chart-sr-vs-k"></canvas>
-                </div>
             </div>
         </div>
     </section>
@@ -258,6 +255,22 @@
                                 style="margin: 0 auto; display: block; max-width: 1000px; width: 100%; height: auto;" />
                             <br>
                         </div>
+                        <h3>Learning Curves</h3>
+                        <div class="text-justify" id="tool-augmented">
+                            We clearly find DigiRL outperforms Filtered BC in the Offline-to-Online learning setting on both subsets of AitW.
+                            <br>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button"
+                                    id="visualize-sr-vs-k-scale-with-model-size-llama2-base">Visualize: AitW General</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button"
+                                    id="visualize-sr-vs-k-scale-with-model-size-llama2-rlhf">AitW Web Shopping</button>
+                            </div>
+            
+                        </div>
+            
+                        <div class="chart-container" id="chart-k" style="display:block;margin:0 auto;">
+                            <canvas id="chart-sr-vs-k"></canvas>
+                        </div>
                     </div>
                 </div>
                 <!--/ Visual Effects. -->
@@ -275,94 +288,13 @@
                     <div class="content">
                         <h2 class="title is-3">Evaluation</h2>
                         <p>
-                            We evaluate 20 LLMs where 4 are closed- and 16 are open-source.
-                            We cover different sizes and training techniques to better understand how they affect LLMs'
-                            multi-turn
-                            interaction capability. We consider three variants of training techniques:
+                            We evaluate with Gemini 1.5 Pro:
                         </p>
                         <ul>
                             <li>Base: Pre-trained model</li>
                             <li>SIFT: Supervised Instruction-Finetuning</li>
                             <li>RLHF: Reinforcement Learning from Human Feedback</li>
                         </ul>
-
-                        <h3>Tool-augmented Task-Solving capabilities of LLMs</h3>
-                        <div class="text-justify" id="tool-augmented">
-                            <ul>
-                                <li>
-                                    We find all open-source models fall behind most commercial closed-source models in
-                                    both success
-                                    rate
-                                    at k=5 and improvement rate (slope).
-                                    <br>
-                                    <button class="btn btn-outline-secondary btn-sm"
-                                        id="visualize-sr-vs-k-open-behind-close">Visualize
-                                        This</button>
-                                </li>
-                                <li>
-                                    Absolute performance and improvement-per-turn (e.g., slope) scale with model size.
-                                    <br>
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button"
-                                            id="visualize-sr-vs-k-scale-with-model-size-llama2-base">Visualize: LLaMA-2
-                                            Base</button>
-                                        <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button"
-                                            id="visualize-sr-vs-k-scale-with-model-size-llama2-rlhf">LLaMA-2
-                                            RLHF</button>
-                                        <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button"
-                                            id="visualize-sr-vs-k-scale-with-model-size-codellama-base">CodeLLaMA
-                                            Base</button>
-                                        <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button"
-                                            id="visualize-sr-vs-k-scale-with-model-size-codellama-sift">CodeLLaMA
-                                            SIFT</button>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    SIFT on multi-turn data can potentially be helpful. <a
-                                        href="https://github.com/lm-sys/FastChat/blob/main/docs/vicuna_weights_version.md">Vicuna-v1.5
-                                        (7B)</a>, which is a SIFT variant of LLaMA2 trained on ShareGPT conversations
-                                    (most are multi-turn), exhibit stronger performance compared to LLaMA-2 (Base and
-                                    RLHF)<sup><a href="#footnote-1" id="ref-footnote-1">1</a></sup>.
-                                    We observe similar trend for <a
-                                        href="https://github.com/OpenLemur/Lemur">Lemur-70b-chat-v1</a>, which continue
-                                    pre-train LLaMA-2 (70B) on code intensive data followed by SIFT on multi-turn data.
-                                    <br>
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button"
-                                            id="visualize-sr-vs-k-vicuna-better-than-llama">Visualize: Vicuna-v1.5
-                                            (7B)</button>
-                                        <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button"
-                                            id="visualize-sr-vs-k-lemur-better-than-llama">Lemur-v1 (70B)</button>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    We find RLHF hurt LLM-tool multi-turn interaction on LLaMA-2 series. However, it's
-                                    unclear if RLHF is problematic overall, or if the issue only arise when RLHF is
-                                    primarily applied to
-                                    single-turn data.
-                                    <br>
-                                    <button class="btn btn-outline-secondary btn-sm inline-vis-button"
-                                        id="visualize-sr-vs-k-rlhf">Visualize This</button>
-                                </li>
-                            </ul>
-
-                            <ol>
-                                <li style="font-size: 0.8rem;" id="footnote-1">We find some performance degradation in
-                                    Vicuna-v1.5
-                                    (especially for the 13B one), potential due to training artifacts. We refer to paper
-                                    Section 3.5
-                                    for
-                                    more details.</li>
-                            </ol>
-
-                        </div>
-
-                        <button class="btn btn-outline-secondary btn-sm" id="visualize-sr-vs-k-all">Visualize All
-                            Models</button>
-
-                        
 
                         <h3>LLMs' Ability to Leverage Natural Language Feedback</h3>
                         <ul>
@@ -484,13 +416,13 @@
     <section class="section" id="BibTeX">
         <div class="container is-max-desktop content">
             <h2 class="title">BibTeX</h2>
-            <pre><code>@misc{wang2023mint,
-    title={MINT: Evaluating LLMs in Multi-turn Interaction with Tools and Language Feedback},
-    author={Xingyao Wang and Zihan Wang and Jiateng Liu and Yangyi Chen and Lifan Yuan and Hao Peng and Heng Ji},
-    year={2023},
-    eprint={2309.10691},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL}
+            <pre><code>@misc{bai2024digirl,
+title={DigiRL: Training In-The-Wild Device-Control Agents with Autonomous Reinforcement Learning},
+author={Bai, Hao and Zhou, Yifei and Pan, Jiayi and Cemri, Mert and Suhr, Alane and Levine, Sergey and Kumar, Aviral}
+year={2024},
+eprint={2405.10292},
+archivePrefix={arXiv},
+primaryClass={cs.AI}
 }</code></pre>
         </div>
     </section>
