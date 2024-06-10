@@ -218,38 +218,20 @@
                     <div class="content">
                         <h2 class="title is-3">RL > SFT</h2>
                         <p>
-                            MINT mirrors the real-world User-LLM-Tool collaborative problem-solving setting. To solve a
-                            problem,
-                            the
-                            LLM can (1) use external tools by generating and executing Python programs and/or (2)
-                            collecting
-                            natural
-                            language feedback to refine its solutions; the feedback is provided by GPT-4, aiming to
-                            simulate
-                            human
-                            users in a reproducible and scalable way.
+                            We find reinforcement learning significantly outperforms supervised fine-tuning due to the strong stochasticity
+                            in real-world environments. To overcome this challenge, we introduce an interactive algorithmic framework with 
+                            reinforcement learning.
                         </p>
-                        <ul>
-                            <li>We measure LLMs' <b>tool-augmented task-solving capability</b> by analyzing its
-                                performance gain
-                                with increased numbers of turns without language feedback (i.e., no red dotted box in
-                                the figure
-                                below).
-                            </li>
-                            <li>
-                                We quantify LLMs' <b>ability to leverage natural language feedback</b> with the
-                                performance gain
-                                upon receiving GPT-4 generated feedback (i.e., performance without and with red dotted
-                                box in
-                                the
-                                figure below).
-                            </li>
-                        </ul>
                         <div style="text-align:center;">
                             <img src="website/images/teaser.png" alt="illustrative-example"
                                 style="margin: 0 auto; display: block; max-width: 1000px; width: 100%; height: auto;" />
                             <br>
                         </div>
+
+                        Our algorithm (DigiRL) uses a doubly robust estimator to estimate the value of a state. We also use a instruction-level algorithm
+                        (automatic curriculum) to enhance the performance. 
+                        algorithm:
+
                         <div style="text-align:center;">
                             <img src="website/images/algo.png" alt="illustrative-example"
                                 style="margin: 0 auto; display: block; max-width: 1000px; width: 100%; height: auto;" />
