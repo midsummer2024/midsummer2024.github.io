@@ -139,16 +139,16 @@
             <div class="hero-body">
 
                 <h2 class="subtitle">
-                    <b>DigiRL</b> solves open-ended realistic Android tasks with autonomous reinforcement learning.
+                    <b>DigiRL</b> solves open-ended realistic Android tasks with an autonomous reinforcement learning algorithm with a doubly robust estimator.
                 </h2>
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="main-results-tab" data-bs-toggle="tab"
                             data-bs-target="#benchmark-table-content" type="button" role="tab"
-                            aria-controls="main-results-tab" aria-selected="true">Micro Average</button>
+                            aria-controls="main-results-tab" aria-selected="true">Success Rates</button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <!-- <li class="nav-item" role="presentation">
                         <button class="nav-link" id="eurus-code-table-tab" data-bs-toggle="tab"
                             data-bs-target="#eurus-code-table-content" type="button" role="tab"
                             aria-controls="eurus-code-table-tab" aria-selected="false">Code (Eurus subset)</button>
@@ -158,7 +158,7 @@
                             data-bs-target="#eurus-math-table-content" type="button" role="tab"
                             aria-controls="eurus-math-table-tab" aria-selected="false">
                             Math (Eurus subset)</button>
-                    </li>
+                    </li> -->
                 </ul>
 
                 <div class="tab-content" id="myTabContent">
@@ -166,9 +166,9 @@
                         aria-labelledby="benchmark-table-content">
 
                         <p class="mt-2 px-2">
-                            This table contains the micro average across all task instances originally featured in the
-                            <a href="https://arxiv.org/abs/2309.10691">MINT paper</a>. It includes test instances from
-                            several sources: HumanEval, MBPP, GSM8K, HotpotQA, MATH, MMLU, TheoremQA, and AlfWorld.
+                            This table contains the success rate across all approaches measured in the
+                            <a href="https://arxiv.org/abs/2309.10691">DigiRL paper</a>. It includes performance on
+                            two subsets: AitW General and AitW Web Shopping.
                         </p>
 
                         <div id="benchmark-table"></div>
@@ -180,33 +180,11 @@
                             This code subset follows the <a href="https://arxiv.org/abs/2404.02078">Eurus
                                 paper</a> and contains MBPP and HumanEval.
                         </p>
-
-
-                        <div id="eurus-code-table"></div>
-                    </div>
-                    <div class="tab-pane fade" id="eurus-math-table-content" role="tabpanel"
-                        aria-labelledby="eurus-math-table-content">
-                        <p class="mt-2 px-2">
-                            This math subset follows the <a href="https://arxiv.org/abs/2404.02078">Eurus
-                                paper</a> and contains TheoremQA, MATH and MMLU.
-                        </p>
-
-
-                        <div id="eurus-math-table"></div>
                     </div>
                 </div>
-
-                <br>
-                <h2 class="subtitle">
-                    <b>MINT</b> can measure different LLMs' ability to provide natural language feedback by measuring
-                    the benefit of their feedback (&Delta; Success Rate) to a fixed LLM (gpt-3.5-turbo-0613).
-                </h2>
-                <div id="benchmark-feedback-efficancy-table"></div>
-                <br>
-                <h2 class="subtitle">
-                    Please refer to our <a href="https://github.com/xingyaoww/mint-bench">GitHub repo</a> to add your
-                    model to the leaderboard.
-                </h2>
+                <div class="chart-container" id="chart-k" style="display:block;margin:0 auto;">
+                    <canvas id="chart-sr-vs-k"></canvas>
+                </div>
             </div>
         </div>
     </section>
@@ -384,9 +362,7 @@
                         <button class="btn btn-outline-secondary btn-sm" id="visualize-sr-vs-k-all">Visualize All
                             Models</button>
 
-                        <div class="chart-container" id="chart-k" style="display:block;margin:0 auto;">
-                            <canvas id="chart-sr-vs-k"></canvas>
-                        </div>
+                        
 
                         <h3>LLMs' Ability to Leverage Natural Language Feedback</h3>
                         <ul>

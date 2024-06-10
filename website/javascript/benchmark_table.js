@@ -134,8 +134,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     // { title: "Arch", field: "model-arch", widthGrow: 1.5, minWidth: 180},
                     { title: "Model", field: "model-name", widthGrow: 1.5, minWidth: 180},
                     { title: "Size", field: "size", widthGrow: 0.9, minWidth: 60},
-                    { title: "Prompt", field: "prompt", widthGrow: 0.9, minWidth: 60},
                     { title: "Algorithm", field: "algo", widthGrow: 0.9, minWidth: 60},
+                    { title: "Prompt", field: "prompt", widthGrow: 0.9, minWidth: 60},
                     { title: "Method", field: "method", widthGrow: 0.9, minWidth: 60},
                     {//create column group
                         title: "AitW General Subset Success Rate",
