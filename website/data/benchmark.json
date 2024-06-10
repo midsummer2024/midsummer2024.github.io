@@ -6,6 +6,7 @@
     "size":"1000B",
     "prompt":"Set-of-Marks",
     "algo":"RLHF",
+    "method": "-",
     "general-train":5.2,
     "general-test":13.5,
     "webshop-train":3.1,
@@ -18,6 +19,7 @@
     "size":"1000B",
     "prompt":"Set-of-Marks",
     "algo":"RLHF",
+    "method": "-",
     "general-train":32.3,
     "general-test":16.7,
     "webshop-train":6.3,
@@ -30,6 +32,7 @@
     "size":"1000B",
     "prompt":"AppAgent",
     "algo":"RLHF",
+    "method": "-",
     "general-train":13.5,
     "general-test":17.7,
     "webshop-train":12.5,
@@ -42,6 +45,7 @@
     "size":"1000B",
     "prompt":"AppAgent",
     "algo":"RLHF",
+    "method": "-",
     "general-train":14.6,
     "general-test":16.7,
     "webshop-train":5.2,
@@ -54,6 +58,7 @@
     "size":"7B",
     "prompt":"Chain-of-Thoughts",
     "algo":"SFT",
+    "method": "-",
     "general-train":25.0,
     "general-test":25.4,
     "webshop-train":25.8,
@@ -66,6 +71,7 @@
     "size":"1.8B",
     "prompt":"Plain",
     "algo":"SFT",
+    "method": "-",
     "general-train":12.5,
     "general-test":14.6,
     "webshop-train":14.6,
@@ -123,5 +129,4 @@
     "webshop-train":68.2,
     "webshop-test":67.2
   }
-
 ]
