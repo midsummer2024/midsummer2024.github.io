@@ -132,23 +132,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 columns: [
                     // { title: "Type", field: "type", widthGrow: 0.9, minWidth: 60},
                     // { title: "Arch", field: "model-arch", widthGrow: 1.5, minWidth: 180},
-                    { title: "Model", field: "model-name", widthGrow: 1.5, minWidth: 180},
-                    { title: "Size", field: "size", widthGrow: 0.9, minWidth: 60},
+                    { title: "Model", field: "model-name", widthGrow: 0.9, minWidth: 60},
+                    { title: "Size", field: "size", widthGrow: 0.6, minWidth: 30},
                     { title: "Algorithm", field: "algo", widthGrow: 0.9, minWidth: 60},
                     { title: "Prompt", field: "prompt", widthGrow: 0.9, minWidth: 60},
                     { title: "Method", field: "method", widthGrow: 0.9, minWidth: 60},
                     {//create column group
                         title: "AitW General Subset Success Rate",
                         columns: [
-                            { title: "Train", field: "general-train", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
-                            { title: "Test", field: "general-test", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
+                            { title: "Train", field: "general-train", hozAlign: "center", formatter: colorFormatter, widthGrow: 0.9, minWidth: 30},
+                            { title: "Test", field: "general-test", hozAlign: "center", formatter: colorFormatter, widthGrow: 0.9, minWidth: 30},
                         ],
                     },
                     {//create column group
                         title: "AitW Webshop Subset Success Rate",
                         columns: [
-                            { title: "Train", field: "webshop-train", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
-                            { title: "Test", field: "webshop-test", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
+                            { title: "Train", field: "webshop-train", hozAlign: "center", formatter: colorFormatter, widthGrow: 0.9, minWidth: 30},
+                            { title: "Test", field: "webshop-test", hozAlign: "center", formatter: colorFormatter, widthGrow: 0.9, minWidth: 30},
                         ],
                     }
                 ],

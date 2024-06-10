@@ -199,7 +199,7 @@ function createChart(subsetNames, annotate_model_name = true) {
                 },
                 title: {
                     display: true,
-                    text: "Offline-to-online training curves for Filtered BC and DigiRL",
+                    text: "Offline-to-online training curves for AutoUI Filtered BC and AutoUI DigiRL",
                     font: function (context) {
                         var width = context.chart.width;
                         var size = Math.round(width / 32);
@@ -217,21 +217,27 @@ function createChart(subsetNames, annotate_model_name = true) {
 }
 
 const default_order = [
-    'Filtered BC, Run 1 (General)',
-    'Filtered BC, Run 2 (General)',
-    'DigiRL, Run 1 (General)',
-    'DigiRL, Run 2 (General)',
+    'AutoUI Filtered BC, Run 1 (General)',
+    'AutoUI Filtered BC, Run 2 (General)',
+    'AutoUI DigiRL, Run 1 (General)',
+    'AutoUI DigiRL, Run 2 (General)',
+    'AutoUI Pretrained (General)',
+    'GPT-4V Set-of-Marks (General)'
 ]
 
 const all_models = [
-    'Filtered BC, Run 1 (Webshop)',
-    'Filtered BC, Run 2 (Webshop)',
-    'DigiRL, Run 1 (Webshop)',
-    'DigiRL, Run 2 (Webshop)',
-    'Filtered BC, Run 1 (General)',
-    'Filtered BC, Run 2 (General)',
-    'DigiRL, Run 1 (General)',
-    'DigiRL, Run 2 (General)',
+    'AutoUI Filtered BC, Run 1 (Webshop)',
+    'AutoUI Filtered BC, Run 2 (Webshop)',
+    'AutoUI DigiRL, Run 1 (Webshop)',
+    'AutoUI DigiRL, Run 2 (Webshop)',
+    'AutoUI Pretrained (Webshop)',
+    'GPT-4V Set-of-Marks (Webshop)',
+    'AutoUI Filtered BC, Run 1 (General)',
+    'AutoUI Filtered BC, Run 2 (General)',
+    'AutoUI DigiRL, Run 1 (General)',
+    'AutoUI DigiRL, Run 2 (General)',
+    'AutoUI Pretrained (General)',
+    'GPT-4V Set-of-Marks (General)'
 ]
 
 
@@ -252,19 +258,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
             document.getElementById("visualize-sr-vs-k-scale-with-model-size-llama2-base").addEventListener("click", function () {
                 createChart([
-                    'Filtered BC, Run 1 (General)',
-                    'Filtered BC, Run 2 (General)',
-                    'DigiRL, Run 1 (General)',
-                    'DigiRL, Run 2 (General)',
+                    'AutoUI Filtered BC, Run 1 (General)',
+                    'AutoUI Filtered BC, Run 2 (General)',
+                    'AutoUI DigiRL, Run 1 (General)',
+                    'AutoUI DigiRL, Run 2 (General)',
+                    'AutoUI Pretrained (General)',
+                    'GPT-4V Set-of-Marks (General)'
                 ]);
             });
 
             document.getElementById("visualize-sr-vs-k-scale-with-model-size-llama2-rlhf").addEventListener("click", function () {
                 createChart([
-                    'Filtered BC, Run 1 (Webshop)',
-                    'Filtered BC, Run 2 (Webshop)',
-                    'DigiRL, Run 1 (Webshop)',
-                    'DigiRL, Run 2 (Webshop)',
+                    'AutoUI Filtered BC, Run 1 (Webshop)',
+                    'AutoUI Filtered BC, Run 2 (Webshop)',
+                    'AutoUI DigiRL, Run 1 (Webshop)',
+                    'AutoUI DigiRL, Run 2 (Webshop)',
+                    'AutoUI Pretrained (Webshop)',
+                    'GPT-4V Set-of-Marks (Webshop)',
                 ]);
             });
 
