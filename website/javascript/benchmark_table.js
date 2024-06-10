@@ -131,16 +131,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 columns: [
                     { title: "Type", field: "type", widthGrow: 0.9, minWidth: 60},
-                    { title: "Model Architecture", field: "model-arch", widthGrow: 1.5, minWidth: 180},
-                    { title: "Model Name", field: "model-name", widthGrow: 1.5, minWidth: 180},
+                    { title: "Arch", field: "model-arch", widthGrow: 1.5, minWidth: 180},
+                    { title: "Model", field: "model-name", widthGrow: 1.5, minWidth: 180},
                     { title: "Size", field: "size", widthGrow: 0.9, minWidth: 60},
                     { title: "Prompt", field: "prompt", widthGrow: 0.9, minWidth: 60},
                     { title: "Algorithm", field: "algo", widthGrow: 0.9, minWidth: 60},
                     {//create column group
-                        title: "Andoird-in-the-Wild Subset Success Rate",
+                        title: "AitW General Subset Success Rate",
                         columns: [
                             { title: "General Train", field: "general-train", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
                             { title: "General Test", field: "general-test", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
+                        ],
+                    },
+                    {//create column group
+                        title: "AitW Webshop Subset Success Rate",
+                        columns: [
                             { title: "Webshop Train", field: "webshop-train", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
                             { title: "Webshop Test", field: "webshop-test", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
                         ],
