@@ -79,10 +79,10 @@
     "prompt":"Plain",
     "algo":"SFT+BC",
     "method":"Offline Filtered BC",
-    "general-train":12.5,
-    "general-test":14.6,
-    "webshop-train":14.6,
-    "webshop-test":17.7
+    "general-train":51.7,
+    "general-test":50.7,
+    "webshop-train":44.7,
+    "webshop-test":45.8
   },
   {
     "type":"Learning",
@@ -90,12 +90,38 @@
     "model-name":"AutoUI",
     "size":"1.8B",
     "prompt":"Plain",
-    "algo":"SFT+Offline Filtered BC",
-    "method":"SFT+Offline Filtered BC",
-    "general-train":12.5,
-    "general-test":14.6,
-    "webshop-train":14.6,
-    "webshop-test":17.7
+    "algo":"SFT+RL",
+    "method":"Offline DigiRL",
+    "general-train":46.9,
+    "general-test":62.8,
+    "webshop-train":39.3,
+    "webshop-test":45.8
+  },
+  {
+    "type":"Learning",
+    "model-arch":"CLIP+T5",
+    "model-name":"AutoUI",
+    "size":"1.8B",
+    "prompt":"Plain",
+    "algo":"SFT+BC",
+    "method":"Offline-to-Online Filtered BC",
+    "general-train":53.5,
+    "general-test":61.5,
+    "webshop-train":53.6,
+    "webshop-test":57.8
+  },
+  {
+    "type":"Learning",
+    "model-arch":"CLIP+T5",
+    "model-name":"AutoUI",
+    "size":"1.8B",
+    "prompt":"Plain",
+    "algo":"SFT+RL",
+    "method":"Offline-to-Online DigiRL",
+    "general-train":63.5,
+    "general-test":71.9,
+    "webshop-train":68.2,
+    "webshop-test":67.2
   }
 
 ]
