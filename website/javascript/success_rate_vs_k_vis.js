@@ -128,7 +128,8 @@ function createChart(subsetNames, annotate_model_name = true) {
     chart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [0, 12*16, 24*16, 36*16, 48*16, 60*16], // Assuming k values range from 1 to 5
+            // assume k values: 0, 6*16, 12*16, ..., 54*16
+            labels: Array.from({ length: 10 }, (_, i) => i * 6 * 16),
             datasets: sr_vs_k_series_subset  // Assuming sr_vs_k_series is already formatted for Chart.js
         },
         options: {
@@ -183,7 +184,7 @@ function createChart(subsetNames, annotate_model_name = true) {
                     },
                     callbacks: {
                         title: function (context) {
-                            return 'Max interaction turns k=' + context[0].label;
+                            return 'Number of trajectories trained on: ' + context[0].label;
                         },
                         label: function (context) {
                             let label = context.dataset.label || '';
@@ -216,17 +217,21 @@ function createChart(subsetNames, annotate_model_name = true) {
 }
 
 const default_order = [
-    'Filtered BC, Run 1',
-    'Filtered BC, Run 2',
-    'DigiRL, Run 1',
-    'DigiRL, Run 2',
+    'Filtered BC, Run 1 (General)',
+    'Filtered BC, Run 2 (General)',
+    'DigiRL, Run 1 (General)',
+    'DigiRL, Run 2 (General)',
 ]
 
 const all_models = [
-    'Filtered BC, Run 1',
-    'Filtered BC, Run 2',
-    'DigiRL, Run 1',
-    'DigiRL, Run 2',
+    'Filtered BC, Run 1 (Webshop)',
+    'Filtered BC, Run 2 (Webshop)',
+    'DigiRL, Run 1 (Webshop)',
+    'DigiRL, Run 2 (Webshop)',
+    'Filtered BC, Run 1 (General)',
+    'Filtered BC, Run 2 (General)',
+    'DigiRL, Run 1 (General)',
+    'DigiRL, Run 2 (General)',
 ]
 
 
@@ -247,19 +252,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
             document.getElementById("visualize-sr-vs-k-scale-with-model-size-llama2-base").addEventListener("click", function () {
                 createChart([
-                    'Llama-2-7b (7B, Base)',
-                    'Llama-2-13b (13B, Base)',
-                    'Llama-2-70b (70B, Base)',
+                    'Filtered BC, Run 1 (General)',
+                    'Filtered BC, Run 2 (General)',
+                    'DigiRL, Run 1 (General)',
+                    'DigiRL, Run 2 (General)',
                 ]);
             });
 
-            // document.getElementById("visualize-sr-vs-k-scale-with-model-size-llama2-rlhf").addEventListener("click", function () {
-            //     createChart([
-            //         'Llama-2-7b-chat (7B, RLHF)',
-            //         'Llama-2-13b-chat (13B, RLHF)',
-            //         'Llama-2-70b-chat (70B, RLHF)',
-            //     ]);
-            // });
+            document.getElementById("visualize-sr-vs-k-scale-with-model-size-llama2-rlhf").addEventListener("click", function () {
+                createChart([
+                    'Filtered BC, Run 1 (Webshop)',
+                    'Filtered BC, Run 2 (Webshop)',
+                    'DigiRL, Run 1 (Webshop)',
+                    'DigiRL, Run 2 (Webshop)',
+                ]);
+            });
 
             // document.getElementById("visualize-sr-vs-k-scale-with-model-size-codellama-base").addEventListener("click", function () {
             //     createChart([
