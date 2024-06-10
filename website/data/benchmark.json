@@ -1,0 +1,88 @@
+[
+  {
+    "type":"Prompting",
+    "model-arch":"GPT",
+    "model-name":"GPT-4V",
+    "size":"1000B",
+    "prompt":"Set-of-Marks",
+    "algo":"RLHF",
+    "general-train":5.2,
+    "general-test":13.5,
+    "webshop-train":3.1,
+    "webshop-test":8.3
+  },
+  {
+    "type":"Prompting",
+    "model-arch":"Transformer MoE",
+    "model-name":"Gemini 1.5 Pro",
+    "size":"1000B",
+    "prompt":"Set-of-Marks",
+    "algo":"RLHF",
+    "general-train":32.3,
+    "general-test":16.7,
+    "webshop-train":6.3,
+    "webshop-test":11.5
+  },
+  {
+    "type":"Prompting",
+    "model-arch":"GPT",
+    "model-name":"GPT-4V",
+    "size":"1000B",
+    "prompt":"AppAgent",
+    "algo":"RLHF",
+    "general-train":13.5,
+    "general-test":17.7,
+    "webshop-train":12.5,
+    "webshop-test":8.3
+  },
+  {
+    "type":"Prompting",
+    "model-arch":"Transformer MoE",
+    "model-name":"Gemini 1.5 Pro",
+    "size":"1000B",
+    "prompt":"AppAgent",
+    "algo":"RLHF",
+    "general-train":14.6,
+    "general-test":16.7,
+    "webshop-train":5.2,
+    "webshop-test":8.3
+  },
+  {
+    "type":"Learning",
+    "model-arch":"Vicuna-7B",
+    "model-name":"CogAgent",
+    "size":"7B",
+    "prompt":"Chain-of-Thoughts",
+    "algo":"SFT",
+    "general-train":25.0,
+    "general-test":25.4,
+    "webshop-train":25.8,
+    "webshop-test":38.5
+  },
+  {
+    "type":"Learning",
+    "model-arch":"CLIP+T5",
+    "model-name":"AutoUI",
+    "size":"1.8B",
+    "prompt":"Plain",
+    "algo":"SFT",
+    "general-train":12.5,
+    "general-test":14.6,
+    "webshop-train":14.6,
+    "webshop-test":17.7
+  },
+  {
+    "type":"Learning",
+    "model-arch":"CLIP+T5",
+    "model-name":"AutoUI",
+    "size":"1.8B",
+    "prompt":"Plain",
+    "algo":"SFT+Offline Filtered BC",
+    "algo":"SFT+Offline Filtered BC",
+    "general-train":12.5,
+    "general-test":14.6,
+    "webshop-train":14.6,
+    "webshop-test":17.7
+  }
+
+]

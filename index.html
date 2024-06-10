@@ -1,571 +1,536 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta http-equiv='cache-control' content='no-cache'>
-        <meta http-equiv='expires' content='0'>
-        <meta http-equiv='pragma' content='no-cache'>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="shortcut icon" type="image/x-icon" href="icon.png">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="template.v2.js"></script>
-        <script src="contents_bar.js"></script>
-        <script src="https://d3js.org/d3.v5.min.js"></script>
-        <script src="https://d3js.org/d3-collection.v1.min.js"></script>
-        <script src="https://rawgit.com/nstrayer/slid3r/master/dist/slid3r.js"></script>
-        <script src="cross_fade.js"></script>
-        <link rel="stylesheet" href="style.css">
+<!DOCTYPE html>
+<html>
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
-        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
-        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
-            onload="renderMathInElement(document.body);"></script>
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script>
-            MathJax = {
-              tex: {
-                inlineMath: [['$', '$']]
-              }
-            };
-          </script>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>DigiRL</title>
+<head>
+    <title>DigiRL</title>
+    <link rel="icon" href="website/img/mint-leaf-logo.png" type="image/icon type">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            <style>
-                /* Styling for the table */
-                table, th, td {
-                    border: 1px solid black;
-                    border-collapse: collapse;
-                }
-                th, td {
-                    padding: 10px;
-                    text-align: left;
-                    cursor: pointer;
-                }
-                .container {
-                    display: flex;
-                    align-items: start;
-                }
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
 
-                .table-container {
-                    margin-right: 10px;
-                }
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="website/css/bulma.min.css">
+    <link rel="stylesheet" href="website/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="website/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./website/javascript/bulma-carousel.min.js"></script>
+    <script src="./website/javascript/bulma-slider.min.js"></script>
 
-                /* Styling for the carousel */
-                .carousel-container {
-                    width: 100%;
-                    max-width: 600px;
-                    margin: auto;
-                    position: relative;
-                    overflow: hidden;
-                    align-items: center;
-                    padding: 0 50px; /* Space for arrows */
-                }
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 
-                .carousel-slide {
-                    display: none;
-                    max-width: 100%; /* Adjusted to use the full area within the padding */
-                    height: auto;
-                    position: relative;
-                    margin: auto;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
+    <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator_bootstrap4.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script>
+    <!-- <script src="website/javascript/peity-vanilla.js"></script> -->
 
-                .carousel-slide.active {
-                    display: flex;
-                }
+    <script src="website/javascript/benchmark_table.js" type="module"></script>
+    <script src="website/javascript/success_rate_vs_k_vis.js" type="module"></script>
+    <script src="website/javascript/feedback_success_rate_vis.js" type="module"></script>
+    <script src="website/javascript/feedback_provider_efficacy.js" type="module"></script>
 
-                .carousel-slide img {
-                    max-width: 100%;
-                    max-height: 100%;
-                    width: auto;
-                    height: auto;
-                    margin: 0;
-                }
+    <link rel="stylesheet" href="website/css/index.css">
 
-                .carousel-controls {
-                    position: absolute;
-                    top: 10px; /* Adjust this value to set how far from the top the arrows should start */
-                    left: 0;
-                    width: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                }
-
-                .carousel-button {
-                    position: absolute;
-                    top: 150px; /* Keeps arrows at 10px from the top of the container */
-                    transform: translateY(-50%); /* Center vertically relative to their height */
-                    z-index: 10;
-                    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-                    color: #000; /* Black arrow color for visibility */
-                    border: none;
-                    cursor: pointer;
-                    font-size: 24px; /* Size of the arrow icons */
-                    padding: 10px; /* Padding around the arrows */
-                    height: 50px; /* Adjust this value to change the height */
-                    width: 50px; /* Adjust width to maintain proportion if necessary */
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-
-
-                .carousel-button:first-child {
-                    left: 0; /* Position the left arrow slightly outside the image area */
-                }
-
-                .carousel-button:last-child {
-                    right: 0; /* Position the right arrow slightly outside the image area */
-                }
-
-                .carousel-caption p {
-                    text-align: center;
-                    font-size: 16px;
-                    color: #333;
-                    margin-top: 10px;
-                }
-
-
-
-                /* Additional styles can go here */
-            </style>
-
-    </head>
-    <sec>
-        <div class="header-container">
-            <div class="header-content">
-              <h1>DigiRL</h1>
-              <h2>Training In-The-Wild Device-Control Agents with Autonomous Reinforcement Learning</h2>
-              <div class="button-container">
-                <a href="https://www.google.com" class="button">Paper</a>
-                <a href="https://www.google.com" class="button">Code</a>
-              </div>
-            </div>
-            <div class="header-image">
-                <img src="images/teaser-head.png" alt="Teaser Image" class="teaser-image">
-            </div>
-        </div>
-    <d-article>
-
-        <!-- Horizontal byline starts here -->
-        <div class="byline-horizontal">
-            <div class="authors">
-                <p>
-                    <a href="https://www.jackgethome.com/" class="author-link">Hao Bai*&dagger;</a>,
-                    <a href="https://https://yifeizhou02.github.io//" class="author-link">Yifei Zhou*</a>,
-                    <a href="https://www.jiayipan.me/" class="author-link">Jiayi Pan</a>,
-                    <a href="https://scholar.google.com/citations?user=sMEFwf8AAAAJ&hl=en" class="author-link">Mert Cemri</a>,
-                </p>
-                <p>
-                    <a href="https://www.alanesuhr.com/" class="author-link">Alane Suhr</a>,
-                    <a href="https://people.eecs.berkeley.edu/~svlevine/" class="author-link">Sergey Levine</a>,
-                    <a href="https://aviralkumar2907.github.io/" class="author-link">Aviral Kumar</a>
-                </p>
-            </div>
-            <div class="affiliations">
-                UC Berkeley, UIUC, CMU, Google DeepMind
-            </div>
-            <div class="contributions">
-                * Equal contribution, alphabetic order
-                &dagger; Work done at UC Berkeley
-            </div>
-        </div>
-
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C7GJ4FYMY9"></script>
     <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
+        gtag('config', 'G-C7GJ4FYMY9');
+    </script>
 
+    <noscript>
+        <p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101339888ns.gif" /></p>
+    </noscript>
+</head>
 
-    var bibliography = {
-        "1": "Shen, Bokui, et al. igibson 1.0: a simulation environment for interactive tasks in large realistic scenes.2021 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS). IEEE, 2021."
-    };
+<body>
 
-    // Function to insert citation
-    function insertCitation(refId) {
-        document.getElementById("ref" + refId).innerText = "[" + refId + "]";
-    }
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title publication-title">
+                            <img src="website/images/icon/icon.png" alt="logo" width="40" height="40" />
+                            DigiRL: Training In-The-Wild Device-Control Agents with Autonomous Reinforcement Learning
+                        </h1>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">
+                                <a href="https://www.jackgethome.com/">Hao Bai</a><sup>1,2*</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://https://yifeizhou02.github.io">Yifei Zhou</a><sup>2*</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://www.jiayipan.me/">Jiayi Pan</a><sup>2</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://scholar.google.com/citations?user=sMEFwf8AAAAJ&hl=en">Mert Cemri</a><sup>2</sup>,
+                            </span>
+                            <br>
+                            <span class="author-block">
+                                <a href="https://www.alanesuhr.com/">Alane Suhr</a><sup>2</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://people.eecs.berkeley.edu/~svlevine/">Sergey Levine</a><sup>2</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://aviralkumar2907.github.io/">Aviral Kumar</a><sup>3,4</sup>
+                            </span>
+                        </div>
 
-    // Function to update bibliography section
-    function updateBibliography() {
-        var bibliographySection = document.getElementById('bibliography');
-        for (var key in bibliography) {
-            if (bibliography.hasOwnProperty(key)) {
-                var para = document.createElement("p");
-                para.innerHTML = "[" + key + "] " + bibliography[key];
-                bibliographySection.appendChild(para);
-            }
-        }
-    }
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block"><sup>1</sup> UIUC,</span>
+                            <span class="author-block"><sup>2</sup> UC Berkeley,</span>
+                            <span class="author-block"><sup>3</sup> CMU,</span>
+                            <span class="author-block"><sup>4</sup> Google DeepMind</span>
 
-    document.addEventListener('DOMContentLoaded', (event) => {
-        initializeCarousels();
-        for (var i = 1; i <= 12; i++) {
-            insertCitation(i.toString());
-        }
-        updateBibliography();
-    });
-    
-    function initializeCarousels() {
-        const carousels = document.querySelectorAll('.carousel-container');
-        carousels.forEach(carousel => {
-            initializeCarousel(carousel);
-        });
-    }
-    
-    function initializeCarousel(carousel) {
-        const imagePath = carousel.getAttribute('data-image-path');
-        const slidesContainer = carousel.querySelector('.carousel-slides');
-        let totalImages = 0;
-    
-        // Dynamically determine the number of images
-        const img = new Image();
-        img.onload = function() {
-            totalImages++;
-            loadNextImage(totalImages);
-        };
-        img.onerror = function() {
-            // All images are loaded
-            generateSlides(carousel, totalImages, imagePath, slidesContainer);
-            showSlides(carousel, 0); // Initialize slides
-        };
-    
-        function loadNextImage(index) {
-            img.src = `${imagePath}${index}.jpg`;
-        }
-    
-        // Start loading the first image
-        loadNextImage(totalImages);
-    }
-    
-    function generateSlides(carousel, totalImages, imagePath, slidesContainer) {
-        for (let i = 0; i < totalImages; i++) {
-            const slideDiv = document.createElement('div');
-            slideDiv.className = 'carousel-slide';
-            const img = document.createElement('img');
-            img.src = `${imagePath}${i}.jpg`;
-            slideDiv.appendChild(img);
-            slidesContainer.appendChild(slideDiv);
-        }
-    }
-    
-    function moveSlide(button, n) {
-        const carousel = button.closest('.carousel-container');
-        let slideIndex = parseInt(carousel.getAttribute('data-slide-index'));
-        slideIndex += n;
-        showSlides(carousel, slideIndex);
-    }
-    
-    function showSlides(carousel, n) {
-        const slides = carousel.querySelectorAll('.carousel-slide');
-        if (n >= slides.length) { n = 0; }
-        if (n < 0) { n = slides.length - 1; }
-    
-        slides.forEach(slide => {
-            slide.style.display = "none";
-        });
-    
-        slides[n].style.display = "block"; // Display only the active slide
-        carousel.setAttribute('data-slide-index', n);
-    }
-    
+                        </div>
 
-</script>
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <!-- PDF Link. -->
+                                <span class="link-block">
+                                    <a href="https://arxiv.org/abs/2309.10691" class="btn btn-outline-dark"
+                                        role="button">&#128221;
+                                        Paper</a> &nbsp;&nbsp;
 
-        <d-contents>
-            <nav>
-                <h4>Contents</h4>
-                <div><a href="#Method"> Method</a></div>
-                <div><a href="#Results"> Results</a></div>
-            </nav>
-        </d-contents>
+                                </span>
+                                <!-- Code Link. -->
+                                <span class="link-block">
+                                    <a href="https://github.com/xingyaoww/mint-bench" class="btn btn-outline-dark"
+                                        role="button">&#128187;
+                                        Code</a> &nbsp;&nbsp;
 
-        <!-- insert a video at ./images/main.mp4 here -->
-        <video width="100%" controls>
-            <source src="images/main.mp4" type="video/mp4">
-        </video>
+                                </span>
+                                <!-- Dataset Link. -->
+                                <span class="link-block">
 
-        <section id="Abstract">
-            <h2>  </h2>
+                                    <a href="https://github.com/xingyaoww/mint-bench/blob/main/docs/DATA.md"
+                                        class="btn btn-outline-dark" role="button">&#128194;
+                                        Data</a>
+                            </div>
+                        </div>
 
-        <d-figure>
-            <img src="images/abstract.png" width="100%">
-        </d-figure>
-
-        <d-figure>
-            <img src="images/teaser.png" width="100%">
-            <figcaption>
-                Our method is designed to train agents that can interact with real-world graphical user interfaces (GUIs) and perform tasks that require reasoning and decision-making.
-            </figcaption>
-        </d-figure>
-
-        </section>
-
-        <section id="RL-over-BC">
-
-            <h2> Why RL over Online Behavior Cloning? </h2>
-            <d-figure>
-                <img src="images/algo.png" width="100%">
-                <figcaption>
-                    We use doubly robust value function and trajectory-level value function to filter interaction data and train the actor policy.
-                </figcaption>
-            </d-figure>
-
-            <d-figure>
-                <img src="images/curves-imp.png" width="100%">
-                <figcaption>
-                    DigiRL is able to improve faster with a fewer number of samples. Since
-                    the data collection frequency is the bottleneck, these performance trends
-                    directly reflect performance trends against wall-clock time as well.
-                </figcaption>
-            </d-figure>
-
-        </section>
-
-        <section id="Results">
-        <h2> Results </h2>
-
-        <h3> Main Results </h3>
-
-        We achieve 280% improvement over GPT-4V, and outperforms filtered behavior cloning on both AitW General and AitW Web Shopping subsets.
-        <d-figure>
-            <img src="images/tab-imp.png" width="100%">
-            <figcaption>
-            Main comparisons of different agents across various settings.
-            </figcaption>
-        </d-figure>
-
-        <h3> Search for good Italian restaurants on map </h3>
-
-        <h4> DigiRL </h4>
-        <div class="carousel-container" data-image-path="images/general_digirl/" data-slide-index="0">
-            <div class="carousel-slides">
-                <!-- Slides will be dynamically generated here -->
-            </div>
-        
-            <div class="carousel-controls">
-                <button class="carousel-button" onclick="moveSlide(this, -1)">&#10094;</button>
-                <button class="carousel-button" onclick="moveSlide(this, 1)">&#10095;</button>
+                        <!-- <h2 class="subtitle" style="text-align: left;">
+                            <b>MINT benchmark</b> measures LLMs' ability to solve tasks with multi-turn interactions
+                            by
+                            (1) using tools and (2) leveraging natural language feedback.
+                        </h2> -->
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <h4> Online (Filtered) Behavior Cloning </h4>
-        <div class="carousel-container" data-image-path="images/general_bc/" data-slide-index="0">
-        <div class="carousel-slides">
-                <!-- Slides will be dynamically generated here -->
-            </div>
-        
-            <div class="carousel-controls">
-                <button class="carousel-button" onclick="moveSlide(this, -1)">&#10094;</button>
-                <button class="carousel-button" onclick="moveSlide(this, 1)">&#10095;</button>
-            </div>
-        </div>
-        
-        <h4> CogAgent </h4>
-
-        <div class="carousel-container" data-image-path="images/general_cogagent/" data-slide-index="0">
-            <div class="carousel-slides">
-                <!-- Slides will be dynamically generated here -->
-            </div>
-        
-            <div class="carousel-controls">
-                <button class="carousel-button" onclick="moveSlide(this, -1)">&#10094;</button>
-                <button class="carousel-button" onclick="moveSlide(this, 1)">&#10095;</button>
-            </div>
-        </div>
-        
-        <h4> Set-of-Marks based on Gemini Pro </h4>
-
-        <div class="carousel-container" data-image-path="images/general_gpt4v/" data-slide-index="0">
-            <div class="carousel-slides">
-                <!-- Slides will be dynamically generated here -->
-            </div>
-        
-            <div class="carousel-controls">
-                <button class="carousel-button" onclick="moveSlide(this, -1)">&#10094;</button>
-                <button class="carousel-button" onclick="moveSlide(this, 1)">&#10095;</button>
-            </div>
-        </div>
-
-        <h3> Go to newegg.com, search for "asus zenbook" </h3>
-
-        <h4> DigiRL </h4>
-
-        <div class="carousel-container" data-image-path="images/webshop_digirl/" data-slide-index="0">
-            <div class="carousel-slides">
-                <!-- Slides will be dynamically generated here -->
-            </div>
-        
-            <div class="carousel-controls">
-                <button class="carousel-button" onclick="moveSlide(this, -1)">&#10094;</button>
-                <button class="carousel-button" onclick="moveSlide(this, 1)">&#10095;</button>
-            </div>
-        </div>
-        
-        <h4> Online (Filtered) Behavior Cloning </h4>
-
-        <div class="carousel-container" data-image-path="images/webshop_bc/" data-slide-index="0">
-            <div class="carousel-slides">
-                <!-- Slides will be dynamically generated here -->
-            </div>
-        
-            <div class="carousel-controls">
-                <button class="carousel-button" onclick="moveSlide(this, -1)">&#10094;</button>
-                <button class="carousel-button" onclick="moveSlide(this, 1)">&#10095;</button>
-            </div>
-        </div>
-        
-        <h4> CogAgent </h4>
-
-        <div class="carousel-container" data-image-path="images/webshop_cogagent/" data-slide-index="0">
-            <div class="carousel-slides">
-                <!-- Slides will be dynamically generated here -->
-            </div>
-        
-            <div class="carousel-controls">
-                <button class="carousel-button" onclick="moveSlide(this, -1)">&#10094;</button>
-                <button class="carousel-button" onclick="moveSlide(this, 1)">&#10095;</button>
-            </div>
-        </div>
-
-        <h4> AppAgent based on GPT-4V </h4>
-
-        <div class="carousel-container" data-image-path="images/webshop_gpt4v/" data-slide-index="0">
-            <div class="carousel-slides">
-                <!-- Slides will be dynamically generated here -->
-            </div>
-        
-            <div class="carousel-controls">
-                <button class="carousel-button" onclick="moveSlide(this, -1)">&#10094;</button>
-                <button class="carousel-button" onclick="moveSlide(this, 1)">&#10095;</button>
-            </div>
-        </div>
-
     </section>
 
-    </d-article>
-        <d-appendix>
-            <h3>BibTeX</h3>
-            <p class="bibtex">
-                @misc{bai2024digirl,<br>
-                &nbsp;&nbsp;title={DigiRL: Training In-The-Wild Device-Control Agents with Autonomous Reinforcement Learning},<br>
-                &nbsp;&nbsp;author={Bai, Hao and Zhou, Yifei and Pan, Jiayi and Cemri, Mert and Suhr, Alane and Levine, Sergey and Kumar, Aviral}<br>
-                &nbsp;&nbsp;year={2024},<br>
-                &nbsp;&nbsp;eprint={2405.10292},<br>
-                &nbsp;&nbsp;archivePrefix={arXiv},<br>
-                &nbsp;&nbsp;primaryClass={cs.AI}<br>
-                }
-            </p>
-            <h3>Acknowledgment</h3>
-            <p>
-                Website template is taken from  <a href=" https://tsb0601.github.io/mmvp_blog/#mmvp" class="code-link">here</a>.
-            </p>
-        </d-appendix>
+    <section class="hero teaser">
+        <div class="container is-max-desktop">
+            <div class="hero-body">
+
+                <h2 class="subtitle">
+                    <b>DigiRL</b> solves open-ended realistic Android tasks with autonomous reinforcement learning.
+                </h2>
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="main-results-tab" data-bs-toggle="tab"
+                            data-bs-target="#benchmark-table-content" type="button" role="tab"
+                            aria-controls="main-results-tab" aria-selected="true">Micro Average</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="eurus-code-table-tab" data-bs-toggle="tab"
+                            data-bs-target="#eurus-code-table-content" type="button" role="tab"
+                            aria-controls="eurus-code-table-tab" aria-selected="false">Code (Eurus subset)</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="eurus-math-table-tab" data-bs-toggle="tab"
+                            data-bs-target="#eurus-math-table-content" type="button" role="tab"
+                            aria-controls="eurus-math-table-tab" aria-selected="false">
+                            Math (Eurus subset)</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="benchmark-table-content" role="tabpanel"
+                        aria-labelledby="benchmark-table-content">
+
+                        <p class="mt-2 px-2">
+                            This table contains the micro average across all task instances originally featured in the
+                            <a href="https://arxiv.org/abs/2309.10691">MINT paper</a>. It includes test instances from
+                            several sources: HumanEval, MBPP, GSM8K, HotpotQA, MATH, MMLU, TheoremQA, and AlfWorld.
+                        </p>
+
+                        <div id="benchmark-table"></div>
+                    </div>
+                    <div class="tab-pane fade" id="eurus-code-table-content" role="tabpanel"
+                        aria-labelledby="eurus-code-table-content">
+
+                        <p class="mt-2 px-2">
+                            This code subset follows the <a href="https://arxiv.org/abs/2404.02078">Eurus
+                                paper</a> and contains MBPP and HumanEval.
+                        </p>
 
 
-        <!-- <script type="text/bibliography">
-
-        </script> -->
-        <script>
-
-            var dContents = document.querySelector('d-contents');
-            var dArticle = document.querySelector('d-article');
-            // Get the computed style of the element to access the margin
-            var computedStyle = window.getComputedStyle(dContents);
-            // Get the top margin as an integer
-            var marginTop = parseInt(computedStyle.marginTop, 10);
-            // Calculate the original top offset plus the margin-top
-            var originalOffsetTop = dContents.offsetTop;
-            var originalOffsetLeft = dContents.offsetLeft;
-            var originalWidth = dContents.offsetWidth; // This should include padding if box-sizing is border-box
-
-            // Function to handle the resize event
-            function onResize() {
-                // Recalculate original left and width on resize
-                originalOffsetLeft = dContents.offsetLeft;
-                originalWidth = dContents.offsetWidth; // This should include padding if box-sizing is border-box
-            }
-
-            // Add the resize event listener
-            window.addEventListener('resize', onResize);
-
-            window.addEventListener('scroll', function() {
-                var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-                var dArticleBottom = dArticle.offsetTop + dArticle.offsetHeight;
-                var dContentsActualTop = scrollPosition > originalOffsetTop ? scrollPosition : originalOffsetTop;
-                var dContentsBottom = dContentsActualTop + dContents.offsetHeight;
-                console.log("dArticleBottom", dArticleBottom)
-                console.log("dContentsBottom", dContentsBottom)
-                if (dContentsBottom >= dArticleBottom) {
-                    // Make d-contents invisible
-                    dContents.style.visibility = 'hidden';
-                } else {
-                    // Make d-contents visible
-                    dContents.style.visibility = 'visible';
-                }
-
-                // Adjust the condition to account for margin-top
-                if (scrollPosition + marginTop >= originalOffsetTop) {
-                    dContents.style.position = 'fixed';
-                    dContents.style.top = '0px';
-                    dContents.style.left = originalOffsetLeft + 'px'; // Maintain the original horizontal position
-                    dContents.style.width = originalWidth + 'px'; // Maintain the original width
-                } else {
-                    dContents.style.position = '';
-                    dContents.style.top = '';
-                    dContents.style.left = '';
-                    dContents.style.width = ''; // Allow the width to be automatic
-                }
+                        <div id="eurus-code-table"></div>
+                    </div>
+                    <div class="tab-pane fade" id="eurus-math-table-content" role="tabpanel"
+                        aria-labelledby="eurus-math-table-content">
+                        <p class="mt-2 px-2">
+                            This math subset follows the <a href="https://arxiv.org/abs/2404.02078">Eurus
+                                paper</a> and contains TheoremQA, MATH and MMLU.
+                        </p>
 
 
-            });
+                        <div id="eurus-math-table"></div>
+                    </div>
+                </div>
+
+                <br>
+                <h2 class="subtitle">
+                    <b>MINT</b> can measure different LLMs' ability to provide natural language feedback by measuring
+                    the benefit of their feedback (&Delta; Success Rate) to a fixed LLM (gpt-3.5-turbo-0613).
+                </h2>
+                <div id="benchmark-feedback-efficancy-table"></div>
+                <br>
+                <h2 class="subtitle">
+                    Please refer to our <a href="https://github.com/xingyaoww/mint-bench">GitHub repo</a> to add your
+                    model to the leaderboard.
+                </h2>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section" id="abstract">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Training corpuses for vision language models typically lack sufficient amounts of decision-centric data. This renders off-the-shelf VLMs sub-optimal for decision-making tasks such as in-the-wild device control through graphical user interfaces (GUIs). While training with static demonstrations has shown some promise, we show that such methods fall short when controlling <b>real</b> GUIs due to their failure to deal with real world <b>stochasticity</b> not captured in static observational data.  
+                            <br>  
+                            This paper introduces a novel autonomous RL approach, called <b>DigiRL</b>, for training in-the-wild device control agents through fine-tuning a pre-trained VLM in two stages: offline RL to initialize the model, followed by offline-to-online RL. To do this, we build a <b>scalable</b> and <b>parallelizable</b> Android learning environment equipped with a VLM-based evaluator and develop a simple yet effective RL approach for learning in this domain. Our approach runs advantage-weighted RL with advantage estimators enhanced to account for stochasticity along with an automatic curriculum for deriving maximal learning signal. 
+                            <br>
+                            We demonstrate the effectiveness of <b>DigiRL</b> using the Android-in-the-Wild (AitW) dataset, where our 1.5B VLM trained with RL achieves a <b>49.5% absolute improvement</b> -- from 17.7% to 67.2% success rate -- over supervised fine-tuning with static human demonstration data. These results significantly surpass not only the prior best agents, including AppAgent with GPT-4V (8.3% success rate) and the 17B CogAgent trained with AitW data (14.4%), but also the prior best autonomous RL approach based on filtered behavior cloning (57.8%), thereby <b>establishing a new state-of-the-art</b> for digital agents for in-the-wild device control.    
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--/ Abstract. -->
+        </div>
+    </section>
+
+    <section class="section" id="interaction-framework">
+        <div class="container is-max-desktop">
+
+            <div class="columns is-full-width">
+
+                <!-- Visual Effects. -->
+                <div class="column">
+                    <div class="content">
+                        <h2 class="title is-3">RL > SFT</h2>
+                        <p>
+                            MINT mirrors the real-world User-LLM-Tool collaborative problem-solving setting. To solve a
+                            problem,
+                            the
+                            LLM can (1) use external tools by generating and executing Python programs and/or (2)
+                            collecting
+                            natural
+                            language feedback to refine its solutions; the feedback is provided by GPT-4, aiming to
+                            simulate
+                            human
+                            users in a reproducible and scalable way.
+                        </p>
+                        <ul>
+                            <li>We measure LLMs' <b>tool-augmented task-solving capability</b> by analyzing its
+                                performance gain
+                                with increased numbers of turns without language feedback (i.e., no red dotted box in
+                                the figure
+                                below).
+                            </li>
+                            <li>
+                                We quantify LLMs' <b>ability to leverage natural language feedback</b> with the
+                                performance gain
+                                upon receiving GPT-4 generated feedback (i.e., performance without and with red dotted
+                                box in
+                                the
+                                figure below).
+                            </li>
+                        </ul>
+                        <div style="text-align:center;">
+                            <img src="website/images/teaser.png" alt="illustrative-example"
+                                style="margin: 0 auto; display: block; max-width: 1000px; width: 100%; height: auto;" />
+                            <br>
+                        </div>
+                        <div style="text-align:center;">
+                            <img src="website/images/algo.png" alt="illustrative-example"
+                                style="margin: 0 auto; display: block; max-width: 1000px; width: 100%; height: auto;" />
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <!--/ Visual Effects. -->
+
+            </div>
+    </section>
+
+    <section class="section" id="evaluation">
+        <div class="container is-max-desktop">
+
+            <div class="columns is-full-width">
+
+                <!-- Visual Effects. -->
+                <div class="column">
+                    <div class="content">
+                        <h2 class="title is-3">Evaluation</h2>
+                        <p>
+                            We evaluate 20 LLMs where 4 are closed- and 16 are open-source.
+                            We cover different sizes and training techniques to better understand how they affect LLMs'
+                            multi-turn
+                            interaction capability. We consider three variants of training techniques:
+                        </p>
+                        <ul>
+                            <li>Base: Pre-trained model</li>
+                            <li>SIFT: Supervised Instruction-Finetuning</li>
+                            <li>RLHF: Reinforcement Learning from Human Feedback</li>
+                        </ul>
+
+                        <h3>Tool-augmented Task-Solving capabilities of LLMs</h3>
+                        <div class="text-justify" id="tool-augmented">
+                            <ul>
+                                <li>
+                                    We find all open-source models fall behind most commercial closed-source models in
+                                    both success
+                                    rate
+                                    at k=5 and improvement rate (slope).
+                                    <br>
+                                    <button class="btn btn-outline-secondary btn-sm"
+                                        id="visualize-sr-vs-k-open-behind-close">Visualize
+                                        This</button>
+                                </li>
+                                <li>
+                                    Absolute performance and improvement-per-turn (e.g., slope) scale with model size.
+                                    <br>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button"
+                                            id="visualize-sr-vs-k-scale-with-model-size-llama2-base">Visualize: LLaMA-2
+                                            Base</button>
+                                        <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button"
+                                            id="visualize-sr-vs-k-scale-with-model-size-llama2-rlhf">LLaMA-2
+                                            RLHF</button>
+                                        <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button"
+                                            id="visualize-sr-vs-k-scale-with-model-size-codellama-base">CodeLLaMA
+                                            Base</button>
+                                        <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button"
+                                            id="visualize-sr-vs-k-scale-with-model-size-codellama-sift">CodeLLaMA
+                                            SIFT</button>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    SIFT on multi-turn data can potentially be helpful. <a
+                                        href="https://github.com/lm-sys/FastChat/blob/main/docs/vicuna_weights_version.md">Vicuna-v1.5
+                                        (7B)</a>, which is a SIFT variant of LLaMA2 trained on ShareGPT conversations
+                                    (most are multi-turn), exhibit stronger performance compared to LLaMA-2 (Base and
+                                    RLHF)<sup><a href="#footnote-1" id="ref-footnote-1">1</a></sup>.
+                                    We observe similar trend for <a
+                                        href="https://github.com/OpenLemur/Lemur">Lemur-70b-chat-v1</a>, which continue
+                                    pre-train LLaMA-2 (70B) on code intensive data followed by SIFT on multi-turn data.
+                                    <br>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button"
+                                            id="visualize-sr-vs-k-vicuna-better-than-llama">Visualize: Vicuna-v1.5
+                                            (7B)</button>
+                                        <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button"
+                                            id="visualize-sr-vs-k-lemur-better-than-llama">Lemur-v1 (70B)</button>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    We find RLHF hurt LLM-tool multi-turn interaction on LLaMA-2 series. However, it's
+                                    unclear if RLHF is problematic overall, or if the issue only arise when RLHF is
+                                    primarily applied to
+                                    single-turn data.
+                                    <br>
+                                    <button class="btn btn-outline-secondary btn-sm inline-vis-button"
+                                        id="visualize-sr-vs-k-rlhf">Visualize This</button>
+                                </li>
+                            </ul>
+
+                            <ol>
+                                <li style="font-size: 0.8rem;" id="footnote-1">We find some performance degradation in
+                                    Vicuna-v1.5
+                                    (especially for the 13B one), potential due to training artifacts. We refer to paper
+                                    Section 3.5
+                                    for
+                                    more details.</li>
+                            </ol>
+
+                        </div>
+
+                        <button class="btn btn-outline-secondary btn-sm" id="visualize-sr-vs-k-all">Visualize All
+                            Models</button>
+
+                        <div class="chart-container" id="chart-k" style="display:block;margin:0 auto;">
+                            <canvas id="chart-sr-vs-k"></canvas>
+                        </div>
+
+                        <h3>LLMs' Ability to Leverage Natural Language Feedback</h3>
+                        <ul>
+                            <li>
+                                We find no significant difference between open- and closed-source models in terms of
+                                &Delta;feedback.
+                                <br>
+                                <button class="btn btn-outline-secondary btn-sm inline-vis-button"
+                                    id="visualize-feedback-sr-no-diff-open-close">Visualize
+                                    This</button>
+
+                            </li>
+
+                            <li>
+                                Similar to previous findings, we find that SIFT and RLHF hurt models' ability to
+                                leverage feedback on CodeLLama (except 7B) and LLaMA-2, as they all have lower
+                                &Delta;feedback and Success Rate (with feedback) compared to their base variants.
+                                Another two exceptions are Vicuna and Lemur-v1; We speculate using multi-turn
+                                conversations (ShareGPT) for SIFT contributes to these two exceptions.
+                                <br>
+                                <button class="btn btn-outline-secondary btn-sm inline-vis-button"
+                                    id="visualize-feedback-sr-sift-rlhf">Visualize
+                                    This</button>
+                            </li>
+
+                            <li>
+                                Models hardly benefit from self-feedback. We find GPT-4-0613 using self-generated
+                                feedback has
+                                limited benefit: only decision-making has improved slightly.
+                                <br>
+                                <button class="btn btn-outline-secondary btn-sm inline-vis-button"
+                                    id="visualize-feedback-sr-gpt-4-self">Visualize
+                                    This</button>
+                            </li>
+
+                        </ul>
 
 
 
-            // Initialize width and position
-            onResize();
-        </script>
+                        <div class="text-center">
+                            <div class="btn-group btn-group-toggle text-center task-selector" data-toggle="buttons">
+                                <button type="button" class="btn btn-outline-secondary btn-sm" disabled>Choose task type
+                                    to
+                                    visualize:</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm active"
+                                    id="avg_micro">Micro
+                                    Average</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm"
+                                    id="reasoning">Reasoning</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm"
+                                    id="decision_making">Decision-Making</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm"
+                                    id="code_generation">Code</button>
+                            </div>
 
-        <script>
-            // Function to determine which section is in view
-            function getActiveSection() {
-                var sections = document.querySelectorAll('section'); // Assuming your sections have a 'section' tag
-                var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 
-                for (var i = 0; i < sections.length; i++) {
-                    if (sections[i].offsetTop <= scrollPosition && sections[i].offsetTop + sections[i].offsetHeight > scrollPosition) {
-                        return sections[i].id;
-                    }
-                }
-                return null;
-            }
+                            <div class="btn-group btn-group-toggle text-center sort-by-selector" data-toggle="buttons">
+                                <button type="button" class="btn btn-outline-secondary btn-sm" disabled>Sort
+                                    by:</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm active"
+                                    id="sort-by-feedbacksr">Success
+                                    Rate with GPT-4 Feedback</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm"
+                                    id="sort-by-nofeedbacksr">Without
+                                    Feedback</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm"
+                                    id="sort-by-feedbackdelta">&Delta;
+                                    Feedback</button>
+                            </div>
+                        </div>
 
-            // Function to update the navigation items
-            function updateNavigation() {
-                var activeSection = getActiveSection();
-                var navLinks = document.querySelectorAll('d-contents nav a');
+                        <div class="chart-container" id="chart-feedback" style="position:relative;margin:0 auto;">
+                            <canvas id="chart-sr-w-feedback" style="max-height: 100%;"></canvas>
+                        </div>
 
-                navLinks.forEach(function(navLink) {
-                    if (navLink.getAttribute('href') === '#' + activeSection) {
-                        navLink.classList.add('active-nav-item');
-                    } else {
-                        navLink.classList.remove('active-nav-item');
-                    }
-                });
-            }
+                        <h3>LLMs' Ability to Provide Natural Language Feedback</h3>
 
-            // Add the scroll event listener
-            window.addEventListener('scroll', updateNavigation);
+                        <p>
+                            In this section, we fixed the evaluated LLM (gpt-3.5-turbo-0613) and use different
+                            LLMs to
+                            <b>provide</b> language feedback.
+                            This allows us to measure different LLMs' effectiveness in providing feedback.
+                            <br>
+                            We find that task-solving ability could be orthogonal to feedback-providing ability: LLM's
+                            higher task-solving performance does not necessarily translate to better feedback-providing
+                            capability and vice versa.
+                            For example, despite performing the worst in solving tasks, CodeLLaMA (34B, SIFT) can
+                            provide feedback that improves the stronger GPT-3.5.
+                        </p>
 
-            // Initial update
-            updateNavigation();
+                        <div class="text-center">
+                            <div class="btn-group btn-group-toggle text-center feedback-provider-sort-by-selector"
+                                data-toggle="buttons">
+                                <button type="button" class="btn btn-outline-secondary btn-sm" disabled>Sort
+                                    by:</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm active"
+                                    id="sort-by-feedback-gain">
+                                    Success Rate with Feedback
+                                </button>
 
-            // Insert citations and update bibliography on page load
-        </script>
-    </body>
+                                <button type="button" class="btn btn-outline-secondary btn-sm"
+                                    id="sort-by-feedback-provider-perf">
+                                    Feedback Provider's Performance
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="chart-container" id="chart-feedback-p" style="display:block;margin:0 auto;">
+                            <canvas id="chart-feedback-provider"></canvas>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+    </section>
+
+
+
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title">BibTeX</h2>
+            <pre><code>@misc{wang2023mint,
+    title={MINT: Evaluating LLMs in Multi-turn Interaction with Tools and Language Feedback},
+    author={Xingyao Wang and Zihan Wang and Jiateng Liu and Yangyi Chen and Lifan Yuan and Hao Peng and Heng Ji},
+    year={2023},
+    eprint={2309.10691},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
+}</code></pre>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div align="center" class="container">
+            <div class="columns is-centered">
+                <div class="content is-small">
+                    This website templated is borrowed from <a
+                        href="https://github.com/nerfies/nerfies.github.io">nerfies</a>.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+
 </html>
