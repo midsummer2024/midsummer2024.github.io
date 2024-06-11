@@ -20,14 +20,18 @@ function getSRWithFeedback(sr_feedback_provider_raw) {
 
   const sr_with_feedback = [];
   // the first entry should be item['model'] concating item['feedback_provider']
+
   sr_feedback_provider_raw.forEach(item => {
     sr_with_feedback.push([
       item['feedback_provider'],
       item['evaluated_LLM_feedback'] + gpt_3_5_perf, // perf after feedback
-      item['SR5_difference'] + gpt_3_5_perf // perf of the feedback provider
+      item['SR5_difference'] + gpt_3_5_perf, // perf of the feedback provider
+      item['evaluated_LLM_feedback_webshop'] + gpt_3_5_perf, // perf after feedback
+      item['SR5_difference_webshop'] + gpt_3_5_perf, // perf of the feedback provider
     ]
     );
   });
+  
 
   return sr_with_feedback;
 }
@@ -37,18 +41,20 @@ function createFeedbackProviderChart() {
   const sr_with_feedback = getSRWithFeedback(sr_feedback_provider_raw);
 
   // Sort filtered data by feedback success rate
-  if (cur_sortby_option === sortby_options.FEEDBACK_PROVIDER_PERF) {
-    sr_with_feedback.sort((a, b) => b[2] - a[2]);
-  } else if (cur_sortby_option === sortby_options.GAIN_FROM_FEEDBACK) {
-    sr_with_feedback.sort((a, b) => b[1] - a[1]);
-  }
 
   // Prepare your data
   const labels = sr_with_feedback.map(item => item[0]);
+  let sr_feedback_provider_perf;
+  let sr_feedback_gain;
   // print this labels in command line
-  const sr_feedback_gain = sr_with_feedback.map(item => item[1]);
-  const sr_feedback_provider_perf = sr_with_feedback.map(item => item[2]);
-
+  if (cur_sortby_option === sortby_options.FEEDBACK_PROVIDER_PERF) {
+    sr_feedback_provider_perf = sr_with_feedback.map(item => item[2]);
+    sr_feedback_gain = sr_with_feedback.map(item => item[1]);
+  } else if (cur_sortby_option === sortby_options.GAIN_FROM_FEEDBACK) {
+    sr_feedback_gain = sr_with_feedback.map(item => item[3]);
+    sr_feedback_provider_perf = sr_with_feedback.map(item => item[4]);
+  }
+  
   const title_text = 'Correlation between autonomous evaluator and human judgements';
 
   if (chart) {
@@ -63,13 +69,13 @@ function createFeedbackProviderChart() {
       labels: labels,
       datasets: [
         {
-          label: 'Success Rate with Feedback',
+          label: 'Gemini Evaluator',
           data: sr_feedback_gain,
           backgroundColor: '#add8e6',
         },
         {
           backgroundColor: 'rgba(158, 159, 163, 0.5)',
-          label: 'Feedback Provider\'s Performance',
+          label: 'Human Annotation',
           data: sr_feedback_provider_perf,
         }
       ]
@@ -182,6 +188,17 @@ Object.values(sortby_options).forEach(sortby_option => {
 
   btn.addEventListener('click', () => {
 
+    document.getElementById("visualize-sr-vs-k-scale-with-model-size-llama2-rlhf").addEventListener("click", function () {
+        createChart([
+            'AutoUI Filtered BC, Run 1 (Webshop)',
+            'AutoUI Filtered BC, Run 2 (Webshop)',
+            'AutoUI DigiRL, Run 1 (Webshop)',
+            'AutoUI DigiRL, Run 2 (Webshop)',
+            'AutoUI Pretrained (Webshop)',
+            'GPT-4V Set-of-Marks (Webshop)',
+        ]);
+    });
+
     // Find all active buttons within btn-group and remove the 'active' class
     document.querySelectorAll('.btn-group.feedback-provider-sort-by-selector .btn.active ')
       .forEach(active => {
@@ -193,6 +210,7 @@ Object.values(sortby_options).forEach(sortby_option => {
 
     // update global variables
     cur_sortby_option = sortby_option;
+
 
     // update the chart
     createFeedbackProviderChart();
@@ -210,6 +228,8 @@ document.addEventListener('DOMContentLoaded', function () {
       // Do stuff
 
       createFeedbackProviderChart()
+
+
 
       // document.getElementById("visualize-feedback-provider").addEventListener("click", function () {
       //   createFeedbackProviderChart();  
