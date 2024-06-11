@@ -132,11 +132,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 columns: [
                     // { title: "Type", field: "type", widthGrow: 0.9, minWidth: 60},
                     // { title: "Arch", field: "model-arch", widthGrow: 1.5, minWidth: 180},
-                    { title: "Model", field: "model-name", widthGrow: 0.9, minWidth: 60},
-                    { title: "Size", field: "size", widthGrow: 0.6, minWidth: 30},
                     { title: "Algorithm", field: "algo", widthGrow: 0.9, minWidth: 60},
+                    { title: "Base Model", field: "model-name", widthGrow: 0.9, minWidth: 60},
+                    { title: "Size", field: "size", widthGrow: 0.6, minWidth: 30},
+                    { title: "Setting", field: "method", widthGrow: 0.9, minWidth: 60},
                     { title: "Prompt", field: "prompt", widthGrow: 0.9, minWidth: 60},
-                    { title: "Method", field: "method", widthGrow: 0.9, minWidth: 60},
                     {//create column group
                         title: "AitW General Subset Success Rate",
                         columns: [
