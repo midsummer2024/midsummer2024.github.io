@@ -37,6 +37,19 @@
     <script src="website/javascript/feedback_success_rate_vis.js" type="module"></script>
     <script src="website/javascript/feedback_provider_efficacy.js" type="module"></script>
 
+    <script>
+        function resizeIframe() {
+            var iframe = document.getElementById('myIframe');
+            iframe.style.height = (iframe.offsetWidth * 0.71875) + 'px';
+        }
+    
+        // Initial resize
+        resizeIframe();
+    
+        // Resize on window resize
+        window.addEventListener('resize', resizeIframe);
+    </script>
+
     <link rel="stylesheet" href="website/css/index.css">
 
     <!-- Google tag (gtag.js) -->
@@ -276,9 +289,9 @@
                                         <h2 class="title is-3">Trajectory Examples</h2>
                                         <div class="content has-text-justified">
                                             <h4> AitW General </h4>
-                                            <iframe src="https://drive.google.com/file/d/17Yra7bm7pI5a11PZxH50h2cUr3mPTKZX/preview" width="1024" height="512" allow="autoplay"></iframe>
+                                            <iframe src="https://drive.google.com/file/d/17Yra7bm7pI5a11PZxH50h2cUr3mPTKZX/preview" width="100%" class="myIframe" allow="autoplay"></iframe>
                                             <h4> AitW Web Shopping </h4>
-                                            <iframe src="https://drive.google.com/file/d/17uyKvvFTwHNygtoH0Q5OB36BX2DVs89Z/preview" width="1024" height="512" allow="autoplay"></iframe>
+                                            <iframe src="https://drive.google.com/file/d/17uyKvvFTwHNygtoH0Q5OB36BX2DVs89Z/preview" width="100%" class="myIframe" allow="autoplay"></iframe>
                                         </div>
                                     </div>
                                 </div>
