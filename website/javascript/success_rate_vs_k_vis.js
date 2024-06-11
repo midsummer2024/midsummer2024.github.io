@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     'AutoUI DigiRL, Run 1 (Webshop)',
                     'AutoUI DigiRL, Run 2 (Webshop)',
                     'AutoUI Pretrained (Webshop)',
-                    'GPT-4V Set-of-Marks (Webshop)',
+                    'GPT-4V Set-of-Marks (Webshop)'
                 ]);
             });
 
