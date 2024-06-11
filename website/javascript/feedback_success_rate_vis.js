@@ -4,8 +4,6 @@ let sr_w_feedback_raw;
 const task_types = [
   'avg_micro',
   'reasoning',
-  'decision_making',
-  'code_generation'
 ];
 
 const sortby_options = {
@@ -16,35 +14,21 @@ const sortby_options = {
 let cur_sortby_option = sortby_options.FEEDBACK;
 
 const task_type_to_name = {
-  'avg_micro': 'Micro Average',
-  'reasoning': 'Reasoning',
-  'decision_making': 'Decision-Making',
-  'code_generation': 'Code Generation'
+  'avg_micro': 'AitW General Subset',
+  'reasoning': 'AitW Web Shopping Subset',
 }
 
 const all_models = [
-  'CodeLlama-13b (13B, Base)',
-  'CodeLlama-13b-Instruct (13B, SIFT)',
-  'CodeLlama-34b (34B, Base)',
-  'CodeLlama-34b-Instruct (34B, SIFT)',
-  'CodeLlama-7b (7B, Base)',
-  'CodeLlama-7b-Instruct (7B, SIFT)',
-  'Lemur-70b-chat-v1 (70B, SIFT)',
-  'Lemur-70b-v1 (70B, Base)',
-  'Llama-2-13b (13B, Base)',
-  'Llama-2-13b-chat (13B, RLHF)',
-  'Llama-2-70b (70B, Base)',
-  'Llama-2-70b-chat (70B, RLHF)',
-  'Llama-2-7b (7B, Base)',
-  'Llama-2-7b-chat (7B, RLHF)',
-  'chat-bison-001 (closed-source)',
-  'claude-2 (closed-source)',
-  'claude-instant-1 (closed-source)',
-  'gpt-3.5-turbo-0613 (closed-source)',
-  'Vicuna-v1.5 (13B, SIFT)',
-  'vicuna-7b-v1.5 (7B, SIFT)',
-
-  'gpt-4-0613 (closed-source)',
+  'Set-of-Marks GPT-4V',
+  'Set-of-Marks Gemini-1.5-Pro',
+  'AppAgent GPT-4V',
+  'AppAgent Gemini-1.5-Pro',
+  'AutoUI Pre-trained',
+  'CogAgent Pre-trained',
+  'AutoUI Filtered BC Offline',
+  'AutoUI DigiRL Offline',
+  'AutoUI Filtered BC Online',
+  'AutoUI DigiRL Online',
 ]
 
 function calculateDifferences(sr_wo_feedback, sr_w_feedback, task_type) {
@@ -101,7 +85,7 @@ function createChart(task_type, namesToKeep) {
   const sr_w_feedback_data = sr_with_diff_filtered.map(item => item[2]);
   const diff_data = sr_with_diff_filtered.map(item => item[3]);
 
-  const title_text = 'Task Success Rate (' + task_type_to_name[task_type] + ')';
+  const title_text = 'Failure Weight (' + task_type_to_name[task_type] + ')';
 
   if (chart) {
     chart.destroy();
@@ -145,7 +129,7 @@ function createChart(task_type, namesToKeep) {
           stacked: true,
           title: {
             display: true,
-            text: 'Evaluated LLM',
+            text: 'Evaluated VLM',
             font: {
               size: 14,
             }
@@ -155,7 +139,7 @@ function createChart(task_type, namesToKeep) {
           grace: 20,
           title: {
             display: true,
-            text: 'Task Success Rate (%)',
+            text: 'Failure Percent in All Trajectories (%)',
             font: {
               size: 14,
             }
@@ -319,35 +303,32 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById("visualize-feedback-sr-sift-rlhf").addEventListener("click", function () {
 
         createChart(last_task_type, [
-          'CodeLlama-13b (13B, Base)',
-          'CodeLlama-13b-Instruct (13B, SIFT)',
-          'CodeLlama-34b (34B, Base)',
-          'CodeLlama-34b-Instruct (34B, SIFT)',
-          'CodeLlama-7b (7B, Base)',
-          'CodeLlama-7b-Instruct (7B, SIFT)',
-          'Lemur-70b-chat-v1 (70B, SIFT)',
-          'Lemur-70b-v1 (70B, Base)',
-          'Llama-2-13b (13B, Base)',
-          'Llama-2-13b-chat (13B, RLHF)',
-          'Llama-2-70b (70B, Base)',
-          'Llama-2-70b-chat (70B, RLHF)',
-          'Llama-2-7b (7B, Base)',
-          'Llama-2-7b-chat (7B, RLHF)',
-          'vicuna-7b-v1.5 (7B, SIFT)',
+          'Set-of-Marks GPT-4V',
+          'Set-of-Marks Gemini-1.5-Pro',
+          'AppAgent GPT-4V',
+          'AppAgent Gemini-1.5-Pro',
+          'AutoUI Pre-trained',
+          'CogAgent Pre-trained',
+          'AutoUI Filtered BC Offline',
+          'AutoUI DigiRL Offline',
+          'AutoUI Filtered BC Online',
+          'AutoUI DigiRL Online',
         ]);
       });
 
       document.getElementById("visualize-feedback-sr-gpt-4-self").addEventListener("click", function () {
 
         createChart(last_task_type, [
-          'CodeLlama-34b (34B, Base)',
-          'CodeLlama-34b-Instruct (34B, SIFT)',
-          'Llama-2-70b (70B, Base)',
-          'Llama-2-70b-chat (70B, RLHF)',
-          'claude-2 (closed-source)',
-          'claude-instant-1 (closed-source)',
-          'gpt-3.5-turbo-0613 (closed-source)',
-          'gpt-4-0613 (closed-source)',
+          'Set-of-Marks GPT-4V',
+          'Set-of-Marks Gemini-1.5-Pro',
+          'AppAgent GPT-4V',
+          'AppAgent Gemini-1.5-Pro',
+          'AutoUI Pre-trained',
+          'CogAgent Pre-trained',
+          'AutoUI Filtered BC Offline',
+          'AutoUI DigiRL Offline',
+          'AutoUI Filtered BC Online',
+          'AutoUI DigiRL Online',
         ]);  // Replace [...] with your model names
 
       });
