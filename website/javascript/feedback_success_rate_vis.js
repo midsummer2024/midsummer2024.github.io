@@ -46,15 +46,17 @@ function createChart(task_type, namesToKeep) {
   const sr_with_diff = calculateDifferences(sr_data, task_type);
   const sr_with_diff_filtered = sr_with_diff.filter(item => namesToKeep.includes(item[0]));
 
-  // Calculate the total length of each bar and sort accordingly
-  sr_with_diff_filtered.sort((a, b) => {
-    const totalA = a.slice(1).reduce((acc, val) => acc + val, 0);
-    const totalB = b.slice(1).reduce((acc, val) => acc + val, 0);
-    return totalB - totalA;
+  // Calculate the total length of each bar
+  const sr_with_totals = sr_with_diff_filtered.map(item => {
+    const totalLength = item.slice(1).reduce((acc, val) => acc + val, 0);
+    return { name: item[0], values: item.slice(1), totalLength };
   });
 
-  const labels = sr_with_diff_filtered.map(item => item[0]);
-  const failure_modes_data = sr_with_diff_filtered.map(item => item.slice(1));
+  // Sort the data by the total length of the bars in descending order
+  sr_with_totals.sort((a, b) => b.totalLength - a.totalLength);
+
+  const labels = sr_with_totals.map(item => item.name);
+  const failure_modes_data = sr_with_totals.map(item => item.values);
 
   const colors = [
     'rgba(255, 99, 132, 0.5)',
@@ -75,6 +77,7 @@ function createChart(task_type, namesToKeep) {
     "Technical issues",
     "Task success"
   ];
+
   for (let i = 0; i < 6; i++) { // Assuming 6 failure modes
     datasets.push({
       label: failure_mode_names[i],
@@ -181,6 +184,7 @@ function createChart(task_type, namesToKeep) {
     }
   });
 }
+
 
 
 task_types.forEach(task_type => {
