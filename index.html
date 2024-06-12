@@ -137,7 +137,7 @@
             <div class="hero-body">
 
                 <h2 class="subtitle">
-                    <b>DigiRL</b> solves open-ended realistic Android tasks with an autonomous reinforcement learning algorithm with a doubly robust estimator.
+                    <b>DigiRL</b> solves open-ended realistic Android tasks with an novel online reinforcement learning algorithm with autonomous VLM evaluator.
                 </h2>
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -230,21 +230,26 @@
                 <!-- Visual Effects. -->
                 <div class="column">
                     <div class="content">
-                        <h2 class="title is-3">DigiRL: New SoTA for Real-world Digital Agents</h2>
+                        <h2 class="title is-3">DigiRL: Autonomous RL for Building a Strong Device-Control Agent</h2>
 
-                        <h3> Why Reinforcement Learning At All? </h3>
-                        <p>
-                            We find reinforcement learning significantly outperforms supervised fine-tuning due to the strong stochasticity
-                            in real-world environments. To overcome this challenge, we introduce an interactive algorithmic framework with 
-                            reinforcement learning.
-
-                            <!-- %%Reserved by Yifei -->
-                        </p>
-
-                        <h3> Algorithmic Framework of DigiRL </h3>
-                        <p>
-                            <!-- %%Reserved by Yifei -->
-                        </p>
+                        <h3> Why RL over the alternatives? </h3>
+                        <ul>
+                            <li>LLM Agent data such as device-control actions is poorly represented in the pre-training corpus of <b>Off-the-shelf proprietary VLMs</b> such as GPT4V and Gemini-1.5-Pro.</li>
+                            <li><b>Supervised Fine-Tuning</b> 1) requires a large amount of human demonstration data and 2) cannot recover from degrading model performance when real websites/applications have changed.</li>
+                        </ul>
+                        <b>@Jack, Let's put our non-stationarity plot here!</b>
+                        <h3> What are we using RL for?</h3>
+                        DigiRL consists of two steps:
+                        <ul>
+                            <li>First, we use <b>Offline RL</b> to make the most out of a potentially sub-optimal existing offline dataset.</li>
+                            <li>Then, we use <b>Offline-to-Online RL</b> to encourage the agent to learn from its own trials and errors.</li>
+                        </ul>
+                        DigiRL identifies the most simple yet effective RL design choices for device-control agent problems. Our RL algorithmic framework automatically achieves the following advantages compared to state-of-the-art alternatives such as rejection sampling (or Filtered Behavior Cloning):
+                        <ul>
+                            <li>We makes use of an <b>instruction-level value function</b> to implicitly construct an automatic curriculum that prioritizes on the tasks most informative to the agent.</li>
+                            <li>We makes use of a <b>state-level value function</b> to pick out the advantageous actions (actions that mark progress towards the goal) in a trajectory while leaving the noisy actions (actions that do not contribute to the goal).</li>
+                        </ul>
+                        Please check out our paper for more details of our algorithm!
 
                         <div style="text-align:center;">
                             <img src="website/images/algo.png" alt="illustrative-example"
@@ -253,7 +258,7 @@
                         </div>
                         <h3>Learning Curves</h3>
                         <div class="text-justify" id="tool-augmented">
-                            We clearly find DigiRL outperforms Filtered BC in the Offline-to-Online learning setting on both subsets of AitW.
+                            In addition to the convergence performance reported in the paper, we also present the sample complexity comparison of DigiRL against the state-of-the-art alternative Filtered Behavior Cloning (or rejection sampling). We find that DigiRL not only converges to a superior performance, but also learns more efficiently.
                             <br>
                             <div class="btn-group" role="group">
                                 <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button" disabled
@@ -310,7 +315,7 @@
                     <div class="content">
                         <h3 class="title is-3">Evaluation</h3>
                         <p>
-                            We evaluate with Gemini 1.5 Pro. We also manually evaluate on some subsets and finds that the evaluation results highly align:
+                            Our main results are autonomously evaluated with Gemini-1.5-Pro. We also manually evaluate on some subsets and finds that the autonomous evaluation results highly align with manual evaluations with an average difference less than 3%:
                         </p>
 
                         <div class="text-center">
@@ -336,7 +341,7 @@
                         <h3>Failure Mode Analysis</h3>
 
                         <p>
-                            We analyze the failure modes of all models:
+                            While all the types of failure modes benefit from offline and offline-to-online RL training, the most consistent and significant reduction is for the failure mode of failing to recover from mistakes. By training on autonomously-collected rollouts, our agent DigiRL is able to learn from its own mistakes and reduces failures to recover over training.
                         </p>
 
                         <div class="text-center">
