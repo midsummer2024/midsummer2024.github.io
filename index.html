@@ -132,6 +132,61 @@
         </div>
     </section>
 
+
+    <section class="section" id="abstract">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <div class="content has-text-justified">
+                    <div class="iframe-container">
+                        <iframe src="website/videos/demo.mp4" class="myIframe" frameborder="0" allow="autoplay; fullscreen"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Training corpuses for vision language models typically lack sufficient amounts of decision-centric data. This renders off-the-shelf VLMs sub-optimal for decision-making tasks such as in-the-wild device control through graphical user interfaces (GUIs). While training with static demonstrations has shown some promise, we show that such methods fall short when controlling <b>real</b> GUIs due to their failure to deal with real world <b>stochasticity</b> not captured in static observational data.  
+                            <br>  
+                            This paper introduces a novel autonomous RL approach, called <b>DigiRL</b>, for training in-the-wild device control agents through fine-tuning a pre-trained VLM in two stages: offline RL to initialize the model, followed by offline-to-online RL. To do this, we build a <b>scalable</b> and <b>parallelizable</b> Android learning environment equipped with a VLM-based evaluator and develop a simple yet effective RL approach for learning in this domain. Our approach runs advantage-weighted RL with advantage estimators enhanced to account for stochasticity along with an automatic curriculum for deriving maximal learning signal. 
+                            <br>
+                            We demonstrate the effectiveness of <b>DigiRL</b> using the Android-in-the-Wild (AitW) dataset, where our 1.5B VLM trained with RL achieves a <b>49.5% absolute improvement</b> -- from 17.7% to 67.2% success rate -- over supervised fine-tuning with static human demonstration data. These results significantly surpass not only the prior best agents, including AppAgent with GPT-4V (8.3% success rate) and the 17B CogAgent trained with AitW data (14.4%), but also the prior best autonomous RL approach based on filtered behavior cloning (57.8%), thereby <b>establishing a new state-of-the-art</b> for digital agents for in-the-wild device control.    
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--/ Abstract. -->
+        </div>
+        <div class="container is-max-desktop">
+            <section class="section" id="abstract">
+                <div class="container is-max-desktop">
+                    <!-- Abstract. -->
+                    <div class="columns is-centered has-text-centered">
+                        <div class="column is-four-fifths">
+                            <h2 class="title is-3">Demo</h2>
+                            <div class="content has-text-justified">
+                                <h4>AitW General Demo: Search for some good Italian restaurants.</h4>
+                                <div class="iframe-container">
+                                    <iframe src="website/videos/general.mp4" class="myIframe" frameborder="0" allow="autoplay; fullscreen; loop"></iframe>
+                                </div>
+                            </div>
+                            <div class="content has-text-justified">
+                                <h4>AitW Web Shopping Demo: Go to newegg.com, and search for "Alienware Aurora".</h4>
+                                <div class="iframe-container">
+                                    <iframe src="website/videos/webshop.mp4" class="myIframe" frameborder="0" allow="autoplay; fullscreen; loop"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+
     <section class="hero teaser">
         <div class="container is-max-desktop">
             <div class="hero-body">
@@ -185,41 +240,6 @@
         </div>
     </section>
 
-
-    <section class="section" id="abstract">
-        <div class="container is-max-desktop">
-            <!-- Abstract. -->
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <h2 class="title is-3">Abstract</h2>
-                    <div class="content has-text-justified">
-                        <p>
-                            Training corpuses for vision language models typically lack sufficient amounts of decision-centric data. This renders off-the-shelf VLMs sub-optimal for decision-making tasks such as in-the-wild device control through graphical user interfaces (GUIs). While training with static demonstrations has shown some promise, we show that such methods fall short when controlling <b>real</b> GUIs due to their failure to deal with real world <b>stochasticity</b> not captured in static observational data.  
-                            <br>  
-                            This paper introduces a novel autonomous RL approach, called <b>DigiRL</b>, for training in-the-wild device control agents through fine-tuning a pre-trained VLM in two stages: offline RL to initialize the model, followed by offline-to-online RL. To do this, we build a <b>scalable</b> and <b>parallelizable</b> Android learning environment equipped with a VLM-based evaluator and develop a simple yet effective RL approach for learning in this domain. Our approach runs advantage-weighted RL with advantage estimators enhanced to account for stochasticity along with an automatic curriculum for deriving maximal learning signal. 
-                            <br>
-                            We demonstrate the effectiveness of <b>DigiRL</b> using the Android-in-the-Wild (AitW) dataset, where our 1.5B VLM trained with RL achieves a <b>49.5% absolute improvement</b> -- from 17.7% to 67.2% success rate -- over supervised fine-tuning with static human demonstration data. These results significantly surpass not only the prior best agents, including AppAgent with GPT-4V (8.3% success rate) and the 17B CogAgent trained with AitW data (14.4%), but also the prior best autonomous RL approach based on filtered behavior cloning (57.8%), thereby <b>establishing a new state-of-the-art</b> for digital agents for in-the-wild device control.    
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <!--/ Abstract. -->
-        </div>
-        <div class="container is-max-desktop">
-            <!-- Abstract. -->
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <div class="iframe-container">
-                            <iframe src="https://drive.google.com/file/d/1Q1IOnAQ2Ab4_PC8FNqHCUk-STYA6hGfa/preview" class="myIframe" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Demo. -->
-        </div>
-    </section>
-
     <section class="section" id="interaction-framework">
         <div class="container is-max-desktop">
 
@@ -270,30 +290,6 @@
                         <div class="chart-container" id="chart-k" style="display:block;margin:0 auto;">
                             <canvas id="chart-sr-vs-k"></canvas>
                         </div>
-
-                        <section class="section" id="abstract">
-                            <div class="container is-max-desktop">
-                                <!-- Abstract. -->
-                                <div class="columns is-centered has-text-centered">
-                                    <div class="column is-four-fifths">
-                                        <h2 class="title is-3">Trajectory Examples</h2>
-                                        <div class="content has-text-justified">
-                                            <h4>AitW General</h4>
-                                            <div class="iframe-container">
-                                                <iframe src="https://drive.google.com/file/d/14OTq5WSPpzi4A48qJzM5VjRmEtJP6_Cb/preview" class="myIframe" frameborder="0" allowfullscreen></iframe>
-                                            </div>
-                                        </div>
-                                        <div class="content has-text-justified">
-                                            <h4>AitW Web Shopping</h4>
-                                            <div class="iframe-container">
-                                                <iframe src="https://drive.google.com/file/d/1J9hhVzKxzLRfUCPKt0tNFX8Ost9buyaK/preview" class="myIframe" frameborder="0" allowfullscreen></iframe>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        
 
                     </div>
                 </div>
