@@ -53,20 +53,6 @@ function createChart(subsetNames, annotate_model_name = true) {
         series.backgroundColor = color_Tableau20[index];
     });
 
-    // Generate annotations for the data
-    // Each annotation is:
-    // {
-    //     label1: {
-    //       type: 'label',
-    //       xValue: 2.5,
-    //       yValue: 60,
-    //       backgroundColor: 'rgba(245,245,245)',
-    //       content: ['This is my text', 'This is my text, second line'],
-    //       font: {
-    //         size: 18
-    //       }
-    //     }
-    //   }
     let annotations_for_data = {};
     let occupiedPositions = [];
     let extra_plugin_args = {};
@@ -74,42 +60,26 @@ function createChart(subsetNames, annotate_model_name = true) {
         sr_vs_k_series_subset.forEach((series, index) => {
             const label = series.label;
             const data = series.data;
-            // use the last data point as the annotation point
-            const yValue = data[data.length - 2]; // annotate above the data point
+            const yValue = data[data.length - 2];
 
             let yAdjust = 0;
             let direction;
             let count = 0;
             while (direction = isColliding(yValue, yAdjust, occupiedPositions)) {
                 if (direction === 'down') {
-                    yAdjust -= 1;  // Move label upwards
-                }
-                else if (direction === 'up') {
-                    yAdjust += 1;  // Move label downwards
-                }
-                else {
+                    yAdjust -= 1;
+                } else if (direction === 'up') {
+                    yAdjust += 1;
+                } else {
                     break;
                 }
                 count++;
-                if (count > 10) {
+                if (count > 12) {
                     break;
                 }
             }
 
-            occupiedPositions.push(yValue + yAdjust);  // Add the new position to the list
-
-            // annotations_for_data[label] = {
-            //     type: 'label',
-            //     // color: series.borderColor,
-            //     padding: 0,
-            //     xValue: 3 + 0.2,
-            //     yValue: yValue + yAdjust,
-            //     backgroundColor: hexToRGBA(series.backgroundColor, 0.8),
-            //     content: [label],
-            //     font: {
-            //         size: 10
-            //     }
-            // }
+            occupiedPositions.push(yValue + yAdjust);
         });
     } else {
         extra_plugin_args = {
@@ -123,14 +93,11 @@ function createChart(subsetNames, annotate_model_name = true) {
         }
     }
 
-
-
     chart = new Chart(ctx, {
         type: 'line',
         data: {
-            // assume k values: 0, 6*16, 12*16, ..., 54*16
             labels: Array.from({ length: 10 }, (_, i) => i * 6 * 16),
-            datasets: sr_vs_k_series_subset  // Assuming sr_vs_k_series is already formatted for Chart.js
+            datasets: sr_vs_k_series_subset
         },
         options: {
             responsive: true,
@@ -155,12 +122,22 @@ function createChart(subsetNames, annotate_model_name = true) {
                     }
                 }
             },
+            animation: {
+                onComplete: () => {
+                    window.delayed = true;
+                },
+                delay: (context) => {
+                    let delay = 0;
+                    if (context.type === 'data' && context.mode === 'default' && !window.delayed) {
+                        delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                    }
+                    return delay;
+                },
+                duration: 1000,
+                easing: 'easeInOutQuart',
+                mode: 'x',
+            },
             plugins: {
-                // annotation: {
-                //     annotations: {
-                //         ...annotations_for_data,
-                //     }
-                // },
                 colors: {
                     enabled: false,
                 },
@@ -188,7 +165,6 @@ function createChart(subsetNames, annotate_model_name = true) {
                         },
                         label: function (context) {
                             let label = context.dataset.label || '';
-
                             if (label) {
                                 label += ': ';
                             }
@@ -210,11 +186,67 @@ function createChart(subsetNames, annotate_model_name = true) {
                     }
                 },
                 ...extra_plugin_args,
+            },
+            elements: {
+                line: {
+                    tension: 0.4
+                },
+                point: {
+                    radius: 5,
+                    hoverRadius: 7,
+                    hitRadius: 10,
+                    pointStyle: 'circle',
+                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                    borderWidth: 1,
+                    borderColor: 'rgba(0, 0, 0, 0.1)',
+                    animation: {
+                        x: {
+                            type: 'number',
+                            easing: 'linear',
+                            duration: 1000,
+                            from: (ctx) => {
+                                if (ctx.index > 0) {
+                                    const prevPoint = ctx.dataset.data[ctx.index - 1];
+                                    return prevPoint.x;
+                                } else {
+                                    return NaN; // the first point should not animate from a previous point
+                                }
+                            },
+                            delay(ctx) {
+                                if (ctx.type !== 'data' || ctx.xStarted) {
+                                    return 0;
+                                }
+                                ctx.xStarted = true;
+                                return ctx.index * 200;
+                            }
+                        },
+                        y: {
+                            type: 'number',
+                            easing: 'linear',
+                            duration: 1000,
+                            from: (ctx) => {
+                                if (ctx.index > 0) {
+                                    const prevPoint = ctx.dataset.data[ctx.index - 1];
+                                    return prevPoint.y;
+                                } else {
+                                    return NaN; // the first point should not animate from a previous point
+                                }
+                            },
+                            delay(ctx) {
+                                if (ctx.type !== 'data' || ctx.yStarted) {
+                                    return 0;
+                                }
+                                ctx.yStarted = true;
+                                return ctx.index * 200;
+                            }
+                        }
+                    }
+                }
             }
         },
-
     });
 }
+
 
 const default_order = [
     'AutoUI Filtered BC, Run 1 (General)',
