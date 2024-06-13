@@ -100,9 +100,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 series.tension = 0.4; // Smooth curves
             });
         
-            const totalDuration = 3000; // Reduced duration for faster animation
-            const delayBetweenPoints = totalDuration / sr_vs_k_series_subset[0].data.length;
-            
+            const totalDuration = 10000; // Increased duration for smoother animation
+            const totalDataPoints = sr_vs_k_series_subset.reduce((acc, series) => acc + series.data.length, 0);
+            const delayBetweenPoints = totalDuration / totalDataPoints;
+        
             const previousY = (ctx) => {
                 if (ctx.index === 0 || !ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1]) {
                     return ctx.chart.scales.y.getPixelForValue(100);
@@ -142,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     animation: {
                         x: {
                             type: 'number',
-                            easing: 'linear',
+                            easing: 'easeInOutQuart',
                             duration: delayBetweenPoints,
                             from: NaN,
                             delay(ctx) {
@@ -155,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         },
                         y: {
                             type: 'number',
-                            easing: 'linear',
+                            easing: 'easeInOutQuart',
                             duration: delayBetweenPoints,
                             from: previousY,
                             delay(ctx) {
@@ -202,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         }
+        
         
 });
 
