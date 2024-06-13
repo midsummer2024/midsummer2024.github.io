@@ -257,6 +257,15 @@
                             <li><b>Supervised Fine-Tuning</b> 1) requires a large amount of human demonstration data and 2) cannot recover from degrading model performance when real websites/applications have changed. As shown in the plot below, a frozen good policy trained with prior data experiences a gradual drop in performance as the websites change over time, while the DigiRL policy constantly updates with fresh autonomous data can maintain a stable performance.</li>
                         </ul>
                         
+                        <!-- button for visualizing offline or not -->
+                        <div class="btn-group vis-offline" role="group">
+                            <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button" disabled
+                                id="visualize-sr-vs-k-scale-with-model-size-llama2-base-disabled">Visualization:</button>
+                            <button type="button" class="btn btn-outline-secondary btn-sm active"
+                                id="exc-offline">Exclude Offline Results</button>
+                            <button type="button" class="btn btn-outline-secondary btn-sm"
+                                id="inc-offline">Include Offline Results</button>
+                        </div>
                         <div class="chart-container" id="chart-k2" style="display:block;margin:0 auto;">
                             <canvas id="chart-sr-vs-k2"></canvas>
                         </div>
