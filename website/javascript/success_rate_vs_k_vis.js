@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 series.tension = 0.4; // Smooth curves
             });
         
-            const totalDuration = 10000; // Increased duration for smoother animation
+            const totalDuration = 20000; // Increased duration for smoother animation
             const totalDataPoints = sr_vs_k_series_subset.reduce((acc, series) => acc + series.data.length, 0);
             const delayBetweenPoints = totalDuration / totalDataPoints;
         
