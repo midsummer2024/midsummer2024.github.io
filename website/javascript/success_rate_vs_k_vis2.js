@@ -49,7 +49,7 @@ function createChart(subsetNames, annotate_model_name = true) {
         series.tension = 0.4;
     });
 
-    const totalDuration = 6000;
+    const totalDuration = 5000;
     const totalDataPoints = sr_vs_k_series_subset.reduce((acc, series) => acc + series.data.length, 0);
     const delayBetweenPoints = totalDuration / totalDataPoints;
 
