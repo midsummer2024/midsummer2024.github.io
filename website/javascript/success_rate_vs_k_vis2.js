@@ -38,65 +38,34 @@ function hexToRGBA(hex, alpha = 1) {
 
 
 function createChart(subsetNames, annotate_model_name = true) {
-
     if (chart) {
         chart.destroy();
     }
 
     const ctx = document.getElementById('chart-sr-vs-k2');
-    // filter the series
     const sr_vs_k_series_subset = sr_vs_k_series.filter(series => subsetNames.includes(series.label));
 
-    // assign colors
     sr_vs_k_series_subset.forEach((series, index) => {
         series.borderColor = color_Tableau20[index];
-        series.backgroundColor = color_Tableau20[index];
+        series.backgroundColor = hexToRGBA(color_Tableau20[index], 0.5);
+        series.tension = 0.4; // Smooth curves
     });
 
-    let annotations_for_data = {};
-    let occupiedPositions = [];
-    let extra_plugin_args = {};
-    if (annotate_model_name) {
-        sr_vs_k_series_subset.forEach((series, index) => {
-            const label = series.label;
-            const data = series.data;
-            const yValue = data[data.length - 2];
+    const totalDuration = 10000; // Increased duration for smoother animation
+    const totalDataPoints = sr_vs_k_series_subset.reduce((acc, series) => acc + series.data.length, 0);
+    const delayBetweenPoints = totalDuration / totalDataPoints;
 
-            let yAdjust = 0;
-            let direction;
-            let count = 0;
-            while (direction = isColliding(yValue, yAdjust, occupiedPositions)) {
-                if (direction === 'down') {
-                    yAdjust -= 1;
-                } else if (direction === 'up') {
-                    yAdjust += 1;
-                } else {
-                    break;
-                }
-                count++;
-                if (count > 12) {
-                    break;
-                }
-            }
-
-            occupiedPositions.push(yValue + yAdjust);
-        });
-    } else {
-        extra_plugin_args = {
-            subtitle: {
-                display: true,
-                text: "You can click on the legend to hide or show a model's performance.",
-                font: {
-                    size: 12,
-                }
-            },
+    const previousY = (ctx) => {
+        if (ctx.index === 0 || !ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1]) {
+            return ctx.chart.scales.y.getPixelForValue(100);
         }
-    }
+        return ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
+    };
 
     chart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: Array.from({ length: 12 }, (_, i) => i * 8),
+            labels: Array.from({ length: 10 }, (_, i) => i * 6 * 16),
             datasets: sr_vs_k_series_subset
         },
         options: {
@@ -106,7 +75,7 @@ function createChart(subsetNames, annotate_model_name = true) {
                 x: {
                     title: {
                         display: true,
-                        text: 'Time Elapsed (hours)',
+                        text: 'Number of Trajectories Trained',
                         font: {
                             size: 14,
                         }
@@ -123,19 +92,32 @@ function createChart(subsetNames, annotate_model_name = true) {
                 }
             },
             animation: {
-                onComplete: () => {
-                    window.delayed = true;
-                },
-                delay: (context) => {
-                    let delay = 0;
-                    if (context.type === 'data' && context.mode === 'default' && !window.delayed) {
-                        delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                x: {
+                    type: 'number',
+                    easing: 'easeInOutQuart',
+                    duration: delayBetweenPoints,
+                    from: NaN,
+                    delay(ctx) {
+                        if (ctx.type !== 'data' || ctx.xStarted) {
+                            return 0;
+                        }
+                        ctx.xStarted = true;
+                        return ctx.index * delayBetweenPoints;
                     }
-                    return delay;
                 },
-                duration: 1000,
-                easing: 'easeInOutQuart',
-                mode: 'x',
+                y: {
+                    type: 'number',
+                    easing: 'easeInOutQuart',
+                    duration: delayBetweenPoints,
+                    from: previousY,
+                    delay(ctx) {
+                        if (ctx.type !== 'data' || ctx.yStarted) {
+                            return 0;
+                        }
+                        ctx.yStarted = true;
+                        return ctx.index * delayBetweenPoints;
+                    }
+                }
             },
             plugins: {
                 colors: {
@@ -161,91 +143,20 @@ function createChart(subsetNames, annotate_model_name = true) {
                     },
                     callbacks: {
                         title: function (context) {
-                            return 'Time elapsed: ' + context[0].label + ' hours';
+                            return 'Number of trajectories trained on: ' + context[0].label;
                         },
                         label: function (context) {
-                            let label = context.dataset.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            label += context.formattedValue + '%';
-                            return label;
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: "Success Rate under non-stationary environment",
-                    font: function (context) {
-                        var width = context.chart.width;
-                        var size = Math.round(width / 32);
-                        size = Math.min(size, 16);
-                        return {
-                            size: size
-                        };
-                    }
-                },
-                ...extra_plugin_args,
-            },
-            elements: {
-                line: {
-                    tension: 0.4
-                },
-                point: {
-                    radius: 5,
-                    hoverRadius: 7,
-                    hitRadius: 10,
-                    pointStyle: 'circle',
-                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                    borderWidth: 1,
-                    borderColor: 'rgba(0, 0, 0, 0.1)',
-                    animation: {
-                        x: {
-                            type: 'number',
-                            easing: 'linear',
-                            duration: 1000,
-                            from: (ctx) => {
-                                if (ctx.index > 0) {
-                                    const prevPoint = ctx.chart.data.datasets[ctx.datasetIndex].data[ctx.index - 1];
-                                    return prevPoint.x;
-                                } else {
-                                    return NaN; // the first point should not animate from a previous point
-                                }
-                            },
-                            delay(ctx) {
-                                if (ctx.type !== 'data' || ctx.xStarted) {
-                                    return 0;
-                                }
-                                ctx.xStarted = true;
-                                return ctx.index * 200;
-                            }
-                        },
-                        y: {
-                            type: 'number',
-                            easing: 'linear',
-                            duration: 1000,
-                            from: (ctx) => {
-                                if (ctx.index > 0) {
-                                    const prevPoint = ctx.chart.data.datasets[ctx.datasetIndex].data[ctx.index - 1];
-                                    return prevPoint.y;
-                                } else {
-                                    return NaN; // the first point should not animate from a previous point
-                                }
-                            },
-                            delay(ctx) {
-                                if (ctx.type !== 'data' || ctx.yStarted) {
-                                    return 0;
-                                }
-                                ctx.yStarted = true;
-                                return ctx.index * 200;
-                            }
+                            return context.dataset.label + ': ' + context.parsed.y.toFixed(2) + '%';
                         }
                     }
                 }
             }
-        },
+        }
     });
 }
+
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
     fetch('website/data/sr_vs_k_series_2.json')
@@ -295,64 +206,8 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             sr_vs_k_series = data;
-
-            // Do stuff
-
             createChart(default_order);
 
-            // document.getElementById("visualize-sr-vs-k-scale-with-model-size-llama2-base").addEventListener("click", function () {
-            //     createChart([
-            //         'AutoUI Filtered BC, Run 1 (General)',
-            //         'AutoUI Filtered BC, Run 2 (General)',
-            //         'AutoUI DigiRL, Run 1 (General)',
-            //         'AutoUI DigiRL, Run 2 (General)',
-            //         'AutoUI Pretrained (General)',
-            //         'GPT-4V Set-of-Marks (General)'
-            //     ]);
-            // });
-
-            // document.getElementById("visualize-sr-vs-k-scale-with-model-size-llama2-rlhf").addEventListener("click", function () {
-            //     createChart([
-            //         'AutoUI Filtered BC, Run 1 (Webshop)',
-            //         'AutoUI Filtered BC, Run 2 (Webshop)',
-            //         'AutoUI DigiRL, Run 1 (Webshop)',
-            //         'AutoUI DigiRL, Run 2 (Webshop)',
-            //         'AutoUI Pretrained (Webshop)',
-            //         'GPT-4V Set-of-Marks (Webshop)'
-            //     ]);
-            // });
-
-            // document.getElementById("visualize-sr-vs-k-vicuna-better-than-llama").addEventListener("click", function () {
-            //     createChart([
-            //         'vicuna-7b-v1.5 (13B, SIFT)',
-            //         'Llama-2-7b-chat (7B, RLHF)',
-            //         'Llama-2-7b (7B, Base)',
-            //     ]);
-            // });
-
-            // document.getElementById("visualize-sr-vs-k-lemur-better-than-llama").addEventListener("click", function () {
-            //     createChart([
-            //         'Lemur-70b-v1 (70B, Base)',
-            //         'Lemur-70b-chat-v1 (70B, SIFT)',
-            //         'Llama-2-70b-chat (70B, RLHF)',
-            //         'Llama-2-70b (70B, Base)',
-            //     ]);
-            // });
-
-            // document.getElementById("visualize-sr-vs-k-rlhf").addEventListener("click", function () {
-            //     createChart([
-            //         'Llama-2-7b (7B, Base)',
-            //         'Llama-2-7b-chat (7B, RLHF)',
-            //         'Llama-2-13b (13B, Base)',
-            //         'Llama-2-13b-chat (13B, RLHF)',
-            //         'Llama-2-70b (70B, Base)',
-            //         'Llama-2-70b-chat (70B, RLHF)',
-            //     ]);
-            // });
-
-            // document.getElementById("visualize-sr-vs-k-all").addEventListener("click", function () {
-            //     createChart(all_models, false);
-            // });
         });
 
 });

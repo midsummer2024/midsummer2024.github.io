@@ -203,8 +203,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         }
-        
-        
 });
 
 
