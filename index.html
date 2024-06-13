@@ -254,9 +254,9 @@
                         <h3> Why RL over the alternatives? </h3>
                         <ul>
                             <li>LLM Agent data such as device-control actions is poorly represented in the pre-training corpus of <b>Off-the-shelf proprietary VLMs</b> such as GPT4V and Gemini-1.5-Pro.</li>
-                            <li><b>Supervised Fine-Tuning</b> 1) requires a large amount of human demonstration data and 2) cannot recover from degrading model performance when real websites/applications have changed.</li>
-                            <li>We measure the trajectory success rate in each 8 hours by first training an online checkpoint:</li>
+                            <li><b>Supervised Fine-Tuning</b> 1) requires a large amount of human demonstration data and 2) cannot recover from degrading model performance when real websites/applications have changed. As shown in the plot below, a frozen good policy trained with prior data experiences a gradual drop in performance as the websites change over time, while the DigiRL policy constantly updates with fresh autonomous data can maintain a stable performance.</li>
                         </ul>
+                        
                         <div class="chart-container" id="chart-k2" style="display:block;margin:0 auto;">
                             <canvas id="chart-sr-vs-k2"></canvas>
                         </div>
