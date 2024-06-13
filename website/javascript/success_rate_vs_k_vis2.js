@@ -3,16 +3,6 @@ let chart = null;
 
 const color_Tableau20 = ['#F28E2B', '#A0CBE8', '#FFBE7D', '#59A14F', '#8CD17D', '#B6992D', '#F1CE63', '#499894', '#86BCB6', '#E15759', '#FF9D9A', '#79706E', '#BAB0AC', '#D37295', '#FABFD2', '#B07AA1', '#D4A6C8', '#9D7660', '#D7B5A6'];
 
-function isColliding(yValue, yAdjust, occupiedPositions) {
-    const tolerance = 1;
-    for (let pos of occupiedPositions) {
-        if (Math.abs((yValue + yAdjust) - pos) <= tolerance) {
-            return (yValue + yAdjust) >= pos ? 'up' : 'down';
-        }
-    }
-    return null;
-}
-
 function hexToRGBA(hex, alpha = 1) {
     hex = hex.replace('#', '');
     if (hex.length === 3) {
@@ -49,7 +39,7 @@ function createChart(subsetNames, annotate_model_name = true) {
         series.tension = 0.4;
     });
 
-    const totalDuration = 10000;
+    const totalDuration = 20000;
     const totalDataPoints = sr_vs_k_series_subset.reduce((acc, series) => acc + series.data.length, 0);
     const delayBetweenPoints = totalDuration / totalDataPoints;
 
@@ -115,6 +105,12 @@ function createChart(subsetNames, annotate_model_name = true) {
                         ctx.yStarted = true;
                         return ctx.index * delayBetweenPoints;
                     }
+                },
+                onComplete: function() {
+                    setTimeout(() => {
+                        chart.destroy();
+                        createChart(subsetNames);
+                    }, 5000); // Pause for 5 seconds before restarting the animation
                 }
             },
             plugins: {
@@ -158,7 +154,6 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             sr_vs_k_series = data;
-
             createChart(default_order);
         });
 
@@ -171,18 +166,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const btn = document.getElementById(buttonId);
 
         btn.addEventListener('click', () => {
-            // Remove active class from all buttons
             taskButtons.forEach(id => {
                 const otherBtn = document.getElementById(id);
                 otherBtn.classList.remove('active');
             });
 
-            // Add active class to the clicked button
             btn.classList.add('active');
 
-
-
-            // Call createChart with different parameters based on the clicked button
             if (buttonId === 'exc-offline') {
                 createChart(default_order);
             } else if (buttonId === 'inc-offline') {
@@ -191,5 +181,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
-
