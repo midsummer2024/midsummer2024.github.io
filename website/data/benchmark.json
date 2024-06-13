@@ -60,8 +60,8 @@
     "algo":"SFT",
     "method": "Pre-trained",
     "general-train":25.0,
-    "general-test":25.4,
-    "webshop-train":25.8,
+    "general-test":25.0,
+    "webshop-train":31.3,
     "webshop-test":38.5
   },
   {

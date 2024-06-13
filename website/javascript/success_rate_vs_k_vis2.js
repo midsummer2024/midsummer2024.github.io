@@ -175,7 +175,7 @@ function createChart(subsetNames, annotate_model_name = true) {
                 },
                 title: {
                     display: true,
-                    text: "Success Rate under Non-stationary Environment",
+                    text: "Success Rate under non-stationary environment",
                     font: function (context) {
                         var width = context.chart.width;
                         var size = Math.round(width / 32);
@@ -206,7 +206,7 @@ function createChart(subsetNames, annotate_model_name = true) {
                             duration: 1000,
                             from: (ctx) => {
                                 if (ctx.index > 0) {
-                                    const prevPoint = ctx.dataset.data[ctx.index - 1];
+                                    const prevPoint = ctx.chart.data.datasets[ctx.datasetIndex].data[ctx.index - 1];
                                     return prevPoint.x;
                                 } else {
                                     return NaN; // the first point should not animate from a previous point
@@ -226,7 +226,7 @@ function createChart(subsetNames, annotate_model_name = true) {
                             duration: 1000,
                             from: (ctx) => {
                                 if (ctx.index > 0) {
-                                    const prevPoint = ctx.dataset.data[ctx.index - 1];
+                                    const prevPoint = ctx.chart.data.datasets[ctx.datasetIndex].data[ctx.index - 1];
                                     return prevPoint.y;
                                 } else {
                                     return NaN; // the first point should not animate from a previous point
@@ -250,15 +250,16 @@ function createChart(subsetNames, annotate_model_name = true) {
 
 
 
+
 const default_order = [
-    "DigiRL Online RL Continued",
-    "DigiRL Online RL Checkpoint", 
+    "DigiRL Learning",
+    "DigiRL Frozen", 
     // "DigiRL Offline RL Checkpoint"
 ]
 
 const all_models = [
-    "DigiRL Online RL Continued",
-    "DigiRL Online RL Checkpoint", 
+    "DigiRL Learning",
+    "DigiRL Frozen", 
     // "DigiRL Offline RL Checkpoint"
 ]
 

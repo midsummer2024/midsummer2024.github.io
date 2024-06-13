@@ -175,7 +175,7 @@ function createChart(subsetNames, annotate_model_name = true) {
                 },
                 title: {
                     display: true,
-                    text: "Offline-to-online training curves for AutoUI Filtered BC and AutoUI DigiRL",
+                    text: "Offline-to-online training curves of AutoUI+Filtered BC/DigiRL",
                     font: function (context) {
                         var width = context.chart.width;
                         var size = Math.round(width / 32);

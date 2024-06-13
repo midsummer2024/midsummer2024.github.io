@@ -6,8 +6,8 @@ const task_types = [
 ];
 
 const task_type_to_name = {
-  'avg_micro': 'AitW General Subset',
-  'reasoning': 'AitW Web Shopping Subset',
+  'avg_micro': 'the AitW General subset',
+  'reasoning': 'the AitW Web Shopping subset',
 }
 
 const all_models = [
@@ -87,7 +87,7 @@ function createChart(task_type, namesToKeep) {
     });
   }
 
-  const title_text = 'Failure Weight (' + task_type_to_name[task_type] + ')';
+  const title_text = 'Failure weight of ' + task_type_to_name[task_type];
 
   if (chart) {
     chart.destroy();
