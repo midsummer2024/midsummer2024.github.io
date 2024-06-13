@@ -1,6 +1,6 @@
 [
     {
-        "label": "DigiRL Learning",
+        "label": "DigiRL Online Learning",
         "data": [
             66.2502984599572,
             66.1044821374555,
@@ -18,7 +18,7 @@
         ]
     },
     {
-        "label": "DigiRL Frozen",
+        "label": "DigiRL Online Frozen",
         "data": [
             66.2502984599572,
             64.11234160816369,
@@ -36,7 +36,7 @@
         ]
     },
     {
-        "label": "DigiRL Offline RL Checkpoint",
+        "label": "DigiRL Offline Frozen",
         "data": [
             45.8,
             51.33866203751213,
