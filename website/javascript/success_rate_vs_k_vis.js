@@ -86,214 +86,123 @@ document.addEventListener('DOMContentLoaded', function () {
             createChart(default_order);
         });
     
-    function createChart(subsetNames, annotate_model_name = true) {
-        if (chart) {
-            chart.destroy();
-        }
-
-        window.delayed = false;
-
-        const ctx = document.getElementById('chart-sr-vs-k');
-        const sr_vs_k_series_subset = sr_vs_k_series.filter(series => subsetNames.includes(series.label));
-
-        sr_vs_k_series_subset.forEach((series, index) => {
-            series.borderColor = color_Tableau20[index];
-            series.backgroundColor = color_Tableau20[index];
-        });
-
-        let annotations_for_data = {};
-        let occupiedPositions = [];
-        let extra_plugin_args = {};
-        if (annotate_model_name) {
-            sr_vs_k_series_subset.forEach((series, index) => {
-                const label = series.label;
-                const data = series.data;
-                const yValue = data[data.length - 2];
-
-                let yAdjust = 0;
-                let direction;
-                let count = 0;
-                while (direction = isColliding(yValue, yAdjust, occupiedPositions)) {
-                    if (direction === 'down') {
-                        yAdjust -= 1;
-                    } else if (direction === 'up') {
-                        yAdjust += 1;
-                    } else {
-                        break;
-                    }
-                    count++;
-                    if (count > 12) {
-                        break;
-                    }
-                }
-
-                occupiedPositions.push(yValue + yAdjust);
-            });
-        } else {
-            extra_plugin_args = {
-                subtitle: {
-                    display: true,
-                    text: "You can click on the legend to hide or show a model's performance.",
-                    font: {
-                        size: 12,
-                    }
-                },
+        function createChart(subsetNames, annotate_model_name = true) {
+            if (chart) {
+                chart.destroy();
             }
-        }
-
-        chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: Array.from({ length: 10 }, (_, i) => i * 6 * 16),
-                datasets: sr_vs_k_series_subset
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Number of Trajectories Trained',
-                            font: {
-                                size: 14,
-                            }
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Success Rate every 16 trajectories',
-                            font: {
-                                size: 14,
-                            }
-                        }
-                    }
+        
+            const ctx = document.getElementById('chart-sr-vs-k');
+            const sr_vs_k_series_subset = sr_vs_k_series.filter(series => subsetNames.includes(series.label));
+        
+            sr_vs_k_series_subset.forEach((series, index) => {
+                series.borderColor = color_Tableau20[index];
+                series.backgroundColor = hexToRGBA(color_Tableau20[index], 0.5);
+                series.tension = 0.4; // Smooth curves
+            });
+        
+            const totalDuration = 3000; // Reduced duration for faster animation
+            const delayBetweenPoints = totalDuration / sr_vs_k_series_subset[0].data.length;
+            
+            const previousY = (ctx) => {
+                if (ctx.index === 0 || !ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1]) {
+                    return ctx.chart.scales.y.getPixelForValue(100);
+                }
+                return ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
+            };
+        
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({ length: 10 }, (_, i) => i * 6 * 16),
+                    datasets: sr_vs_k_series_subset
                 },
-                animation: {
-                    onComplete: () => {
-                        window.delayed = true;
-                    },
-                    delay: (context) => {
-                        let delay = 0;
-                        if (context.type === 'data' && context.mode === 'default' && !window.delayed) {
-                            delay = context.dataIndex * 100 + context.datasetIndex * 100;
-                        }
-                        return delay;
-                    },
-                    duration: 1000,
-                    easing: 'easeInOutQuart',
-                    mode: 'x',
-                },
-                plugins: {
-                    colors: {
-                        enabled: false,
-                    },
-                    legend: {
-                        display: true,
-                        labels: {
-                            usePointStyle: true,
-                            font: {
-                                size: 10,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Number of Trajectories Trained',
+                                font: {
+                                    size: 14,
+                                }
                             }
                         },
-                        align: 'center',
-                        position: 'top'
-                    },
-                    tooltip: {
-                        mode: 'index',
-                        position: 'nearest',
-                        intersect: false,
-                        itemSort: function (a, b) {
-                            return b.raw - a.raw;
-                        },
-                        callbacks: {
-                            title: function (context) {
-                                return 'Number of trajectories trained on: ' + context[0].label;
-                            },
-                            label: function (context) {
-                                let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Success Rate every 16 trajectories',
+                                font: {
+                                    size: 14,
                                 }
-                                label += context.formattedValue + '%';
-                                return label;
                             }
                         }
                     },
-                    title: {
-                        display: true,
-                        text: "Offline-to-online training curves of AutoUI+Filtered BC/DigiRL",
-                        font: function (context) {
-                            var width = context.chart.width;
-                            var size = Math.round(width / 32);
-                            size = Math.min(size, 16);
-                            return {
-                                size: size
-                            };
+                    animation: {
+                        x: {
+                            type: 'number',
+                            easing: 'linear',
+                            duration: delayBetweenPoints,
+                            from: NaN,
+                            delay(ctx) {
+                                if (ctx.type !== 'data' || ctx.xStarted) {
+                                    return 0;
+                                }
+                                ctx.xStarted = true;
+                                return ctx.index * delayBetweenPoints;
+                            }
+                        },
+                        y: {
+                            type: 'number',
+                            easing: 'linear',
+                            duration: delayBetweenPoints,
+                            from: previousY,
+                            delay(ctx) {
+                                if (ctx.type !== 'data' || ctx.yStarted) {
+                                    return 0;
+                                }
+                                ctx.yStarted = true;
+                                return ctx.index * delayBetweenPoints;
+                            }
                         }
                     },
-                    ...extra_plugin_args,
-                },
-                elements: {
-                    line: {
-                        tension: 0.4
-                    },
-                    point: {
-                        radius: 5,
-                        hoverRadius: 7,
-                        hitRadius: 10,
-                        pointStyle: 'circle',
-                        backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                        borderWidth: 1,
-                        borderColor: 'rgba(0, 0, 0, 0.1)',
-                        animation: {
-                            x: {
-                                type: 'number',
-                                easing: 'linear',
-                                duration: 1000,
-                                from: (ctx) => {
-                                    if (ctx.index > 0) {
-                                        const prevPoint = ctx.dataset.data[ctx.index - 1];
-                                        return prevPoint.x;
-                                    } else {
-                                        return NaN;
-                                    }
-                                },
-                                delay(ctx) {
-                                    if (ctx.type !== 'data' || ctx.xStarted) {
-                                        return 0;
-                                    }
-                                    ctx.xStarted = true;
-                                    return ctx.index * 200;
+                    plugins: {
+                        colors: {
+                            enabled: false,
+                        },
+                        legend: {
+                            display: true,
+                            labels: {
+                                usePointStyle: true,
+                                font: {
+                                    size: 10,
                                 }
                             },
-                            y: {
-                                type: 'number',
-                                easing: 'linear',
-                                duration: 1000,
-                                from: (ctx) => {
-                                    if (ctx.index > 0) {
-                                        const prevPoint = ctx.dataset.data[ctx.index - 1];
-                                        return prevPoint.y;
-                                    } else {
-                                        return NaN;
-                                    }
+                            align: 'center',
+                            position: 'top'
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            position: 'nearest',
+                            intersect: false,
+                            itemSort: function (a, b) {
+                                return b.raw - a.raw;
+                            },
+                            callbacks: {
+                                title: function (context) {
+                                    return 'Number of trajectories trained on: ' + context[0].label;
                                 },
-                                delay(ctx) {
-                                    if (ctx.type !== 'data' || ctx.yStarted) {
-                                        return 0;
-                                    }
-                                    ctx.yStarted = true;
-                                    return ctx.index * 200;
+                                label: function (context) {
+                                    return context.dataset.label + ': ' + context.parsed.y.toFixed(2) + '%';
                                 }
                             }
                         }
                     }
                 }
-            },
-        });
-    }
+            });
+        }
+        
 });
 
 
