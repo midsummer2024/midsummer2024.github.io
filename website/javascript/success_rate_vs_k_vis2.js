@@ -247,6 +247,32 @@ function createChart(subsetNames, annotate_model_name = true) {
     });
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('website/data/sr_vs_k_series_2.json')
+        .then(response => response.json())
+        .then(data => {
+            sr_vs_k_series = data;
+
+            createChart(default_order);
+
+            const buttons = document.querySelectorAll('.main-curve');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', function () {
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    buttons.forEach(btn => btn.disabled = false);
+                    
+                    this.classList.add('active');
+                    this.disabled = true;
+
+                    const subsetNames = this.getAttribute('data-subset').split(',');
+                    createChart(subsetNames);
+                });
+            });
+
+            document.getElementById("default-order-button").click(); // Click the default button on page load
+        });
+});
 
 
 
