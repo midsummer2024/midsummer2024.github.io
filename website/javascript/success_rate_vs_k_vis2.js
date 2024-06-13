@@ -63,7 +63,7 @@ function createChart(subsetNames, annotate_model_name = true) {
     chart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: Array.from({ length: 10 }, (_, i) => i * 6 * 16),
+            labels: Array.from({ length: 12 }, (_, i) => i * 8),
             datasets: sr_vs_k_series_subset
         },
         options: {
@@ -73,7 +73,7 @@ function createChart(subsetNames, annotate_model_name = true) {
                 x: {
                     title: {
                         display: true,
-                        text: 'Number of Trajectories Trained',
+                        text: 'Time elapsed (hours)',
                         font: {
                             size: 14,
                         }
