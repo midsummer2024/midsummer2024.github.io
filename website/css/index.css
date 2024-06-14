@@ -2,6 +2,23 @@ body {
   font-family: 'Noto Sans', sans-serif;
 }
 
+.iframe-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+}
+
+.iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 80%;
+  border: 0;
+}
+
 .custom-column {
   width: 25%; /* Fit to the width of its parent or adjust as necessary */
   padding: 0;
