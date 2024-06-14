@@ -35,6 +35,18 @@ ul li::before {
   padding-right: 5px; /* Optional: Adds space between the dash and the text */
 }
 
+ul.custom-bullets {
+  list-style-type: none; /* Remove default bullets */
+  padding-left: 0;       /* Adjust padding if needed */
+}
+
+ul.custom-bullets li::before {
+  content: "•";  /* Custom bullet symbol */
+  color: black;   /* You can change the color */
+  font-size: 20px; /* Adjust size as needed */
+  padding-right: 5px; /* Space between the bullet and the text */
+}
+
 
 .custom-column-large {
   width: 60%;       /* This sets the width of the element to always be 60% of its parent's width */

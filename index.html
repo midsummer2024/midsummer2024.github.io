@@ -166,7 +166,8 @@
         <div class="container is-max-desktop">
             <div class="is-centered has-text-centered">
                 <div class="custom-column-large">
-                    <h4>AitW General<br>Search for some good Italian restaurants</h4>
+                    <h4><b>AitW General</b><br>
+                        Search for some good Italian restaurants</h4>
                     <video controls autoplay muted loop>
                         <source src="website/videos/general.mp4" type="video/mp4">
                     </video> <!-- Ensure the video tag is properly closed -->
@@ -174,7 +175,9 @@
             </div>
             <div class="is-centered has-text-centered">
                 <div class="custom-column-large">
-                    <h4>AitW Web Shopping<br>Go to newegg.com, and search for "Alienware Aurora"</h4>
+                    <h4><b>AitW Web Shopping</b>
+                        <br>Go to newegg.com, and search for "Alienware Aurora"
+                    </h4>
                     <video controls autoplay muted loop>
                         <source src="website/videos/general.mp4" type="video/mp4">
                     </video> <!-- Ensure the video tag is properly closed -->
@@ -192,24 +195,9 @@
                     <b>DigiRL</b> solves open-ended realistic Android tasks with an novel online reinforcement learning algorithm with autonomous VLM evaluator.
                 </h2>
 
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="main-results-tab" data-bs-toggle="tab"
-                            data-bs-target="#benchmark-table-content" type="button" role="tab"
-                            aria-controls="main-results-tab" aria-selected="true">Success Rates</button>
-                    </li>
-                </ul>
-
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="benchmark-table-content" role="tabpanel"
                         aria-labelledby="benchmark-table-content">
-
-                        <p class="mt-2 px-2">
-                            This table contains the success rate across all approaches measured in the
-                            <a href="https://arxiv.org/abs/2309.10691">DigiRL paper</a>. It includes performance on
-                            two subsets: AitW General and AitW Web Shopping. The codename of GPT-4V we use is <i>gpt-4-vision-preview</i>
-                            and the codename of Gemini-1.5-Pro is <i>gemini-1.5-pro-latest</i>.
-                        </p>
 
                         <div id="benchmark-table"></div>
                     </div>
@@ -221,6 +209,12 @@
                                 paper</a> and contains MBPP and HumanEval.
                         </p>
                     </div>
+                    <p class="mt-2 px-2">
+                        This table contains the success rate across all approaches measured in the
+                        <a href="https://arxiv.org/abs/2309.10691">DigiRL paper</a>. It includes performance on
+                        two subsets: AitW General and AitW Web Shopping. The codename of GPT-4V we use is <i>gpt-4-vision-preview</i>
+                        and the codename of Gemini-1.5-Pro is <i>gemini-1.5-pro-latest</i>.
+                    </p>
                 </div>
             </div>
         </div>
@@ -237,7 +231,7 @@
                         <h2 class="title is-3">DigiRL: Autonomous RL for Building a Strong Device-Control Agent</h2>
 
                         <h3> Why RL over the alternatives? </h3>
-                        <ul>
+                        <ul class="custom-bullets">
                             <li>LLM Agent data such as device-control actions is poorly represented in the pre-training corpus of <b>Off-the-shelf proprietary VLMs</b> such as GPT4V and Gemini-1.5-Pro.</li>
                             <li><b>Supervised Fine-Tuning</b> 1) requires a large amount of human demonstration data and 2) cannot recover from degrading model performance when real websites/applications have changed. As shown in the plot below, a frozen good policy trained with prior data experiences a gradual drop in performance as the websites change over time, while the DigiRL policy constantly updates with fresh autonomous data can maintain a stable performance.</li>
                         </ul>
@@ -259,12 +253,12 @@
                         </div>
                         <h3> What are we using RL for?</h3>
                         DigiRL consists of two steps:
-                        <ul>
+                        <ul class="custom-bullets">
                             <li>First, we use <b>Offline RL</b> to make the most out of a potentially sub-optimal existing offline dataset.</li>
                             <li>Then, we use <b>Offline-to-Online RL</b> to encourage the agent to learn from its own trials and errors.</li>
                         </ul>
                         DigiRL identifies the most simple yet effective RL design choices for device-control agent problems. Our RL algorithmic framework automatically achieves the following advantages compared to state-of-the-art alternatives such as rejection sampling (or Filtered Behavior Cloning):
-                        <ul>
+                        <ul class="custom-bullets">
                             <li>We makes use of an <b>instruction-level value function</b> to implicitly construct an automatic curriculum that prioritizes on the tasks most informative to the agent.</li>
                             <li>We makes use of a <b>step-level value function</b> to pick out the advantageous actions (actions that mark progress towards the goal) in a trajectory while leaving the noisy actions (actions that do not contribute to the goal).</li>
                         </ul>
@@ -346,7 +340,7 @@
                                 <button type="button" class="btn btn-outline-secondary btn-sm active"
                                     id="avg_micro">AitW General</button>
                                 <button type="button" class="btn btn-outline-secondary btn-sm"
-                                    id="reasoning">AitW Webshop</button>
+                                    id="reasoning">AitW Web Shopping</button>
                             </div>
 
 
@@ -372,19 +366,24 @@
 
     <section class="section" id="evaluation">
         <div class="container is-max-desktop">
+            <h3>Misc</h3>
             <div class="columns is-full-width">
                 <div class="column">
                     <div class="content">
-    <h4>Re the Icon <img src="website/images/icon/icon.png" alt="logo" width="40" height="40" /></h4>
-    <p>
-        <b>Infinity:</b> Our environment is open-ended, which can be easily generalized to infinite open-ended tasks sets with our open-ended evaluator.
-        <br>
-        <b>Loop:</b> We use online reinforcement learning, which is closed-loop: the agent interacts with the environment and learns from its own trials and errors.
-    </p>
-    </div>
-    </div>
-    </div>
-    </div>
+                        <h4>Re the Charts &#128200 </h4>
+                        Try clicking on the legend of the charts!
+                    </div>
+                    <div class="content">
+                        <h4>Re the Icon <img src="website/images/icon/icon.png" alt="logo" width="30" height="30" /></h4>
+                        <p>
+                            <b>Infinity:</b> Our environment is open-ended, which can be easily generalized to infinite open-ended tasks sets with our open-ended evaluator.
+                            <br>
+                            <b>Loop:</b> We use online reinforcement learning, which is closed-loop: the agent interacts with the environment and learns from its own trials and errors.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="section" id="BibTeX">
