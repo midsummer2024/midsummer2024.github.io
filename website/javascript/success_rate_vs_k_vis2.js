@@ -1,5 +1,6 @@
 let sr_vs_k_series;
 let chart = null;
+let isUpdatingChart = false; // Flag to check if chart is being updated interactively
 
 const color_Tableau20 = ['#F28E2B', '#A0CBE8', '#FFBE7D', '#59A14F', '#8CD17D', '#B6992D', '#F1CE63', '#499894', '#86BCB6', '#E15759', '#FF9D9A', '#79706E', '#BAB0AC', '#D37295', '#FABFD2', '#B07AA1', '#D4A6C8', '#9D7660', '#D7B5A6'];
 
@@ -29,6 +30,7 @@ function createChart(subsetNames, annotate_model_name = true) {
     if (chart) {
         chart.destroy();
     }
+    isUpdatingChart = true; // Set the flag to indicate the chart is being updated
 
     const ctx = document.getElementById('chart-sr-vs-k2');
     const sr_vs_k_series_subset = sr_vs_k_series.filter(series => subsetNames.includes(series.label));
@@ -39,16 +41,9 @@ function createChart(subsetNames, annotate_model_name = true) {
         series.tension = 0.4;
     });
 
-    const totalDuration = 20000;
-    const totalDataPoints = sr_vs_k_series_subset.reduce((acc, series) => acc + series.data.length, 0);
-    const delayBetweenPoints = totalDuration / totalDataPoints;
-
-    const previousY = (ctx) => {
-        if (ctx.index === 0 || !ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1]) {
-            return ctx.chart.scales.y.getPixelForValue(100);
-        }
-        return ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
-    };
+    const totalDuration = 20000; // Keep total duration fixed for consistency
+    const maxDataPoints = Math.max(...sr_vs_k_series_subset.map(series => series.data.length));
+    const delayBetweenPoints = totalDuration / maxDataPoints; // Now based on maximum data points in any subset
 
     chart = new Chart(ctx, {
         type: 'line',
@@ -97,7 +92,7 @@ function createChart(subsetNames, annotate_model_name = true) {
                     type: 'number',
                     easing: 'easeInOutQuart',
                     duration: delayBetweenPoints,
-                    from: previousY,
+                    from: NaN,
                     delay(ctx) {
                         if (ctx.type !== 'data' || ctx.yStarted) {
                             return 0;
@@ -105,18 +100,9 @@ function createChart(subsetNames, annotate_model_name = true) {
                         ctx.yStarted = true;
                         return ctx.index * delayBetweenPoints;
                     }
-                },
-                onComplete: function() {
-                    setTimeout(() => {
-                        chart.destroy();
-                        createChart(subsetNames);
-                    }, 5000); // Pause for 5 seconds before restarting the animation
                 }
             },
             plugins: {
-                colors: {
-                    enabled: false,
-                },
                 legend: {
                     display: true,
                     labels: {
@@ -147,7 +133,10 @@ function createChart(subsetNames, annotate_model_name = true) {
             }
         }
     });
+
+    setTimeout(() => isUpdatingChart = false, 500); // Reset flag after a short delay
 }
+
 
 document.addEventListener('DOMContentLoaded', function () {
     fetch('website/data/sr_vs_k_series_2.json')
@@ -164,13 +153,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     taskButtons.forEach(buttonId => {
         const btn = document.getElementById(buttonId);
-
         btn.addEventListener('click', () => {
             taskButtons.forEach(id => {
-                const otherBtn = document.getElementById(id);
-                otherBtn.classList.remove('active');
+                document.getElementById(id).classList.remove('active');
             });
-
             btn.classList.add('active');
 
             if (buttonId === 'exc-offline') {
