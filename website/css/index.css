@@ -2,49 +2,36 @@ body {
   font-family: 'Noto Sans', sans-serif;
 }
 
-.iframe-container {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 aspect ratio */
-  height: 0;
-  overflow: hidden;
-}
-
-.iframe-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 80%;
-  height: 80%;
-  border: 0;
-}
 .custom-column {
-  width: 200%; /* Adjust the width of the outer container to fit your layout */
+  width: 25%; /* Fit to the width of its parent or adjust as necessary */
   padding: 0;
-  margin: 0 auto; /* Center the column if needed */
+  margin: 0 auto; /* Center the column */
 }
 
 .custom-content {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%; /* Ensure the content uses full height of the container */
+  height: 100%; /* Full height of the container */
   margin: 0;
 }
 
 .custom-iframe-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0; /* Removes margin around the iframe */
-  padding: 0; /* Removes padding around the iframe */
-  background-color: #FFF; /* Adjust background color if needed, matches iframe background */
+  position: relative;
+  width: 100%; /* Full width */
+  padding-top: 56.25%; /* Aspect ratio for 16:9 videos, adjust if your video has a different aspect ratio */
+  height: 0;
+  overflow: hidden;
+  background-color: #FFF; /* Adjust if needed */
 }
 
 .custom-iframe {
-  width: 100%; /* Adjust the width as necessary */
-  height: 100%; /* Adjust the height as necessary */
-  border: none; /* Removes any border around the iframe */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  border: none;
 }
 
 
