@@ -41,7 +41,7 @@ function createChart(subsetNames, annotate_model_name = true) {
         series.tension = 0.4;
     });
 
-    const totalDuration = 20000; // Keep total duration fixed for consistency
+    const totalDuration = 12000; // Keep total duration fixed for consistency
     const maxDataPoints = Math.max(...sr_vs_k_series_subset.map(series => series.data.length));
     const delayBetweenPoints = totalDuration / maxDataPoints; // Now based on maximum data points in any subset
 
