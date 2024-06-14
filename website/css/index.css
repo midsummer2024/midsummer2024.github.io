@@ -25,6 +25,15 @@ body {
   margin: 0 auto; /* Center the column */
 }
 
+ul {
+  list-style-type: none; /* Removes default bullets */
+  padding-left: 0; /* Removes default padding */
+}
+
+ul li::before {
+  content: "- "; /* Adds dash before the text of each list item */
+  padding-right: 5px; /* Optional: Adds space between the dash and the text */
+}
 
 
 .custom-column-large {

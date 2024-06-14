@@ -233,7 +233,7 @@
 
                 <!-- Visual Effects. -->
                 <div class="column">
-                    <div class="content">
+                    <div class="text-justified">
                         <h2 class="title is-3">DigiRL: Autonomous RL for Building a Strong Device-Control Agent</h2>
 
                         <h3> Why RL over the alternatives? </h3>
@@ -241,9 +241,10 @@
                             <li>LLM Agent data such as device-control actions is poorly represented in the pre-training corpus of <b>Off-the-shelf proprietary VLMs</b> such as GPT4V and Gemini-1.5-Pro.</li>
                             <li><b>Supervised Fine-Tuning</b> 1) requires a large amount of human demonstration data and 2) cannot recover from degrading model performance when real websites/applications have changed. As shown in the plot below, a frozen good policy trained with prior data experiences a gradual drop in performance as the websites change over time, while the DigiRL policy constantly updates with fresh autonomous data can maintain a stable performance.</li>
                         </ul>
-                        
+                    </div>
+                    <div class="text-center">
                         <!-- button for visualizing offline or not -->
-                        <div class="btn-group vis-offline" role="group">
+                        <div class="btn-group btn-group-toggle text-center task-selector" data-toggle="buttons">
                             <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button" disabled
                                 id="visualize-sr-vs-k-scale-with-model-size-llama2-base-disabled">Visualization:</button>
                             <button type="button" class="btn btn-outline-secondary btn-sm active"
@@ -251,6 +252,8 @@
                             <button type="button" class="btn btn-outline-secondary btn-sm"
                                 id="inc-offline">Include Offline Results</button>
                         </div>
+                    </div>
+                    <div class="text-justified">
                         <div class="chart-container" id="chart-k2" style="display:block;margin:0 auto;">
                             <canvas id="chart-sr-vs-k2"></canvas>
                         </div>
@@ -273,10 +276,12 @@
                             <br>
                         </div>
                         <h3>Learning Curves</h3>
-                        <div class="text-justify" id="tool-augmented">
+                        <div class="text-justified" id="tool-augmented">
                             In addition to the convergence performance reported in the paper, we also present the sample complexity comparison of DigiRL against the state-of-the-art alternative Filtered Behavior Cloning (or rejection sampling). We find that DigiRL not only converges to a superior performance, but also learns more efficiently.
+                        </div>
+                        <div class="text-center">
                             <br>
-                            <div class="btn-group main-curve" role="group">
+                            <div class="btn-group btn-group-toggle text-center task-selector" data-toggle="buttons">
                                 <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button" disabled
                                     id="visualize-sr-vs-k-scale-with-model-size-llama2-base-disabled">Subset:</button>
                                 <button type="button" class="btn btn-outline-secondary btn-sm active"
