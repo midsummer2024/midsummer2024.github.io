@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 series.tension = 0.4; // Smooth curves
             });
         
-            const fixedTotalDuration = 60000; // Total duration of the animation (in milliseconds)
+            const fixedTotalDuration = 20000; // Total duration of the animation (in milliseconds)
             const totalDataPoints = sr_vs_k_series_subset.reduce((acc, series) => acc + series.data.length, 0);
             const delayBetweenPoints = fixedTotalDuration / totalDataPoints;
             const durationPerPoint = fixedTotalDuration / totalDataPoints;

@@ -37,6 +37,7 @@
     <script src="website/javascript/success_rate_vs_k_vis2.js" type="module"></script>
     <script src="website/javascript/feedback_success_rate_vis.js" type="module"></script>
     <script src="website/javascript/feedback_provider_efficacy.js" type="module"></script>
+    <script src="website/javascript/demos.js" type="module"></script>
 
     <link rel="stylesheet" href="website/css/index.css">
 
@@ -48,7 +49,10 @@
         gtag('js', new Date());
 
         gtag('config', 'G-C7GJ4FYMY9');
+
     </script>
+
+    
 
     <noscript>
         <p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101339888ns.gif" /></p>
@@ -96,6 +100,9 @@
                             <span class="author-block"><sup>2</sup> UIUC,</span>
                             <span class="author-block"><sup>3</sup> Google DeepMind</span>
                         </div>
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block"><small>*Equal contribution, alphabetic order; work done at UC Berkeley</small></span>
 
                         <div class="column has-text-centered">
                             <div class="publication-links">
@@ -166,24 +173,83 @@
         <div class="container is-max-desktop">
             <div class="is-centered has-text-centered">
                 <div class="custom-column-large">
-                    <h4><b>AitW General</b><br>
-                        Search for some good Italian restaurants</h4>
-                    <video controls autoplay muted loop>
-                        <source src="website/videos/general.mp4" type="video/mp4">
-                    </video> <!-- Ensure the video tag is properly closed -->
-                </div>
-            </div>
-            <div class="is-centered has-text-centered">
-                <div class="custom-column-large">
-                    <h4><b>AitW Web Shopping</b>
-                        <br>Go to newegg.com, and search for "Alienware Aurora"
-                    </h4>
-                    <video controls autoplay muted loop>
-                        <source src="website/videos/general.mp4" type="video/mp4">
-                    </video> <!-- Ensure the video tag is properly closed -->
+                    <div class="custom-column-large">
+                        <h4><b>AitW General</b><br>
+                            Search for some good Italian restaurants</h4>
+                        <div class="text-center">
+                            <div class="btn-group btn-group-toggle text-center task-selector" data-toggle="buttons">
+                                <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button" disabled>Visualization:</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm active" id="all-methods">All Methods</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm" id="each-method">Each Method (pause at wish)</button>
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                        <!-- All video -->
+                        <div id="all-video-container">
+                            <video controls autoplay muted loop>
+                                <source src="website/videos/general.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    
+                        <!-- Each video -->
+                        <div id="each-video-container" style="display:none;">
+                            <video controls autoplay muted loop>
+                                <source src="website/videos/general/slice1.mp4" type="video/mp4">
+                            </video>
+                            <video controls autoplay muted loop>
+                                <source src="website/videos/general/slice2.mp4" type="video/mp4">
+                            </video>
+                            <video controls autoplay muted loop>
+                                <source src="website/videos/general/slice3.mp4" type="video/mp4">
+                            </video>
+                            <video controls autoplay muted loop>
+                                <source src="website/videos/general/slice4.mp4" type="video/mp4">
+                            </video>
+                    </div>
                 </div>
             </div>
         </div>
+        <br>
+        <div class="container is-max-desktop">
+            <div class="is-centered has-text-centered">
+                <div class="custom-column-large">
+                    <div class="custom-column-large">
+                        <h4><b>AitW Web Shopping</b><br>
+                            Go to newegg.com, and search for "Alienware Aurora"</h4>
+                        <div class="text-center">
+                            <div class="btn-group btn-group-toggle text-center task-selector" data-toggle="buttons">
+                                <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button" disabled>Visualization:</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm active" id="webshop-all-methods">All Methods</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm" id="webshop-each-method">Each Method (pause at wish)</button>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- All video -->
+                    <div id="all-webshop-container">
+                        <video controls autoplay muted loop>
+                            <source src="website/videos/webshop.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    
+                    <!-- Each video -->
+                    <div id="each-webshop-container" style="display:none;">
+                        <video controls autoplay muted loop>
+                            <source src="website/videos/webshop/slice1.mp4" type="video/mp4">
+                        </video>
+                        <video controls autoplay muted loop>
+                            <source src="website/videos/webshop/slice2.mp4" type="video/mp4">
+                        </video>
+                        <video controls autoplay muted loop>
+                            <source src="website/videos/webshop/slice3.mp4" type="video/mp4">
+                        </video>
+                        <video controls autoplay muted loop>
+                            <source src="website/videos/webshop/slice4.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

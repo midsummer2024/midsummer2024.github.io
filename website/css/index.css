@@ -20,7 +20,7 @@ body {
 }
 
 .custom-column {
-  width: 25%; /* Fit to the width of its parent or adjust as necessary */
+  width: 40%; /* Fit to the width of its parent or adjust as necessary */
   padding: 0;
   margin: 0 auto; /* Center the column */
 }
@@ -44,8 +44,61 @@ ul.custom-bullets li::before {
   content: "•";  /* Custom bullet symbol */
   color: black;   /* You can change the color */
   font-size: 20px; /* Adjust size as needed */
-  padding-right: 5px; /* Space between the bullet and the text */
+  padding-right: 5px; 
 }
+
+.custom-column-large video {
+  border: 1px solid black;
+}
+
+#all-video-container {
+  display: flex;
+  justify-content: center; /* Centers the video horizontally */
+  align-items: center; /* Aligns the video vertically in the center */
+  width: 100%; /* Container takes the full width of its parent */
+}
+
+#all-video-container video {
+  width: 100%; /* Increase this value to make the video larger */
+  margin: 0 auto; /* Centers the video horizontally within the container */
+}
+
+#each-video-container {
+  display: flex;
+  justify-content: space-around; /* Distributes space around each video evenly */
+  align-items: center; /* Aligns the videos vertically within the container */
+  width: 100%; /* Ensures the container takes full width of its parent */
+}
+
+#each-video-container video {
+  width: 23%; /* Matches the individual video sizes in the multi-video layout */
+  margin: 0 1%; /* Adds a small margin between videos */
+}
+
+#all-webshop-container {
+  display: flex;
+  justify-content: center; /* Centers the video horizontally */
+  align-items: center; /* Aligns the video vertically in the center */
+  width: 100%; /* Container takes the full width of its parent */
+}
+
+#all-webshop-container video {
+  width: 100%; /* Increase this value to make the video larger */
+  margin: 0 auto; /* Centers the video horizontally within the container */
+}
+
+#each-webshop-container {
+  display: flex;
+  justify-content: space-around; /* Distributes space around each video evenly */
+  align-items: center; /* Aligns the videos vertically within the container */
+  width: 100%; /* Ensures the container takes full width of its parent */
+}
+
+#each-webshop-container video {
+  width: 23%; /* Matches the individual video sizes in the multi-video layout */
+  margin: 0 1%; /* Adds a small margin between videos */
+}
+
 
 
 .custom-column-large {
