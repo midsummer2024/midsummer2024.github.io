@@ -64,8 +64,8 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
 
     const taskButtons = [
-        'fast',
-        'slow'
+        'fast-button',
+        'slow-button'
     ];
 
     taskButtons.forEach(buttonId => {
@@ -81,12 +81,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    document.getElementById('fast').addEventListener('click', function() {
+    document.getElementById('fast-button').addEventListener('click', function() {
         document.getElementById('fast-container').style.display = 'block';
         document.getElementById('slow-container').style.display = 'none';
     });
 
-    document.getElementById('slow').addEventListener('click', function() {
+    document.getElementById('slow-button').addEventListener('click', function() {
         document.getElementById('fast-container').style.display = 'none';
         document.getElementById('slow-container').style.display = 'block';
     });
