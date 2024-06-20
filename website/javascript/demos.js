@@ -60,3 +60,34 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('each-webshop-container').style.display = 'flex'; // Use flex to display videos side by side
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const taskButtons = [
+        'fast',
+        'slow'
+    ];
+
+    taskButtons.forEach(buttonId => {
+        const btn = document.getElementById(buttonId);
+
+        btn.addEventListener('click', () => {
+            taskButtons.forEach(id => {
+                const otherBtn = document.getElementById(id);
+                otherBtn.classList.remove('active');
+            });
+
+            btn.classList.add('active');
+        });
+    });
+
+    document.getElementById('fast').addEventListener('click', function() {
+        document.getElementById('fast-container').style.display = 'block';
+        document.getElementById('slow-container').style.display = 'none';
+    });
+
+    document.getElementById('slow').addEventListener('click', function() {
+        document.getElementById('fast-container').style.display = 'none';
+        document.getElementById('slow-container').style.display = 'block';
+    });
+});
