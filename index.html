@@ -229,28 +229,23 @@
         <div class="container is-max-desktop">
             <div class="hero-body">
 
-                <h2 class="subtitle">
-                    <b>DigiRL</b> solves open-ended realistic Android tasks with an novel online reinforcement learning algorithm with autonomous VLM evaluator.
-                </h2>
+                <h3> Performance </h3>
+                Detection of GPT-3.5 and GPT-4o polished text. Typically, the Neo-2.7B (Black et al. 2021) is used as the source for the scoring model. NPR and DetectGPT, on the other hand, utilize T5-3B (Chen et al. 2019) for generating perturbations, whereas Fast-DetectGPT employs GPT-J (Wang and Komatsuzaki 2021) as a surrogate model to generate samples. The ? symbol denotes methods that require multiple model invocations, leading to a substantial increase in computational load. Metric: AUROC.
 
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="benchmark-table-content" role="tabpanel"
                         aria-labelledby="benchmark-table-content">
-
                         <div id="benchmark-table"></div>
                     </div>
+					
                     <div class="tab-pane fade" id="eurus-code-table-content" role="tabpanel"
                         aria-labelledby="eurus-code-table-content">
-
-                        <p class="mt-2 px-2">
-                            This code subset follows the <a href="https://arxiv.org/abs/2404.02078">Eurus
-                                paper</a> and contains MBPP and HumanEval.
-                        </p>
                     </div>
                     <p class="mt-2 px-2">
-                        This table contains the success rate across all approaches measured in the DigiRL paper. It includes performance on
-                        two subsets: AitW General and AitW Web Shopping. The codename of GPT-4V we use is <i>gpt-4-vision-preview</i>
-                        and the codename of Gemini-1.5-Pro is <i>gemini-1.5-pro-latest</i>.
+                        Table 2: <b>Compared with GPTZero on detecting <i>GPT-3.5</i> polished text.</b> Metric: AUROC.
+                    </p>
+					<p class="mt-2 px-2">
+                        Table 3: <b>Performance on diverse tasks.</b> We evaluated the detection performance, measured by average AUROC, of text revised by leading LLMs (Qwen2-7B, Llama-3-8B, Mixtral-7B, Deepseek-7B, GPT-3.5, and GPT-4o) on the XSum dataset. 
                     </p>
                 </div>
             </div>
@@ -301,18 +296,6 @@
 	<!-- End Image 45 -->
     </section> 
 
-	
-    <section class="section" id="BibTeX">
-        <div class="container is-max-desktop content">
-            <h2 class="title">BibTeX</h2>
-            <pre><code>@article{bai2024digirl,
-title={DigiRL: Training In-The-Wild Device-Control Agents with Autonomous Reinforcement Learning},
-author={Bai, Hao and Zhou, Yifei and Cemri, Mert and Pan, Jiayi and Suhr, Alane and Levine, Sergey and Kumar, Aviral},
-journal={arXiv preprint arXiv:2406.11896},
-year={2024}
-}</code></pre>
-        </div>
-    </section>
 
     <footer class="footer">
         <div align="center" class="container">
