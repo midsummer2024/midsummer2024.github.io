@@ -110,14 +110,12 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(([
             benchmark_tabledata,
             benchmark_feedback_efficancy_tabledata,
-            eurus_code_sr_vs_k_series,
-            eurus_math_sr_vs_k_series        ]) => {
+            eurus_code_sr_vs_k_series        ]) => {
 
-            // 1. Benchmark Table
+            // Table 1 Benchmark
             benchmark_tabledata.forEach(row => {
                 row.line = [row['1'], row['2'], row['3'], row['4'], row['5']]
             })
-
             var table = new Tabulator("#benchmark-table", {
                 data: benchmark_tabledata,
                 layout: "fitColumns",
@@ -153,73 +151,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 ],
             });
+			// End Table 1 Benchmark
 
-
-            var eurus_code_table = new Tabulator("#eurus-code-table", {
-                data: eurus_code_sr_vs_k_series,
-                layout: "fitColumns",
-                responsiveLayout: "collapse",
-                movableColumns: false,
-                initialSort: [
-                    { column: "5", dir: "desc" },
-                ],
-                columnDefaults: {
-                    tooltip: true,
-                },
-                columns: [
-                    { title: "Model Family", field: "model", widthGrow: 2, minWidth: 180},
-                    { title: "Size", field: "size", widthGrow: 0.9, minWidth: 60},
-                    { title: "Type", field: "type", widthGrow: 0.9, minWidth: 60},
-                    {//create column group
-                        title: "Tool-augmented Task-Solving Success Rate (within k turns, code subset)",
-                        columns: [
-                            { title: "k = 1", field: "1", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
-                            { title: "k = 2", field: "2", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
-                            { title: "k = 3", field: "3", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
-                            { title: "k = 4", field: "4", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
-                            { title: "k = 5", field: "5", sorter: "number", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
-                            { title: "Slope", field: "Slope", sorter: "number", minWidth: 90},
-                        ],
-                    },
-                ],
-            });
-
-            var eurus_math_table = new Tabulator("#eurus-math-table", {
-                data: eurus_math_sr_vs_k_series,
-                layout: "fitColumns",
-                responsiveLayout: "collapse",
-                movableColumns: false,
-                initialSort: [
-                    { column: "5", dir: "desc" },
-                ],
-                columnDefaults: {
-                    tooltip: true,
-                },
-                columns: [
-                    { title: "Model Family", field: "model", widthGrow: 2, minWidth: 180},
-                    { title: "Size", field: "size", widthGrow: 0.9, minWidth: 60},
-                    { title: "Type", field: "type", widthGrow: 0.9, minWidth: 60},
-                    {//create column group
-                        title: "Tool-augmented Task-Solving Success Rate (within k turns, math subset)",
-                        columns: [
-                            { title: "k = 1", field: "1", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
-                            { title: "k = 2", field: "2", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
-                            { title: "k = 3", field: "3", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
-                            { title: "k = 4", field: "4", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
-                            { title: "k = 5", field: "5", sorter: "number", hozAlign: "center", formatter: colorFormatter, minWidth: 90},
-                            { title: "Slope", field: "Slope", sorter: "number", minWidth: 90},
-                        ],
-                    },
-                ],
-            });
-
-            // 2. Benchmark Feedback Efficancy Table
+            // Table 2 Benchmark Feedback Efficancy
             benchmark_feedback_efficancy_tabledata.forEach(row => {
-                row.model = row.feedback_provider_info.model;
-                row.size = row.feedback_provider_info.size;
-                row.type = row.feedback_provider_info.type;
+                row.method = row.feedback_provider_info.method;
+                row.xsum = row.feedback_provider_info.xsum;
+                row.writing = row.feedback_provider_info.writing;
+				row.pubmed = row.feedback_provider_info.pubmed;
+				row.avg = row.feedback_provider_info.avg;
             })
-
             var feedback_efficacy_table = new Tabulator("#benchmark-feedback-efficancy-table", {
                 data: benchmark_feedback_efficancy_tabledata,
                 layout: "fitColumns",
@@ -246,42 +187,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 columns: [
                     {
-                        title: "Feedback Provider",
+                        title: "",
                         columns: [
-                            { title: "Model Family", field: "model", widthGrow: 1, minWidth: 180},
-                            { title: "Size", field: "size", minWidth: 90},
-                            { title: "Type", field: "type", minWidth: 90},
+                            { title: "Method", field: "method", widthGrow: 1, minWidth: 180},
+                            { title: "XSum", field: "xsum", minWidth: 90},
+                            { title: "Writing", field: "writing", minWidth: 90},
+							{ title: "PubMed", field: "pubmed", minWidth: 90},
+							{ title: "Avg.", field: "avg", minWidth: 90},
                         ]
-                    },
-                    {
-                        title: "&Delta; Task Success Rate compared to GPT-3.5",
-                        field: "SR5_difference",
-                        formatter: "progress",
-                        sorter: "number",
-                        minWidth: 400,
-                        widthGrow: 3,
-                        formatterParams: {
-                            min: -50, max: 50,
-                            legend: true,
-                            color: barColorFn,
-                        },
-                    },
-                    {
-                        title: "&Delta; GPT-3.5 Success Rate with Provided Feedback",
-                        field: "evaluated_LLM_feedback",
-                        sorter: "number",
-                        formatter: "progress",
-                        minWidth: 400,
-                        widthGrow: 3,
-                        formatterParams: {
-                            min: -30, max: 30,
-                            legend: true,
-                            color: barColorFn
-                        },
                     },
                 ]
             });
+			// End Table 2 Benchmark Feedback Efficancy
         });
 
 })
-
