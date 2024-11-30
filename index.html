@@ -162,40 +162,6 @@
             </div>
         </div>
     </section>
-	<!-- Remy
-    <section class="section" id="propaganda">
-        <div class="container is-max-desktop">
-            <div class="is-centered has-text-centered">
-                <div class="custom-column-large">
-                    <div class="is-centered custom-column-large">
-                        <h2 class="title is-3">Demo</h2>
-                        <div class="text-center">
-                            <div class="btn-group btn-group-toggle text-center task-selector" data-toggle="buttons">
-                                <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button" disabled>Speed:</button>
-                                <button type="button" class="btn btn-outline-secondary btn-sm active" id="fast-button">Fast</button>
-                                <button type="button" class="btn btn-outline-secondary btn-sm" id="slow-button">Slow</button>
-                            </div>
-                        </div>
-                    </div>
-                        <br>
-                        
-                    <div id="fast-container">
-                        <video controls autoplay muted loop>
-                            <source src="website/videos/demo2_5x.mp4" type="video/mp4">
-                        </video>
-                    </div>
-
-                    <div id="slow-container" style="display:none;">
-                        <video controls autoplay muted loop>
-                            <source src="website/videos/demo2.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <small>Success rate and corresponding trajectories. A <font color="#007800">green</font> final screen indicates a successful trajectory; a <font color="#ff1900">red</font> final screen indicates a failed trajectory.</s>
-                </div>
-            </div>
-        </div>
-    </section>
-	-->
 
     <section class="section" id="abstract">
 	<!-- Abstract -->
@@ -217,7 +183,7 @@
 	
 
     <section class="section" id="interaction-framework">
-	<!-- Image -->
+	<!-- Images -->
         <div class="container is-max-desktop">
 
             <div class="columns is-full-width">
@@ -225,13 +191,7 @@
                 <!-- Visual Effects. -->
                 <div class="column">
                     <div class="text-justified">
-                        <h2 class="title is-3">DigiRL: Autonomous RL for Building a Strong Device-Control Agent</h2>
-
-                        <h3> Why RL over the alternatives? </h3>
-                        <ul class="custom-bullets">
-                            <li>LLM Agent data such as device-control actions is poorly represented in the pre-training corpus of <b>Off-the-shelf proprietary VLMs</b> such as GPT4V and Gemini-1.5-Pro.</li>
-                            <li><b>Supervised Fine-Tuning</b> 1) requires a large amount of human demonstration data and 2) cannot recover from degrading model performance when real websites/applications have changed. As shown in the plot below, a frozen good policy trained with prior data experiences a gradual drop in performance as the websites change over time, while the DigiRL policy constantly updates with fresh autonomous data can maintain a stable performance.</li>
-                        </ul>
+                        <h2 class="title is-3">Why we need Imitate?</h2>
                     </div>
 
                     <div class="text-justified">
@@ -239,38 +199,27 @@
                             <canvas id="chart-sr-vs-k2"></canvas>
                         </div>
                         <h3> What are we using RL for?</h3>
-                        DigiRL consists of two steps:
-                        <ul class="custom-bullets">
-                            <li>First, we use <b>Offline RL</b> to make the most out of a potentially sub-optimal existing offline dataset.</li>
-                            <li>Then, we use <b>Offline-to-Online RL</b> to encourage the agent to learn from its own trials and errors.</li>
-                        </ul>
-                        DigiRL identifies the most simple yet effective RL design choices for device-control agent problems. Our RL algorithmic framework automatically achieves the following advantages compared to state-of-the-art alternatives such as rejection sampling (or Filtered Behavior Cloning):
-                        <ul class="custom-bullets">
-                            <li>We makes use of an <b>instruction-level value function</b> to implicitly construct an automatic curriculum that prioritizes on the tasks most informative to the agent.</li>
-                            <li>We makes use of a <b>step-level value function</b> to pick out the advantageous actions (actions that mark progress towards the goal) in a trajectory while leaving the noisy actions (actions that do not contribute to the goal).</li>
-                        </ul>
-                        Please check out our paper for more details of our algorithm!
-
+                        (a-c) Comparative examples of human-written, machine-generated, and machine-revised text. (d) Fast-DetectGPT shows a significant drop in detection accuracy when identifying machine-revised text compared to machinegenerated text. (e) Our method brings a noticeable improvement in detecting machine-revised text compared to Fast-DetectGPT. “Fast-Det.” denotes “Fast-DetectGPT”.
                         <div style="text-align:center;">
                             <img src="website/images/algo.png" alt="illustrative-example"
                                 style="margin: 0 auto; display: block; max-width: 1000px; width: 100%; height: auto;" />
                             <br>
                         </div>
-                        <h3>Learning Curves</h3>
-                        <div class="text-justified" id="tool-augmented">
-                            In addition to the convergence performance reported in the paper, we also present the sample complexity comparison of DigiRL against the state-of-the-art alternative Filtered Behavior Cloning (or rejection sampling). We find that DigiRL not only converges to a superior performance, but also learns more efficiently.
-                        </div>
-                        <div class="text-center">
+                        
+						Imitating the stylistic preferences of LLMs. (a) Token distribution before and after machine-style imitation, demonstrating a deliberate fine-tuning of the scoring model to bias its token distribution towards a machine writing style (e.g., shifting preferences from common words like “explore” to machine-favored tokens such as “delve”). (b) The pipeline of Style Preference Optimization is applied to align the base scoring model with the style of machine-revised content using paired human-machine texts. This results in a machine-style scoring model, which generates token distributions p(x_n|x_(0:n?1)) for each position n, subsequently used for style-conditional probability curvature calculations.
+						<div style="text-align:center;">
+                            <img src="website/images/algo.png" alt="illustrative-example"
+                                style="margin: 0 auto; display: block; max-width: 1000px; width: 100%; height: auto;" />
                             <br>
-                            <div class="btn-group btn-group-toggle text-center task-selector" data-toggle="buttons">
-                                <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button" disabled
-                                    id="visualize-sr-vs-k-scale-with-model-size-llama2-base-disabled">Subset:</button>
-                                <button type="button" class="btn btn-outline-secondary btn-sm active"
-                                    id="visualize-sr-vs-k-scale-with-model-size-llama2-base">AitW General (click to visualize)</button>
-                                <button type="button" class="btn btn-outline-secondary btn-sm"
-                                    id="visualize-sr-vs-k-scale-with-model-size-llama2-rlhf">AitW Web Shopping</button>
-                            </div>
                         </div>
+						
+						Impact of Style-conditional probability curvatures (Style-CPC). (Left) Conditional probability curvatures (CPC) from Fast-DetectGPT (denoted as “Fast-Det.”) applied to purely machine-generated text; (Middle) Conditional probability curvatures applied to purely machine-revised text; (Right) Style-conditional probability curvatures from ours applied to machine-revised text. The greater the separation between human-written texts (red) and machine-revised texts (blue), the more effective the detection.
+						<div style="text-align:center;">
+                            <img src="website/images/algo.png" alt="illustrative-example"
+                                style="margin: 0 auto; display: block; max-width: 1000px; width: 100%; height: auto;" />
+                            <br>
+                        </div>
+						
                         <div class="chart-container" id="chart-k" style="display:block;margin:0 auto;">
                             <canvas id="chart-sr-vs-k"></canvas>
                         </div>
@@ -280,7 +229,7 @@
                 <!--/ Visual Effects. -->
 
             </div>
-	<!-- End Image -->
+	<!-- End Images -->
     </section>
 
 	<section class="hero teaser">
