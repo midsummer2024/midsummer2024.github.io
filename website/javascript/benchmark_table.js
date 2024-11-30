@@ -110,7 +110,8 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(([
             benchmark_tabledata,
             benchmark_feedback_efficancy_tabledata,
-            eurus_code_sr_vs_k_series        ]) => {
+            eurus_code_sr_vs_k_series,
+            eurus_math_sr_vs_k_series			]) => {
 
             // Table 1 Benchmark
             benchmark_tabledata.forEach(row => {
@@ -199,6 +200,55 @@ document.addEventListener('DOMContentLoaded', function () {
                 ]
             });
 			// End Table 2 Benchmark Feedback Efficancy
+			
+			// Table 3 eurus_code_sr_vs_k_series
+            eurus_code_sr_vs_k_series.forEach(row => {
+                row.method = row.feedback_provider_info.method;
+                row.rewrite = row.feedback_provider_info.rewrite;
+                row.expand = row.feedback_provider_info.expand;
+				row.polish = row.feedback_provider_info.polish;
+				row.generate = row.feedback_provider_info.generate;
+				row.avg = row.feedback_provider_info.avg;
+            })
+            var eurus_code_table = new Tabulator("#eurus-code-table", {
+                data: eurus_code_sr_vs_k_series,
+                layout: "fitColumns",
+                // responsiveLayout: "collapse",
+                responsiveLayoutCollapseFormatter:function(data){
+                    //data - an array of objects containing the column title and value for each cell
+                    var list = document.createElement("ul");
+            
+                    data.forEach(function(col){
+                        console.log(col);
+                        let item = document.createElement("li");
+                        item.innerHTML = "<strong>" + col.title + "</strong> - " + col.value;
+                        list.appendChild(item);
+                    });
+            
+                    return Object.keys(data).length ? list : "";
+                },
+                movableColumns: false,
+                initialSort: [
+                    { column: "evaluated_LLM_feedback", dir: "desc" },
+                ],
+                columnDefaults: {
+                    tooltip: true,
+                },
+                columns: [
+                    { title: "Method", field: "method", widthGrow: 2, minWidth: 180},
+					{//create column group
+                        title: "Tasks",
+                        columns: [
+                            { title: "Rewrite", field: "rewrite", minWidth: 90},
+							{ title: "Expand", field: "expand", minWidth: 90},
+							{ title: "Polish", field: "polish", minWidth: 90},
+							{ title: "Generate", field: "generate", minWidth: 90},
+                        ],
+                    },
+					{ title: "Avg.", field: "avg", widthGrow: 2, minWidth: 180},
+                ]
+            });
+			// End Table 3 eurus_code_sr_vs_k_series
+			
         });
-
 })
