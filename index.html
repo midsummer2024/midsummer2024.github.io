@@ -67,34 +67,56 @@
                 <div class="columns is-centered">
                     <div class="column has-text-centered">
                         <h1 class="title publication-title">
-                            <img src="website/images/icon/icon.png" alt="logo" width="40" height="40" />
-                            DigiRL: Training In-The-Wild Device-Control Agents with Autonomous Reinforcement Learning
+                            Imitate Before Detect: Aligning Machine Stylistic Preference for Machine-Revised Text Detection
                         </h1>
                         <div class="is-size-5 publication-authors">
                             <span class="author-block">
-                                <a href="https://www.jackgethome.com/">Hao Bai</a><sup>1,2*</sup>,
+                                <a href="">Jiaqi Chen</a>,
                             </span>
                             <span class="author-block">
-                                <a href="https://yifeizhou02.github.io">Yifei Zhou</a><sup>1*</sup>,
+                                <a href="">Xiaoye Zhu</a>,
                             </span>
                             <span class="author-block">
-                                <a href="https://scholar.google.com/citations?user=sMEFwf8AAAAJ&hl=en">Mert Cemri</a><sup>1</sup>,
+                                <a href="">Tianyang Liu</a>,
                             </span>
                             <span class="author-block">
-                                <a href="https://www.jiayipan.me/">Jiayi Pan</a><sup>1</sup>,
+                                <a href="">Ying Chen</a>,
+                            </span>
+							<span class="author-block">
+                                <a href="">Xinhui Chen</a>,
                             </span>
                             <br>
                             <span class="author-block">
-                                <a href="https://www.alanesuhr.com/">Alane Suhr</a><sup>1</sup>,
+                                <a href="">Yiwen Yuan</a>,
                             </span>
                             <span class="author-block">
-                                <a href="https://people.eecs.berkeley.edu/~svlevine/">Sergey Levine</a><sup>1</sup>,
+                                <a href="">Chak Tou Leong</a>,
                             </span>
                             <span class="author-block">
-                                <a href="https://aviralkumar2907.github.io/">Aviral Kumar</a><sup>3</sup>
+                                <a href="">Zuchao Li</a>,
+                            </span>
+                            <span class="author-block">
+                                <a href="">Tang Long</a>,
+                            </span>
+							<span class="author-block">
+                                <a href="">Lei Zhang</a>,
+                            </span>
+                            <br>
+							<span class="author-block">
+                                <a href="">Chenyu Yan</a>,
+                            </span>
+                            <span class="author-block">
+                                <a href="">Guanghao Mei</a>,
+                            </span>
+                            <span class="author-block">
+                                <a href="">Jie Zhang</a>,
+                            </span>
+							<span class="author-block">
+                                <a href="">Lefei Zhang</a>
                             </span>
                         </div>
 
+						<!-- Remy
                         <div class="is-size-5 publication-authors">
                             <span class="author-block"><sup>1</sup> UC Berkeley,</span>
                             <span class="author-block"><sup>2</sup> UIUC,</span>
@@ -103,7 +125,8 @@
 
                         <div class="is-size-5 publication-authors">
                             <span class="author-block"><small>*Equal contribution, alphabetic order; work done at UC Berkeley</small></span>
-
+						-->
+							
                         <div class="column has-text-centered">
                             <div class="publication-links">
                                 <!-- PDF Link. -->
@@ -139,7 +162,7 @@
             </div>
         </div>
     </section>
-
+	<!-- Remy
     <section class="section" id="propaganda">
         <div class="container is-max-desktop">
             <div class="is-centered has-text-centered">
@@ -155,7 +178,7 @@
                         </div>
                     </div>
                         <br>
-                        <!-- All video -->
+                        
                     <div id="fast-container">
                         <video controls autoplay muted loop>
                             <source src="website/videos/demo2_5x.mp4" type="video/mp4">
@@ -172,64 +195,24 @@
             </div>
         </div>
     </section>
+	-->
 
     <section class="section" id="abstract">
+		<!-- Abstract -->
         <div class="container is-max-desktop">
-            <!-- Abstract. -->
             <div class="columns is-centered has-text-centered">
                 <div class="column is-four-fifths">
                     <h2 class="title is-3">Abstract</h2>
                     <div class="content has-text-justified">
                         <p>
-                            Training corpuses for vision language models typically lack sufficient amounts of decision-centric data. This renders off-the-shelf VLMs sub-optimal for decision-making tasks such as in-the-wild device control through graphical user interfaces (GUIs). While training with static demonstrations has shown some promise, we show that such methods fall short when controlling <b>real</b> GUIs due to their failure to deal with real world <b>stochasticity</b> not captured in static observational data.  
-                            This paper introduces a novel autonomous RL approach, called <b>DigiRL</b>, for training in-the-wild device control agents through fine-tuning a pre-trained VLM in two stages: offline RL to initialize the model, followed by offline-to-online RL. To do this, we build a <b>scalable</b> and <b>parallelizable</b> Android learning environment equipped with a VLM-based evaluator and develop a simple yet effective RL approach for learning in this domain. Our approach runs advantage-weighted RL with advantage estimators enhanced to account for stochasticity along with an automatic curriculum for deriving maximal learning signal. 
-                            We demonstrate the effectiveness of <b>DigiRL</b> using the Android-in-the-Wild (AitW) dataset, where our 1.5B VLM trained with RL achieves a <b>49.5% absolute improvement</b> -- from 17.7% to 67.2% success rate -- over supervised fine-tuning with static human demonstration data. These results significantly surpass not only the prior best agents, including AppAgent with GPT-4V (8.3% success rate) and the 17B CogAgent trained with AitW data (14.4%), but also the prior best autonomous RL approach based on filtered behavior cloning (57.8%), thereby <b>establishing a new state-of-the-art</b> for digital agents for in-the-wild device control.    
+                            Large Language Models (LLMs) have revolutionized text generation, making detecting machine-generated text increasingly challenging. Although past methods have achieved good performance on detecting pure machine-generated text, those detectors have poor performance on distinguishing <b><i>machine-revised text</i></b> (rewriting, expansion, and polishing), which can have only minor changes from its original human prompt. As the content of text may originate from human prompts, detecting machine-revised text often involves identifying distinctive machine styles, e.g., worded favored by LLMs. However, existing methods struggle to detect machine-style phrasing hidden within the content contributed by humans. We propose the <b><i>“Imitate Before Detect” (ImBD)</i></b> approach, which first imitates the machine-style token distribution, and then compares the distribution of the text to be tested with the machine-style distribution to determine whether the text has been machinerevised. To this end, we introduce style preference optimization (SPO), which aligns a scoring LLM model to the preference of text styles generated by machines. The aligned scoring model is then used to calculate the style-conditional probability curvature (Style-CPC), quantifying the log probability difference between the original and conditionally sampled texts for effective detection. We conduct extensive comparisons across various scenarios, encompassing text revisions by six LLMs, four distinct text domains, and three machine revision types. Compared to existing state-of-the-art methods, our method yields a 13% increase in AUC for detecting text revised by open-source LLMs, and improves performance by 5% and 19% for detecting GPT-3.5 and GPT-4o revised text, respectively. Notably, our method surpasses the commercially trained GPT-Zero with just 1,000 samples and five minutes of SPO, demonstrating its efficiency and effectiveness. Code, data, and models are available.    
                         </p>
                     </div>
                 </div>
-            </div>
-            <!--/ Abstract. -->
+            </div>			
         </div>
-        <div class="container is-max-desktop">
-            <div class="is-centered has-text-centered">
-                <div class="custom-column-large">
-                    <div class="is-centered custom-column-large">
-                        <h4><b>AitW General</b><br>
-                            Search for some good Italian restaurants</h4>
-                        <div class="text-center">
-                            <div class="btn-group btn-group-toggle text-center task-selector" data-toggle="buttons">
-                                <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button" disabled>Visualization:</button>
-                                <button type="button" class="btn btn-outline-secondary btn-sm active" id="all-methods">All Methods</button>
-                                <button type="button" class="btn btn-outline-secondary btn-sm" id="each-method">Each Method (pause at wish)</button>
-                            </div>
-                        </div>
-                    </div>
-                        <br>
-                        <!-- All video -->
-                        <div id="all-video-container">
-                            <video controls autoplay muted loop>
-                                <source src="website/videos/general.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                    
-                        <!-- Each video -->
-                        <div id="each-video-container" style="display:none;">
-                            <video controls autoplay muted loop>
-                                <source src="website/videos/general/slice1.mp4" type="video/mp4">
-                            </video>
-                            <video controls autoplay muted loop>
-                                <source src="website/videos/general/slice2.mp4" type="video/mp4">
-                            </video>
-                            <video controls autoplay muted loop>
-                                <source src="website/videos/general/slice3.mp4" type="video/mp4">
-                            </video>
-                            <video controls autoplay muted loop>
-                                <source src="website/videos/general/slice4.mp4" type="video/mp4">
-                            </video>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<!-- /Abstract. -->
+		
         <br>
         <div class="container is-max-desktop">
             <div class="is-centered has-text-centered">
@@ -274,6 +257,7 @@
     </section>
 
     <section class="hero teaser">
+		<!-- Data Table -->
         <div class="container is-max-desktop">
             <div class="hero-body">
 
@@ -321,17 +305,7 @@
                             <li><b>Supervised Fine-Tuning</b> 1) requires a large amount of human demonstration data and 2) cannot recover from degrading model performance when real websites/applications have changed. As shown in the plot below, a frozen good policy trained with prior data experiences a gradual drop in performance as the websites change over time, while the DigiRL policy constantly updates with fresh autonomous data can maintain a stable performance.</li>
                         </ul>
                     </div>
-                    <div class="text-center">
-                        <!-- button for visualizing offline or not -->
-                        <div class="btn-group btn-group-toggle text-center task-selector" data-toggle="buttons">
-                            <button type="button" class="btn btn-outline-secondary btn-sm inline-vis-button" disabled
-                                id="visualize-sr-vs-k-scale-with-model-size-llama2-base-disabled">Visualization:</button>
-                            <button type="button" class="btn btn-outline-secondary btn-sm active"
-                                id="exc-offline">Exclude Offline Results (click to visualize)</button>
-                            <button type="button" class="btn btn-outline-secondary btn-sm"
-                                id="inc-offline">Include Offline Results</button>
-                        </div>
-                    </div>
+
                     <div class="text-justified">
                         <div class="chart-container" id="chart-k2" style="display:block;margin:0 auto;">
                             <canvas id="chart-sr-vs-k2"></canvas>
