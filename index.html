@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Imitate3 Before Detect:</title>
+    <title>Imitate Before Detect:</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -180,7 +180,192 @@
     </section>
 	
 
-	
+	<section class="section">
+      <div class="container">
+
+          <div class="columns is-centered">
+              <div class="columns is-centered has-text-centered">
+              <div class="column is-four-fifths">
+                  <h2 class="title is-3" id="leaderboard"></h2>
+                    <div class="content has-text-justified">
+                      <table>
+
+                        <thead>
+                          <tr></tr>
+                          <tr>
+                            <th rowspan="2" style="vertical-align: middle;">Method</th>
+                            <th colspan="1" style="text-align: center; font-weight: bold;">Time cost</th>
+							<th colspan="3" style="text-align: center; font-weight: bold;">GPT-3.5</th>
+                            <th rowspan="2" style="vertical-align: middle;">Avg.</th>
+							<th colspan="3" style="text-align: center; font-weight: bold;">GPT-4o</th>
+                            <th rowspan="2" style="vertical-align: middle;">Avg.</th>
+                          </tr>
+
+                          <tr>
+                            <th>(s/1k words)</th>
+                            <th>XSum</th>
+                            <th>Writing</th>
+                            <th>PubMed</th>
+							<th>XSum</th>
+                            <th>Writing</th>
+                            <th>PubMed</th>
+                          </tr>
+                        </thead>
+
+                        <tbody id="tabResults">
+
+                          <tr>
+                            <td>RoBERTa-base</td>
+                            <td>0.07</td>
+                            <td>0.5806</td>
+                            <td>0.7225</td>
+                            <td>0.4370</td>
+                            <td>0.5800</td>
+							<td>0.4921</td>
+                            <td>0.4774</td>
+                            <td>0.2496</td>
+                            <td>0.4064</td>
+                          </tr>
+						  
+						  <tr>
+                            <td>RoBERTa-large</td>
+                            <td>0.1100</td>
+                            <td>0.6391</td>
+                            <td>0.7236</td>
+                            <td>0.4848</td>
+                            <td>0.6158</td>
+							<td>0.4782</td>
+                            <td>0.4708</td>
+                            <td>0.3089</td>
+                            <td>0.4193</td>
+                          </tr>
+						  
+						  <tr>
+                            <td>Likehood</td>
+                            <td>0.38</td>
+                            <td>0.4982</td>
+                            <td>0.8788</td>
+                            <td>0.5528</td>
+                            <td>0.6433</td>
+							<td>0.4396</td>
+                            <td>0.8077</td>
+                            <td>0.4596</td>
+                            <td>0.5690</td>
+                          </tr>
+						  
+						  <tr>
+                            <td>Entropy</td>
+                            <td>0.3500</td>
+                            <td>0.6742</td>
+                            <td>0.3021</td>
+                            <td>0.5662</td>
+                            <td>0.5142</td>
+							<td>0.6122</td>
+                            <td>0.2802</td>
+                            <td>0.5899</td>
+                            <td>0.4941</td>
+                          </tr>
+						  
+						  <tr>
+                            <td>LogRank</td>
+                            <td>0.36</td>
+                            <td>0.4711</td>
+                            <td>0.8496</td>
+                            <td>0.5597</td>
+                            <td>0.6268</td>
+							<td>0.4002</td>
+                            <td>0.7694</td>
+                            <td>0.4472</td>
+                            <td>0.5389</td>
+                          </tr>
+						  
+						  <tr>
+                            <td>LRR</td>
+                            <td>0.4100</td>
+                            <td>0.4016</td>
+                            <td>0.7203</td>
+                            <td>0.5629</td>
+                            <td>0.5616</td>
+							<td>0.3095</td>
+                            <td>0.6214</td>
+                            <td>0.4710</td>
+                            <td>0.4673</td>
+                          </tr>
+						  
+						  <tr>
+                            <td>DNA-GPT</td>
+                            <td>35.92</td>
+                            <td>0.5338</td>
+                            <td>0.8439</td>
+                            <td>0.3333</td>
+                            <td>0.5703</td>
+							<td>0.4974</td>
+                            <td>0.7478</td>
+                            <td>0.3151</td>
+                            <td>0.5201</td>
+                          </tr>
+						  
+						  <tr>
+                            <td>NPR</td>
+                            <td>111.9900</td>
+                            <td>0.5659</td>
+                            <td>0.8786</td>
+                            <td>0.4246</td>
+                            <td>0.6230</td>
+							<td>0.5065</td>
+                            <td>0.8444</td>
+                            <td>0.3740</td>
+                            <td>0.5750</td>
+                          </tr>
+						  
+						  <tr>
+                            <td>DetectGPT</td>
+                            <td>111.33</td>
+                            <td>0.6343</td>
+                            <td>0.8793</td>
+                            <td>0.5608</td>
+                            <td>0.6915</td>
+							<td>0.6217</td>
+                            <td>0.8771</td>
+                            <td>0.5612</td>
+                            <td>0.6867</td>
+                          </tr>
+						  
+						  <tr>
+                            <td>Fast-DetectGPT</td>
+                            <td>0.7200</td>
+                            <td>0.7312</td>
+                            <td>0.9304</td>
+                            <td>0.7182</td>
+                            <td>0.7933</td>
+							<td>0.6293</td>
+                            <td>0.8324</td>
+                            <td>0.6175</td>
+                            <td>0.6931</td>
+                          </tr>
+						  
+						  <tr>
+                            <td>ImBD (Ours)</td>
+                            <td>0.72</td>
+                            <td>0.9849</td>
+                            <td>0.9871</td>
+                            <td>0.8626</td>
+                            <td>0.9449</td>
+							<td>0.9486</td>
+                            <td>0.9468</td>
+                            <td>0.7743</td>
+                            <td>0.8899</td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+              </div>
+              </div>
+          </div>
+
+      </div>
+	</section>
 
 	<section class="section">
       <div class="container">
@@ -233,9 +418,10 @@
 	
 	<section class="section">
       <div class="container">
-              <div class="columns is-centered">
+
+          <div class="columns is-centered">
               <div class="columns is-centered has-text-centered">
-              
+              <div class="column is-four-fifths">
                   <h2 class="title is-3" id="leaderboard">Performance on diverse tasks</h2>
                     <div class="content has-text-justified">
                       <table>
@@ -344,6 +530,7 @@
                     </div>
               </div>
               </div>
+          </div>
 
       </div>
 	</section>
