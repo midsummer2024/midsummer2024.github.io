@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Imitate4 Before Detect:</title>
+    <title>Imitate5 Before Detect:</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -416,35 +416,40 @@
       </div>
 	</section>
 	
-		<section class="section">
+	<section class="section">
       <div class="container">
 
           <div class="columns is-centered">
               <div class="columns is-centered has-text-centered">
               <div class="column is-four-fifths">
-                  <h2 class="title is-3" id="leaderboard">Compared with GPTZero on detecting <i>GPT-3.5</i> polished text</h2>
+                  <h2 class="title is-3" id="leaderboard">Performance on diverse tasks</h2>
                     <div class="content has-text-justified">
                       <table>
 
                         <thead>
                           <tr></tr>
+						  <tr>
+                            <th rowspan="2" style="vertical-align: middle;">Method</th>
+                            <th colspan="4" style="text-align: center; font-weight: bold;">Tasks</th>
+                            <th rowspan="2" style="vertical-align: middle;">Avg.</th>
+                          </tr>
                           <tr>
-                            <th>Method</th>
-                            <th>XSum</th>
-                            <th>Writing</th>
-                            <th>PubMed</th>
-							<th>Avg.</th>
+                            <th>Rewrite</th>
+                            <th>Expand</th>
+                            <th>Polish</th>
+                            <th>Generate</th>
                           </tr>
                         </thead>
 
                         <tbody id="tabResults">
 
                           <tr>
-                            <td>GPTZero</td>
-                            <td>0.9542</td>
-                            <td>0.9711</td>
-                            <td>0.8800</td>
-							<td>0.9351</td>
+                            <td>Likehood</td>
+                            <td>0.4073</td>
+                            <td>0.4564</td>
+                            <td>0.6039</td>
+                            <td>0.8939</td>
+                            <td>0.5904</td>
                           </tr>
 						  
 						  <tr>
