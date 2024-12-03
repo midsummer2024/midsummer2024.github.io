@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Imitate5 Before Detect:</title>
+    <title>Imitate6 Before Detect:</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -194,12 +194,14 @@
                         </div>
 						(a-c) Comparative examples of human-written, machine-generated, and machine-revised text. (d) Fast-DetectGPT shows a significant drop in detection accuracy when identifying machine-revised text compared to machinegenerated text. (e) Our method brings a noticeable improvement in detecting machine-revised text compared to Fast-DetectGPT. “Fast-Det.” denotes “Fast-DetectGPT”. 
 						<br>
+						<br>
                         						
 						<div style="text-align:center;">
                             <img src="website/images/fig2.png" alt="illustrative-example"
                                 style="margin: 0 auto; display: block; max-width: 400px; width: 100%; height: auto;" />
                         </div>
 						Imitating the stylistic preferences of LLMs. (a) Token distribution before and after machine-style imitation, demonstrating a deliberate fine-tuning of the scoring model to bias its token distribution towards a machine writing style (e.g., shifting preferences from common words like “explore” to machine-favored tokens such as “delve”). (b) The pipeline of Style Preference Optimization is applied to align the base scoring model with the style of machine-revised content using paired human-machine texts. This results in a machine-style scoring model, which generates token distributions p(x_n|x_(0:n?1)) for each position n, subsequently used for style-conditional probability curvature calculations. 
+						<br>
 						<br>
 						
 						<div style="text-align:center;">
@@ -224,7 +226,9 @@
           <div class="columns is-centered">
               <div class="columns is-centered has-text-centered">
 					<h3> Performance </h3>
+					<br>
                 Detection of GPT-3.5 and GPT-4o polished text. Typically, the Neo-2.7B (Black et al. 2021) is used as the source for the scoring model. NPR and DetectGPT, on the other hand, utilize T5-3B (Chen et al. 2019) for generating perturbations, whereas Fast-DetectGPT employs GPT-J (Wang and Komatsuzaki 2021) as a surrogate model to generate samples. The ? symbol denotes methods that require multiple model invocations, leading to a substantial increase in computational load. Metric: AUROC.
+				<br>
                   <!--<h2 class="title is-3" id="leaderboard">Table Caption xxx</h2>-->
                     <div class="content has-text-justified">
                       <table>
